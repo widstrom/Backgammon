@@ -17,13 +17,26 @@ using System.Windows.Controls.Primitives;
 namespace Backgammon
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for ucPiece.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class ucPiece : UserControl
     {
-        public MainWindow()
+        public ucPiece()
         {
             InitializeComponent();
         }
+
+        void fillEllipse()
+        {
+            UniformGrid grid = this.pieceGrid as UniformGrid;
+
+            for (int i = 0; i < 5; i++)
+            {
+                Ellipse p = grid.Children[i] as Ellipse;
+                p.Fill = Brushes.Blue;
+            }
+        }
     }
+
+
 }

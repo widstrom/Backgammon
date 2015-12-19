@@ -15,3 +15,5 @@ C:\Users\ägare\Documents\GitHub\Backgammon\Backgammon\Backgammon\obj\Debug\Back
 C:\Users\ägare\Documents\GitHub\Backgammon\Backgammon\Backgammon\obj\Debug\Backgammon.csproj.GenerateResource.Cache
 C:\Users\ägare\Documents\GitHub\Backgammon\Backgammon\Backgammon\obj\Debug\Backgammon.exe
 C:\Users\ägare\Documents\GitHub\Backgammon\Backgammon\Backgammon\obj\Debug\Backgammon.pdb
+C:\Users\ägare\Documents\GitHub\Backgammon\Backgammon\Backgammon\obj\Debug\ucPiece.baml
+C:\Users\ägare\Documents\GitHub\Backgammon\Backgammon\Backgammon\obj\Debug\ucPiece.g.cs

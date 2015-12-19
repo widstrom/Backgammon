@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Backgammon"
              mc:Ignorable="d" 
              d:DesignHeight="270" d:DesignWidth="480">
     <Grid>
@@ -26,27 +27,33 @@
                     <UniformGrid Rows="1" Columns="6" Grid.Row="0" Grid.Column="0">
                         <Grid Name="grid11">
                             <Polygon Name="t11" Points="0, 0 0, 0 15, 120 30, 0" Fill="SandyBrown" Stretch="Fill">                                
-                            </Polygon>                            
+                            </Polygon> 
+                            <local:ucPiece></local:ucPiece>
                         </Grid>
                         <Grid Name="grid10">
                             <Polygon Name="t10" Points="0, 0 0, 0 15, 120 30, 0" Fill="SaddleBrown" Stretch="Fill">
                             </Polygon>
+                            <local:ucPiece></local:ucPiece>
                         </Grid>
                         <Grid Name="grid9">
                             <Polygon Name="t9" Points="0, 0 0, 0 15, 120 30, 0" Fill="SandyBrown" Stretch="Fill">
                             </Polygon>
+                            <local:ucPiece></local:ucPiece>
                         </Grid>
                         <Grid Name="grid8">
                             <Polygon Name="t8" Points="0, 0 0, 0 15, 120 30, 0" Fill="SaddleBrown" Stretch="Fill">
                             </Polygon>
+                            <local:ucPiece></local:ucPiece>
                         </Grid>
                         <Grid Name="grid7">
                             <Polygon Name="t7" Points="0, 0 0, 0 15, 120 30, 0" Fill="SandyBrown" Stretch="Fill">
                             </Polygon>
+                            <local:ucPiece></local:ucPiece>
                         </Grid>
                         <Grid Name="grid6">
                             <Polygon Name="t6" Points="0, 0 0, 0 15, 120 30, 0" Fill="SaddleBrown" Stretch="Fill">
                             </Polygon>
+                            <local:ucPiece></local:ucPiece>
                         </Grid>                     
                     </UniformGrid>
                     <UniformGrid Rows="1" Columns="6" Grid.Row="0" Grid.Column="2">
@@ -127,8 +134,10 @@
                             </Polygon>
                         </Grid>
                     </UniformGrid>
-                    <UniformGrid Rows="0" Columns="1">
-                        <Grid Name="player1Out"></Grid>
+                    <UniformGrid Grid.Row="0" Grid.Column="1">
+                        <Grid Name="player1Out" Margin="0,10" Background="Gray">
+                            
+                        </Grid>
                     </UniformGrid>
                 </Grid>
             </Grid>
