@@ -1,0 +1,138 @@
+﻿<UserControl x:Class="Backgammon.ucGameBoard"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="270" d:DesignWidth="480">
+    <Grid>
+        <Canvas x:Name="theCanvas" Height="270" Width="480" Background="RoyalBlue">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="400"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Grid Name="mainGrid" Grid.Column="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="180"/>
+                        <ColumnDefinition Width="40"/>
+                        <ColumnDefinition Width="180"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="120" />
+                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="120" />
+                    </Grid.RowDefinitions>
+                    <UniformGrid Rows="1" Columns="6" Grid.Row="0" Grid.Column="0">
+                        <Grid Name="grid11">
+                            <Polygon Name="t11" Points="0, 0 0, 0 15, 120 30, 0" Fill="SandyBrown" Stretch="Fill">                                
+                            </Polygon>                            
+                        </Grid>
+                        <Grid Name="grid10">
+                            <Polygon Name="t10" Points="0, 0 0, 0 15, 120 30, 0" Fill="SaddleBrown" Stretch="Fill">
+                            </Polygon>
+                        </Grid>
+                        <Grid Name="grid9">
+                            <Polygon Name="t9" Points="0, 0 0, 0 15, 120 30, 0" Fill="SandyBrown" Stretch="Fill">
+                            </Polygon>
+                        </Grid>
+                        <Grid Name="grid8">
+                            <Polygon Name="t8" Points="0, 0 0, 0 15, 120 30, 0" Fill="SaddleBrown" Stretch="Fill">
+                            </Polygon>
+                        </Grid>
+                        <Grid Name="grid7">
+                            <Polygon Name="t7" Points="0, 0 0, 0 15, 120 30, 0" Fill="SandyBrown" Stretch="Fill">
+                            </Polygon>
+                        </Grid>
+                        <Grid Name="grid6">
+                            <Polygon Name="t6" Points="0, 0 0, 0 15, 120 30, 0" Fill="SaddleBrown" Stretch="Fill">
+                            </Polygon>
+                        </Grid>                     
+                    </UniformGrid>
+                    <UniformGrid Rows="1" Columns="6" Grid.Row="0" Grid.Column="2">
+                        <Grid Name="grid5">
+                            <Polygon Name="t5" Points="0, 0 0, 0 15, 120 30, 0" Fill="SandyBrown" Stretch="Fill">
+                            </Polygon>
+                        </Grid>
+                        <Grid Name="grid4">
+                            <Polygon Name="t4" Points="0, 0 0, 0 15, 120 30, 0" Fill="SaddleBrown" Stretch="Fill">
+                            </Polygon>
+                        </Grid>
+                        <Grid Name="grid3">
+                            <Polygon Name="t3" Points="0, 0 0, 0 15, 120 30, 0" Fill="SandyBrown" Stretch="Fill">
+                            </Polygon>
+                        </Grid>
+                        <Grid Name="grid2">
+                            <Polygon Name="t2" Points="0, 0 0, 0 15, 120 30, 0" Fill="SaddleBrown" Stretch="Fill">
+                            </Polygon>
+                        </Grid>
+                        <Grid Name="grid1">
+                            <Polygon Name="t1" Points="0, 0 0, 0 15, 120 30, 0" Fill="SandyBrown" Stretch="Fill">
+                            </Polygon>
+                        </Grid>
+                        <Grid Name="grid0">
+                            <Polygon Name="t0" Points="0, 0 0, 0 15, 120 30, 0" Fill="SaddleBrown" Stretch="Fill">
+                            </Polygon>
+                        </Grid>
+                    </UniformGrid>
+                    <UniformGrid Rows="1" Columns="6" Grid.Row="2" Grid.Column="0">
+                        <Grid Name="grid12">
+                            <Polygon Name="t12" Points="15, 0 0, 120 30, 120 15, 0" Fill="SandyBrown" Stretch="Fill">
+                            </Polygon>
+                        </Grid>
+                        <Grid Name="grid13">
+                            <Polygon Name="t13" Points="15, 0 0, 120 30, 120 15, 0" Fill="SaddleBrown" Stretch="Fill">
+                            </Polygon>
+                        </Grid>
+                        <Grid Name="grid14">
+                            <Polygon Name="t14" Points="15, 0 0, 120 30, 120 15, 0" Fill="SandyBrown" Stretch="Fill">
+                            </Polygon>
+                        </Grid>
+                        <Grid Name="grid15">
+                            <Polygon Name="t15" Points="15, 0 0, 120 30, 120 15, 0" Fill="SaddleBrown" Stretch="Fill">
+                            </Polygon>
+                        </Grid>
+                        <Grid Name="grid16">
+                            <Polygon Name="t16" Points="15, 0 0, 120 30, 120 15, 0" Fill="SandyBrown" Stretch="Fill">
+                            </Polygon>
+                        </Grid>
+                        <Grid Name="grid17">
+                            <Polygon Name="t17" Points="15, 0 0, 120 30, 120 15, 0" Fill="SaddleBrown" Stretch="Fill">
+                            </Polygon>
+                        </Grid>
+                    </UniformGrid>
+                    <UniformGrid Rows="1" Columns="6" Grid.Row="2" Grid.Column="2">
+                        <Grid Name="grid18">
+                            <Polygon Name="t18" Points="15, 0 0, 120 30, 120 15, 0" Fill="SandyBrown" Stretch="Fill">
+                            </Polygon>
+                        </Grid>
+                        <Grid Name="grid19">
+                            <Polygon Name="t19" Points="15, 0 0, 120 30, 120 15, 0" Fill="SaddleBrown" Stretch="Fill">
+                            </Polygon>
+                        </Grid>
+                        <Grid Name="grid20">
+                            <Polygon Name="t20" Points="15, 0 0, 120 30, 120 15, 0" Fill="SandyBrown" Stretch="Fill">
+                            </Polygon>
+                        </Grid>
+                        <Grid Name="grid21">
+                            <Polygon Name="t21" Points="15, 0 0, 120 30, 120 15, 0" Fill="SaddleBrown" Stretch="Fill">
+                            </Polygon>
+                        </Grid>
+                        <Grid Name="grid22">
+                            <Polygon Name="t22" Points="15, 0 0, 120 30, 120 15, 0" Fill="SandyBrown" Stretch="Fill">
+                            </Polygon>
+                        </Grid>
+                        <Grid Name="grid23">
+                            <Polygon Name="t23" Points="15, 0 0, 120 30, 120 15, 0" Fill="SaddleBrown" Stretch="Fill">
+                            </Polygon>
+                        </Grid>
+                    </UniformGrid>
+                    <UniformGrid Rows="0" Columns="1">
+                        <Grid Name="player1Out"></Grid>
+                    </UniformGrid>
+                </Grid>
+            </Grid>
+
+        </Canvas>
+    </Grid>
+</UserControl>
