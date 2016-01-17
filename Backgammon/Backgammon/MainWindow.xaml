@@ -2,10 +2,26 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:local="clr-namespace:Backgammon"
-        Title="MainWindow">
-    <Border BorderThickness="5" BorderBrush="Black">
+        Title="MainWindow" Background="Black">
+
+    <DockPanel>
+        <Menu DockPanel.Dock="Top" Height="50"   Background="Black">
+
+            <MenuItem Header="File" Height="50" Width="50" FontSize="25" Background="White">
+                <MenuItem Header="_New Game" />
+                <MenuItem Header="_Rules" />
+                <MenuItem Header="_Help" />
+                <Separator />
+                <MenuItem Header="_Exit" />
+            </MenuItem>
+            <MenuItem Header="File" Height="50" Width="50" FontSize="25" Background="White"></MenuItem>
+            <MenuItem Header="File" Height="50" Width="50" FontSize="25" Background="White"></MenuItem>
+            <MenuItem Header="File" Height="50" Width="50" FontSize="25" Background="White"></MenuItem>
+            
+        </Menu>
         <Viewbox Stretch="Uniform">
             <local:ucGameBoard />
         </Viewbox>
-    </Border>
+    </DockPanel>
+
 </Window>

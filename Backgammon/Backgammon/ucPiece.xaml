@@ -6,10 +6,10 @@
              mc:Ignorable="d" 
              d:DesignHeight="120" d:DesignWidth="25">
     <UniformGrid Name="pieceGrid" Rows="5">
-        <Ellipse Name="pos0" Height="24" Width="24" Stroke="Black"></Ellipse>
-        <Ellipse Name="pos1" Height="24" Width="24" Stroke="Black"></Ellipse>
-        <Ellipse Name="pos2" Height="24" Width="24" Stroke="Black"></Ellipse>
-        <Ellipse Name="pos3" Height="24" Width="24" Stroke="Black"></Ellipse>
-        <Ellipse Name="pos4" Height="24" Width="24" Stroke="Black"></Ellipse>
+        <Ellipse  Height="24" Width="24" ></Ellipse>
+        <Ellipse  Height="24" Width="24" ></Ellipse>
+        <Ellipse  Height="24" Width="24" ></Ellipse>
+        <Ellipse  Height="24" Width="24" ></Ellipse>
+        <Ellipse  Height="24" Width="24" ></Ellipse>
     </UniformGrid>
 </UserControl>

@@ -23,8 +23,11 @@ namespace Backgammon
     {
         public MainWindow()
         {
+
             InitializeComponent();
             //testar att göra en ändring bara
+            
         }
+       
     }
 }
