@@ -50,7 +50,6 @@ namespace Backgammon
             ucPiece uc4 = this.grid0.Children[1] as ucPiece;
             uc4.fillEllipse(2, true);
 
-            //nedervåningen 
             ucPiece uc5 = this.grid12.Children[1] as ucPiece;
             uc5.fillEllipse(5, false);
 
