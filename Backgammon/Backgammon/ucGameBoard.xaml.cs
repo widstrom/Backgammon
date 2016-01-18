@@ -76,7 +76,7 @@ namespace Backgammon
             Point pt = e.GetPosition(theCanvas);
             HitTestResult hr = VisualTreeHelper.HitTest(theCanvas, pt);
             Object obj = hr.VisualHit;
-            if (obj is Shape)
+            if (obj is Ellipse)
             {
                 _shapeSelected = (Shape)obj;
                 if (_shapeSelected.Name.Contains("")) //kolla närmre på detta
@@ -88,6 +88,9 @@ namespace Backgammon
                 else
                 {
                 }
+            }
+            else
+            {
             }
         }
     }
