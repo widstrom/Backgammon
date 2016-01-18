@@ -25,7 +25,7 @@ namespace Backgammon
         {
 
             InitializeComponent();
-            //testar att göra en ändring bara
+            
             
         }
        
