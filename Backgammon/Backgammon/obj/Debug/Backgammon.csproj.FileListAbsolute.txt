@@ -36,3 +36,6 @@ C:\Backgammon\Backgammon\Backgammon\obj\Debug\ucGameBoard.baml
 C:\Backgammon\Backgammon\Backgammon\obj\Debug\Backgammon.g.resources
 C:\Backgammon\Backgammon\Backgammon\obj\Debug\Backgammon.Properties.Resources.resources
 C:\Backgammon\Backgammon\Backgammon\obj\Debug\Backgammon.csproj.GenerateResource.Cache
+C:\Users\Van Carl.DESKTOP-VSGJ6R5\Documents\GitHub\Backgammon\Backgammon\Backgammon\bin\Debug\Backgammon.exe.config
+C:\Users\Van Carl.DESKTOP-VSGJ6R5\Documents\GitHub\Backgammon\Backgammon\Backgammon\obj\Debug\Backgammon.exe
+C:\Users\Van Carl.DESKTOP-VSGJ6R5\Documents\GitHub\Backgammon\Backgammon\Backgammon\obj\Debug\Backgammon.pdb

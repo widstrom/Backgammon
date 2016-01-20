@@ -53,6 +53,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Backgammon Rules n Logic\Piece.cs" />
+    <Compile Include="Backgammon Rules n Logic\PieceManager.cs" />
+    <Compile Include="Backgammon Rules n Logic\PiecePlacement.cs" />
     <Compile Include="ucGameBoard.xaml.cs">
       <DependentUpon>ucGameBoard.xaml</DependentUpon>
     </Compile>
