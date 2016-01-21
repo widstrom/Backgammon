@@ -52,7 +52,7 @@
                         <Grid Name="grid7">
                             <Polygon Name="t7" Points="0, 0 0, 0 15, 120 30, 0" Fill="SandyBrown" Stretch="Fill">
                             </Polygon>
-                            <local:ucPiece></local:ucPiece>
+                            <local:ucPiece ></local:ucPiece>
                         </Grid>
                         <Grid Name="grid6">
                             <Polygon Name="t6" Points="0, 0 0, 0 15, 120 30, 0" Fill="SaddleBrown" Stretch="Fill">
@@ -296,6 +296,12 @@
                             </local:ucPiece>
                         </Grid>
                     </UniformGrid>
+                    <Grid Grid.Row="1" Grid.Column="1">
+                        <Polygon Points="0,15 20,0 20,15" Fill="SaddleBrown" ></Polygon>
+                        <Polygon Points= "40,15 20,0 20,15" Fill="SaddleBrown" RenderTransformOrigin="0.381,0.604" ></Polygon>
+                        <Polygon Points= "40,15 20,30 20,15" Fill="SaddleBrown" RenderTransformOrigin="0.384,0.379" ></Polygon>
+                        <Polygon Points= "0,15 20,30 20,15" Fill="SaddleBrown" RenderTransformOrigin="0.622,0.358" ></Polygon>
+                    </Grid>
                     <UniformGrid Columns="2" Rows="6" Grid.Row="0" Grid.Column="1">
                         <Rectangle Fill="SaddleBrown" ></Rectangle>
                         <Rectangle Fill="SandyBrown" ></Rectangle>
@@ -326,17 +332,33 @@
                         <Rectangle Fill="SaddleBrown" ></Rectangle>
                     </UniformGrid>
                 </Grid>
-                <Grid Grid.Column="1">
-                    <Grid Name="player1Home" Width="45" Height="70" Margin="20" Background="LightBlue" VerticalAlignment="Top">
-                        <Label VerticalAlignment="Top" HorizontalAlignment="Center" Foreground="Tomato" FontSize="9">Player 1</Label>
+                <Grid Grid.Column="1" Background="Black">
+
+                    <Grid Name="player1Home" Width="45" Height="70" Margin="20" Background="White" VerticalAlignment="Top">
+                        <Label Name="Player1" VerticalAlignment="Top" HorizontalAlignment="Center" Foreground="Tomato" FontSize="9">Player 1</Label>
+                        <Ellipse Name="turn1" Height="35" Width="35" Fill="Black" Stroke="Gray"></Ellipse>
                     </Grid>
-                    <Grid Name="player2Home" Width="45" Height="70" Margin="20" Background="LightBlue" VerticalAlignment="Bottom">
+
+                    <Grid Height="80" Width="70">
+                        <UniformGrid  Rows="2" Columns="1" Name="Dices" Width="70" Height="60" >
+
+                            <UniformGrid Columns="2">
+                                <Image Name="image1" Stretch="Fill"></Image>
+                                <Image Name="image2" Stretch="Fill"></Image>
+                            </UniformGrid>
+                            <Button Click="button1_Click" >Roll the dice</Button>
+
+                        </UniformGrid>
+
+                    </Grid>
+                    <Grid Name="player2Home" Width="45" Height="70" Margin="20" Background="White" VerticalAlignment="Bottom">
                         <Label VerticalAlignment="Top" HorizontalAlignment="Center" Foreground="Firebrick" FontSize="9">Player 2</Label>
+                        <Ellipse Name="turn2" Height="35" Width="35" Fill="Red" Stroke="Gray"></Ellipse>
                     </Grid>
 
                 </Grid>
             </Grid>
-            
+
 
         </Canvas>
     </Grid>

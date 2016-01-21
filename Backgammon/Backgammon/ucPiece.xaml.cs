@@ -28,24 +28,21 @@ namespace Backgammon
 
         public void fillEllipse(int fills, bool player)
         {
-          
+
             UniformGrid grid = this.pieceGrid as UniformGrid;
 
-           
-                for (int i = 0; i < fills; i++)
-                {
-                    Ellipse p = grid.Children[i] as Ellipse;
-                    p.Stroke = Brushes.DarkSlateGray;
-                    if (player)
-                        p.Fill = Brushes.Black;
-                    else
-                        p.Fill = Brushes.Red;
-                }
+
+            for (int i = 0; i < fills; i++)
+            {
+                Ellipse p = grid.Children[i] as Ellipse;
+                p.Stroke = Brushes.DarkSlateGray;
+                if (player)
+                    p.Fill = Brushes.Black;
+                else
+                    p.Fill = Brushes.Red;
             }
-            
-            
         }
+
+
     }
-
-
-
+}
