@@ -120,11 +120,11 @@ namespace Backgammon
             }
 
 
-            //for (int i = 0; i < 24; i++)
-            //{
-            //    for (int z = 0; z < 5; z++)
-            //        uc[i].fillEllipse(mr.Triangel[i, z, 0], z, i);
-            //}
+            for (int i = 0; i < 24; i++)
+            {
+                for (int z = 0; z < 5; z++)
+                    uc[i].fillEllipse(mr.Triangel[i, z, 0], z, i);
+            }
 
         }
 
@@ -164,25 +164,22 @@ namespace Backgammon
         }
         private void showalltop(int x)
         {
+            for (int i = 0; i < 24; i++)
+            {
+                for (int z = 0; z < 5; z++)
+                {
+                    if (z == 4 && mr.Triangel[i, z - 1, 0] == x)
+                    {
+                        uc[i].showstroke(z);
+                    }
+                    else if (mr.Triangel[i, z, 0] == x && mr.Triangel[i, z + 1, 0] == 0)
+                    {
 
-            //for (int i = 0; i < 24; i++)
-            //{
-            //    for (int z = 0; z < 5; z++)
-            //    {
-            //        if (z == 4 && mr.Triangel[i, z - 1, 0] == x)
-            //        {
-            //            uc[i].showstroke(z);
-            //        }
-            //        else if (mr.Triangel[i, z, 0] == x && mr.Triangel[i, z + 1, 0] == 0)
-            //        {
+                        uc[i].showstroke(z);
 
-            //            uc[i].showstroke(z);
-
-            //        }
-            //    }
-            //}
-
+                    }
+                }
+            }
         }
-
     }
 }

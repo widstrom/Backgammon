@@ -26,23 +26,35 @@ namespace Backgammon
             InitializeComponent();
         }
 
-        public void fillEllipse(int fills, bool player)
+        public void fillEllipse(int i, int x, int z)
         {
 
             UniformGrid grid = this.pieceGrid as UniformGrid;
-
-
-            for (int i = 0; i < fills; i++)
+            Ellipse p = grid.Children[x] as Ellipse;
+            p.Name = "E" + z;
+            if (i == 0)
             {
-                Ellipse p = grid.Children[i] as Ellipse;
+                p.Fill = null;
+                p.Stroke = null;
+            }
+            if (i == 1)
+            {
+                p.Fill = Brushes.Black;
                 p.Stroke = Brushes.DarkSlateGray;
-                if (player)
-                    p.Fill = Brushes.Black;
-                else
-                    p.Fill = Brushes.Red;
+            }
+            else if (i == 2)
+            {
+                p.Fill = Brushes.Red;
+                p.Stroke = Brushes.DarkSlateGray;
             }
         }
+        public void showstroke(int x)
+        {
+            UniformGrid grid = this.pieceGrid as UniformGrid;
+            Ellipse p = grid.Children[x] as Ellipse;
 
+            p.Stroke = Brushes.Gold;
+        }
 
     }
 }
