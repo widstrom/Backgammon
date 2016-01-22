@@ -36,7 +36,7 @@ namespace Backgammon
 
             mr.startpositions(); //när gameborder öppnas fylls arraysen med start värdena.
             initialall(); //här iitiallerar vi uc arrayen med dess gridar med children 1
-            StartPos(); //här målar vi ut utifrån alla arrayer. OBS BYT NAMN
+            ritaPjäser();
 
             timer.Interval = TimeSpan.FromMilliseconds(50); //sätter rullhastigheten till 0,05sekunder
             timer.Tick += timer_Tick; //timer.tick sätts till funktionen timer_tick
@@ -106,7 +106,7 @@ namespace Backgammon
         }
 
 
-        public void StartPos()
+        public void ritaPjäser()
         {
             if (mr.Player == 1)
             {
@@ -153,7 +153,7 @@ namespace Backgammon
                         mr.Player = 2;
                     else
                         mr.Player = 1;
-                    StartPos();
+                    ritaPjäser();
                 }
 
 

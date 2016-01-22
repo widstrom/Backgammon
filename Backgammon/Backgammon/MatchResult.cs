@@ -33,18 +33,8 @@ namespace Backgammon
             {
                 Triangel[0, i, 0] = 1;
                 Triangel[23, i, 0] = 2;
-            }
-
-
-            
-        }
-
-            
-
-            
-
-
-        }
-
+            }           
+        }                
     }
+}
 
