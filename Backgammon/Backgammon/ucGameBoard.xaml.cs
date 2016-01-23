@@ -29,6 +29,7 @@ namespace Backgammon
 
         private DispatcherTimer timer = new DispatcherTimer(); //globalvariabel för dispatchertimern
         private int count = 0;
+        int pjäsVald = 0;
 
         public ucGameBoard()
         {
@@ -101,8 +102,6 @@ namespace Backgammon
             image2.Source = Img2;
             BitmapImage Img = new BitmapImage(new Uri(Number.ToString() + ".png", UriKind.Relative));
             image1.Source = Img;
-
-
         }
 
 
@@ -118,12 +117,10 @@ namespace Backgammon
                 turn1.Stroke = Brushes.Gray;
                 turn2.Stroke = Brushes.Gold;
             }
-
-
             for (int i = 0; i < 24; i++)
             {
                 for (int z = 0; z < 5; z++)
-                    uc[i].fillEllipse(mr.Triangel[i, z, 0], z, i);
+                    uc[i].fillEllipse(mr.Triangel[i, z], z, i);
             }
 
         }
@@ -137,46 +134,59 @@ namespace Backgammon
         //|                                                                     |
         //|*********************************************************************|
         private void theCanvas_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-            Point pt = e.GetPosition(theCanvas);
-            HitTestResult hr = VisualTreeHelper.HitTest(theCanvas, pt);
-            Object obj = hr.VisualHit;
-            if (obj is Shape)
+        {           
+            if (pjäsVald == 1) //Flytta Pjäsen, inte klar än.
             {
-                _shapeSelected = (Shape)obj;
-                if (_shapeSelected.Name.Contains("E")) //kolla närmre på detta
+                Point pt2 = e.GetPosition(theCanvas);
+                HitTestResult hr2 = VisualTreeHelper.HitTest(theCanvas, pt2);
+                Object obj2 = hr2.VisualHit;
                 {
-                    MessageBox.Show(_shapeSelected.Name);
+                    _shapeSelected = (Shape)obj2;
+                    if (_shapeSelected.Name.Contains("t"))
+                    {
+                        int valdTri = Int32.Parse(_shapeSelected.Name.Remove(0, 1));
+                        mr.Triangel[valdTri, 0] = 2;
+                        ritaPjäser();
+                    }
+                }
+            }
 
-
-                    if (mr.Player == 1)
-                        mr.Player = 2;
-                    else
-                        mr.Player = 1;
-                    ritaPjäser();
+            else // Ska tart bort den översta. Inte klar.           
+            {
+                Point pt1 = e.GetPosition(theCanvas);
+                HitTestResult hr1 = VisualTreeHelper.HitTest(theCanvas, pt1);
+                Object obj1 = hr1.VisualHit;
+                if (obj1 is Ellipse)
+                {
+                    _shapeSelected = (Shape)obj1;
+                    if (_shapeSelected.Name.Contains("E")) //kolla närmre på detta
+                    {
+                        mr.Triangel[2, 0] = 2;  //test så det funkar bara.
+                        //if (mr.Player == 1)
+                        //    mr.Player = 2;
+                        //else
+                        //    mr.Player = 1;
+                        ritaPjäser();
+                        pjäsVald = 1;
+                    }
                 }
 
-
-
-
-
             }
-        }
+        }        
+
         private void showalltop(int x)
         {
             for (int i = 0; i < 24; i++)
             {
                 for (int z = 0; z < 5; z++)
                 {
-                    if (z == 4 && mr.Triangel[i, z - 1, 0] == x)
+                    if (z == 4 && mr.Triangel[i, z - 1] == x)
                     {
                         uc[i].showstroke(z);
                     }
-                    else if (mr.Triangel[i, z, 0] == x && mr.Triangel[i, z + 1, 0] == 0)
+                    else if (mr.Triangel[i, z] == x && mr.Triangel[i, z + 1] == 0)
                     {
-
                         uc[i].showstroke(z);
-
                     }
                 }
             }

@@ -30,7 +30,7 @@ namespace Backgammon
         {
 
             UniformGrid grid = this.pieceGrid as UniformGrid;
-            Ellipse p = grid.Children[x] as Ellipse;
+            Ellipse p = grid.Children[x] as Ellipse;            
             p.Name = "E" + z;
             if (i == 0)
             {
