@@ -107,16 +107,16 @@ namespace Backgammon
 
         public void ritaPjäser()
         {
-            if (mr.Player == 1)
-            {
-                turn2.Stroke = Brushes.Gray;
-                turn1.Stroke = Brushes.Gold;
-            }
-            if (mr.Player == 2)
-            {
-                turn1.Stroke = Brushes.Gray;
-                turn2.Stroke = Brushes.Gold;
-            }
+            //if (mr.Player == 1)
+            //{
+            //    turn2.Stroke = Brushes.Gray;
+            //    turn1.Stroke = Brushes.Gold;
+            //}
+            //if (mr.Player == 2)
+            //{
+            //    turn1.Stroke = Brushes.Gray;
+            //    turn2.Stroke = Brushes.Gold;
+            //}
             for (int i = 0; i < 24; i++)
             {
                 for (int z = 0; z < 5; z++)
