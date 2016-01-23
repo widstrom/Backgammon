@@ -481,7 +481,7 @@
                 <Grid Grid.Column="1">
 
                     <Grid Name="player1Home" Width="45" Height="70" Margin="20" Background="Wheat" VerticalAlignment="Top">
-                        <Label Name="Player1" VerticalAlignment="Top" HorizontalAlignment="Center" Foreground="Red" FontSize="9">Player 1</Label>
+                        <Label Name="Player1" VerticalAlignment="Top" HorizontalAlignment="Center" Foreground="Black" FontSize="9">Player 1</Label>
                         <Grid.Effect>
                             <DropShadowEffect BlurRadius="5" Direction="320" ShadowDepth="4"></DropShadowEffect>
                         </Grid.Effect>
@@ -495,7 +495,7 @@
                                 <Image Name="image1" Stretch="Fill"></Image>
                                 <Image Name="image2" Stretch="Fill"></Image>
                             </UniformGrid>
-                            <Button Click="button1_Click" >Roll the dice</Button>
+                            <Button Name="btnDice" Click="btnDice_Click" >Roll the dice</Button>
 
                         </UniformGrid>
 

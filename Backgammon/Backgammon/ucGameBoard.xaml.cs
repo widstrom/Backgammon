@@ -72,9 +72,22 @@ namespace Backgammon
 
         }
 
-        private void button1_Click(object sender, RoutedEventArgs e)
+        private void btnDice_Click(object sender, RoutedEventArgs e)
         {
+            if (mr.Player == 1)
+            {
+                mr.Player = 2;
+                kastaTärning();
+            }
+            else
+            {
+                mr.Player = 1;
+                kastaTärning();
+            }
+        }
 
+        private void kastaTärning()
+        {
             timer.Start();
             Random num = new Random();
             int Number = num.Next(1, 7);
@@ -85,8 +98,8 @@ namespace Backgammon
             image1.Source = Img;
 
             showalltop(mr.Player);
-
         }
+
         void timer_Tick(object sender, EventArgs e)
         {
             count++;
@@ -107,22 +120,11 @@ namespace Backgammon
 
         public void ritaPjäser()
         {
-            //if (mr.Player == 1)
-            //{
-            //    turn2.Stroke = Brushes.Gray;
-            //    turn1.Stroke = Brushes.Gold;
-            //}
-            //if (mr.Player == 2)
-            //{
-            //    turn1.Stroke = Brushes.Gray;
-            //    turn2.Stroke = Brushes.Gold;
-            //}
             for (int i = 0; i < 24; i++)
             {
                 for (int z = 0; z < 5; z++)
                     uc[i].fillEllipse(mr.Triangel[i, z], z, i);
             }
-
         }
 
 
@@ -134,45 +136,71 @@ namespace Backgammon
         //|                                                                     |
         //|*********************************************************************|
         private void theCanvas_MouseDown(object sender, MouseButtonEventArgs e)
-        {           
-            if (pjäsVald == 1) //Flytta Pjäsen, inte klar än.
+        {
+            if (mr.Player == 0) //Player är 0, innan man rullat tärningarna första gången.
             {
-                Point pt2 = e.GetPosition(theCanvas);
-                HitTestResult hr2 = VisualTreeHelper.HitTest(theCanvas, pt2);
-                Object obj2 = hr2.VisualHit;
+                MessageBox.Show("Rulla tärningarna först!");
+            }
+            else
+            {
+                if (pjäsVald == 1) // Är 1 om du valt en pjäs att flytta. Sedan flyttas pjäsen till den triangel du valt.
                 {
-                    _shapeSelected = (Shape)obj2;
-                    if (_shapeSelected.Name.Contains("t"))
+                    Point pt2 = e.GetPosition(theCanvas);
+                    HitTestResult hr2 = VisualTreeHelper.HitTest(theCanvas, pt2);
+                    Object obj2 = hr2.VisualHit;
                     {
-                        int valdTri = Int32.Parse(_shapeSelected.Name.Remove(0, 1));
-                        mr.Triangel[valdTri, 0] = 2;
-                        ritaPjäser();
+                        _shapeSelected = (Shape)obj2;
+                        if (_shapeSelected.Name.Contains("t"))
+                        {
+                            int valdTri = Int32.Parse(_shapeSelected.Name.Remove(0, 1));
+                            int antalPjäser = 1;
+                            int i = 0;
+
+                            while (antalPjäser != 0)
+                            {
+                                antalPjäser = mr.Triangel[valdTri, i++];
+                            }
+
+                            if (mr.Player == 1)
+                            {
+                                mr.Triangel[valdTri, i - 1] = 1;
+                            }
+                            else
+                            {
+                                mr.Triangel[valdTri, i - 1] = 2;
+                            }
+                            pjäsVald = 0; //Sätter pjäsVald till 0 igen.
+                            ritaPjäser();
+                        }
+                    }
+                }
+
+                else // Tar bort den översta pjässen på den triangel du valt. 
+                {
+                    Point pt1 = e.GetPosition(theCanvas);
+                    HitTestResult hr1 = VisualTreeHelper.HitTest(theCanvas, pt1);
+                    Object obj1 = hr1.VisualHit;
+                    if (obj1 is Ellipse)
+                    {
+                        _shapeSelected = (Shape)obj1;
+                        if (_shapeSelected.Name.Contains("E")) //kolla närmre på detta
+                        {
+                            int vald = Int32.Parse(_shapeSelected.Name.Remove(0, 1));
+                            int antalPjäser = 1;
+                            int i = 0;
+                            while (antalPjäser != 0)
+                            {
+                                //MessageBox.Show("test: " + vald + " " + i + " " + antalPjäser);
+                                antalPjäser = mr.Triangel[vald, i++];
+                            }
+                            mr.Triangel[vald, i - 2] = 0;
+                            pjäsVald = 1; //Sätter till 1, då du valt en pjäs att flytta.
+                            ritaPjäser();
+                        }
                     }
                 }
             }
-
-            else // Ska tart bort den översta. Inte klar.           
-            {
-                Point pt1 = e.GetPosition(theCanvas);
-                HitTestResult hr1 = VisualTreeHelper.HitTest(theCanvas, pt1);
-                Object obj1 = hr1.VisualHit;
-                if (obj1 is Ellipse)
-                {
-                    _shapeSelected = (Shape)obj1;
-                    if (_shapeSelected.Name.Contains("E")) //kolla närmre på detta
-                    {
-                        mr.Triangel[2, 0] = 2;  //test så det funkar bara.
-                        //if (mr.Player == 1)
-                        //    mr.Player = 2;
-                        //else
-                        //    mr.Player = 1;
-                        ritaPjäser();
-                        pjäsVald = 1;
-                    }
-                }
-
-            }
-        }        
+        }
 
         private void showalltop(int x)
         {

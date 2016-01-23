@@ -9,9 +9,9 @@ namespace Backgammon
     
     class MatchResult
     {
-        public  int Player = 1;
+        public  int Player = 0;
         public bool dicerolled = false;
-        public int[,] Triangel = new int[24, 5];
+        public int[,] Triangel = new int[24, 15]; //Ändrade till 15, så att det kan var 15pjäser på en triangel.
 
         public void startpositions()
         {            
