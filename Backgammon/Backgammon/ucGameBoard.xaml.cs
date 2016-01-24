@@ -168,9 +168,8 @@ namespace Backgammon
                             while (pjäsVärde != 0)
 						    {
                                 pjäsVärde = mr.Triangel[valdTri, i++];
-						    }
-                            //MessageBox.Show("pjäsVald:" + pjäsVärde + " // i:" + i);
-                            if (mr.Triangel[valdTri, 0] == 2 && mr.Triangel[valdTri, 1] == 0)
+						    }                           
+                            if (mr.Triangel[valdTri, 0] == 2 && mr.Triangel[valdTri, 1] == 0) //Knock out
                             {
                                 mr.Triangel[valdTri, 0] = 1;
                                 pjäsVald = -1;
@@ -179,7 +178,7 @@ namespace Backgammon
                             else
                             {
                                 mr.Triangel[valdTri, i - 1] = 1;
-                                pjäsVald = -1;//Blir -1 igen.
+                                pjäsVald = -1; //Blir -1 igen.
                                 ritaPjäser();
                             }
 					    }
@@ -243,14 +242,14 @@ namespace Backgammon
 			{
 				for (int z = 0; z < 5; z++)
 				{
-					if (z == 4 && mr.Triangel[i, z - 1] == x)
-					{
-						uc[i].showstroke(z);
-					}
-					else if (mr.Triangel[i, z] == x && mr.Triangel[i, z + 1] == 0)
-					{
-						uc[i].showstroke(z);
-					}
+                    if (z == 4 && mr.Triangel[i, z] == x)
+                    {
+                        uc[i].showstroke(z);
+                    }
+                    else if (mr.Triangel[i, z] == x && mr.Triangel[i, z+1] == 0)
+                    {
+                        uc[i].showstroke(z);
+                    }
 				}
 			}
 		}
