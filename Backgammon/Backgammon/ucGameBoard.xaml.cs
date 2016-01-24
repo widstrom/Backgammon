@@ -169,13 +169,19 @@ namespace Backgammon
 						    {
                                 pjäsVärde = mr.Triangel[valdTri, i++];
 						    }
-                            MessageBox.Show("pjäsVald:" + pjäsVärde + " // i:" + i);
-                            //if (mr.Triangel[valdTri, 1] == 2)
-                            //{
-                            //}
-							mr.Triangel[valdTri, i - 1] = 1;												    
-						    pjäsVald = -1;
-						    ritaPjäser();
+                            //MessageBox.Show("pjäsVald:" + pjäsVärde + " // i:" + i);
+                            if (mr.Triangel[valdTri, 0] == 2 && mr.Triangel[valdTri, 1] == 0)
+                            {
+                                mr.Triangel[valdTri, 0] = 1;
+                                pjäsVald = -1;
+                                ritaPjäser();
+                            }
+                            else
+                            {
+                                mr.Triangel[valdTri, i - 1] = 1;
+                                pjäsVald = -1;//Blir -1 igen.
+                                ritaPjäser();
+                            }
 					    }
                        
                     }
@@ -188,9 +194,18 @@ namespace Backgammon
                             {
                                 pjäsVärde = mr.Triangel[valdTri, i++];
                             }
-                            mr.Triangel[valdTri, i - 1] = 2;
-                            pjäsVald = -1; //Blir -1 igen.
-                            ritaPjäser();
+                            if (mr.Triangel[valdTri, 0] == 1 && mr.Triangel[valdTri, 1] == 0)
+                            {
+                                mr.Triangel[valdTri, 0] = 2;
+                                pjäsVald = -1;
+                                ritaPjäser();
+                            }
+                            else
+                            {
+                                mr.Triangel[valdTri, i - 1] = 2;
+                                pjäsVald = -1; //Blir -1 igen.
+                                ritaPjäser();
+                            }
                         }                       
                     }
 				}
