@@ -44,7 +44,7 @@ namespace Backgammon
             }
             else if (i == 2)
             {
-                p.Fill = Brushes.Red;
+                p.Fill = Brushes.White;
                 p.Stroke = Brushes.DarkSlateGray;
             }
         }

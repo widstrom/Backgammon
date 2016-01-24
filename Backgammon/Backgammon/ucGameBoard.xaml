@@ -97,7 +97,7 @@
                             <local:ucPiece></local:ucPiece>
                         </Grid>
                     </UniformGrid>
-                    <UniformGrid Rows="2" Columns="7" Grid.Row="1" Grid.Column="0">
+                    <UniformGrid Rows="2" Columns="7" Grid.Row="1" Grid.Column="0" Opacity="0.8">
                         <Rectangle Fill="SaddleBrown"></Rectangle>
                         <Rectangle Fill="SandyBrown"></Rectangle>
                         <Rectangle Fill="SaddleBrown"></Rectangle>
@@ -113,7 +113,7 @@
                         <Rectangle Fill="SaddleBrown"></Rectangle>
                         <Rectangle Fill="SandyBrown"></Rectangle>
                     </UniformGrid>
-                    <UniformGrid Rows="2" Columns="7" Grid.Row="1" Grid.Column="2">
+                    <UniformGrid Rows="2" Columns="7" Grid.Row="1" Grid.Column="2" Opacity="0.8">
                         <Rectangle Fill="SaddleBrown"></Rectangle>
                         <Rectangle Fill="SandyBrown"></Rectangle>
                         <Rectangle Fill="SaddleBrown"></Rectangle>
@@ -448,7 +448,7 @@
                         <Polygon Points= "40,15 20,30 20,15" Fill="SaddleBrown" RenderTransformOrigin="0.384,0.379" ></Polygon>
                         <Polygon Points= "0,15 20,30 20,15" Fill="SaddleBrown" RenderTransformOrigin="0.622,0.358" ></Polygon>
                     </Grid>
-                    <UniformGrid Columns="2" Rows="6" Grid.Row="0" Grid.Column="1">
+                    <UniformGrid Columns="2" Rows="6" Grid.Row="0" Grid.Column="1" Opacity="0.8">
                         <Rectangle Fill="SaddleBrown" ></Rectangle>
                         <Rectangle Fill="SandyBrown" ></Rectangle>
                         <Rectangle Fill="SandyBrown" ></Rectangle>
@@ -463,7 +463,7 @@
                         <Rectangle Fill="SaddleBrown" ></Rectangle>
 
                     </UniformGrid>
-                    <UniformGrid Columns="2" Rows="6"  Grid.Row="2" Grid.Column="1">
+                    <UniformGrid Columns="2" Rows="6"  Grid.Row="2" Grid.Column="1" Opacity="0.8">
                         <Rectangle Fill="SaddleBrown" ></Rectangle>
                         <Rectangle Fill="SandyBrown" ></Rectangle>
                         <Rectangle Fill="SandyBrown" ></Rectangle>
@@ -483,8 +483,9 @@
                     <Grid Name="player1Home" Width="45" Height="70" Margin="20" Background="Wheat" VerticalAlignment="Top">
                         <Label Name="Player1" VerticalAlignment="Top" HorizontalAlignment="Center" Foreground="Black" FontSize="9">Player 1</Label>
                         <Grid.Effect>
+                            
                             <DropShadowEffect BlurRadius="5" Direction="320" ShadowDepth="4"></DropShadowEffect>
-                        </Grid.Effect>
+                        </Grid.Effect>                        
                         <!--<Ellipse Name="turn1" Height="35" Width="35" Fill="Black" Stroke="Gray"></Ellipse>-->
                     </Grid>
 
