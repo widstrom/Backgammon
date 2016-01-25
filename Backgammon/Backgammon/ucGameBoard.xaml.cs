@@ -170,9 +170,11 @@ namespace Backgammon
                             mr.Triangel[pjäsVald, pjäsValdPlats] = 1;
                             ritaPjäser();
                             pjäsVald = -1;
+                            pjäsValdPlats = 0;
                         }
-                        else if ((pjäsVald + dice1) == valdTri || (pjäsVald + dice2) == valdTri) 
+                        else if ((pjäsVald + dice1) == valdTri) 
                         {
+                            MessageBox.Show("1  dice1: " + dice1 + " // dice2; " + dice2);
                             while (pjäsVärde != 0)
 						    {
                                 pjäsVärde = mr.Triangel[valdTri, i++];
@@ -185,10 +187,29 @@ namespace Backgammon
                             {
                                 mr.Triangel[valdTri, i - 1] = 1;                                
                             }
-                            pjäsVald = -1; //Blir -1 igen.
-                            ritaPjäser();
+                            dice1 = 0;
+                            image1.Opacity = 0.5;
 					    }
-                       
+                        else if ((pjäsVald + dice2) == valdTri)
+                        {
+                            MessageBox.Show("2  dice1: " + dice1 + " // dice2; " + dice2);
+                            while (pjäsVärde != 0)
+                            {
+                                pjäsVärde = mr.Triangel[valdTri, i++];
+                            }
+                            if (mr.Triangel[valdTri, 0] == 2 && mr.Triangel[valdTri, 1] == 0) //Knock out
+                            {
+                                mr.Triangel[valdTri, 0] = 1;
+                            }
+                            else
+                            {
+                                mr.Triangel[valdTri, i - 1] = 1;
+                            }
+                            dice2 = 0;
+                            image2.Opacity = 0.5;
+                        }
+                        pjäsVald = -1; //Blir -1 igen.
+                        ritaPjäser();                       
                     }
                     // RÖD : Utgår från träningarna.
                     else                   
@@ -198,8 +219,9 @@ namespace Backgammon
                             mr.Triangel[pjäsVald, pjäsValdPlats] = 2;
                             ritaPjäser();
                             pjäsVald = -1;
+                            pjäsValdPlats = 0;
                         }
-                        if ((pjäsVald - dice1) == valdTri || (pjäsVald - dice2) == valdTri)
+                        else if ((pjäsVald - dice1) == valdTri)
                         {
                             while (pjäsVärde != 0)
                             {
@@ -213,9 +235,28 @@ namespace Backgammon
                             {
                                 mr.Triangel[valdTri, i - 1] = 2;                               
                             }
-                            pjäsVald = -1; //Blir -1 igen.
-                            ritaPjäser();
-                        }                       
+                            dice1 = 0;
+                            image1.Opacity = 0.5;
+                        }
+                        else if ((pjäsVald - dice2) == valdTri)
+                        {
+                            while (pjäsVärde != 0)
+                            {
+                                pjäsVärde = mr.Triangel[valdTri, i++];
+                            }
+                            if (mr.Triangel[valdTri, 0] == 1 && mr.Triangel[valdTri, 1] == 0) //Knock out
+                            {
+                                mr.Triangel[valdTri, 0] = 2;
+                            }
+                            else
+                            {
+                                mr.Triangel[valdTri, i - 1] = 2;
+                            }
+                            dice2 = 0;
+                            image2.Opacity = 0.5;
+                        }
+                        pjäsVald = -1; //Blir -1 igen.
+                        ritaPjäser();
                     }
 				}
             }
@@ -223,27 +264,34 @@ namespace Backgammon
 
             else // Tar bort den översta pjässen på vald triangel.
 			{
-				Point pt1 = e.GetPosition(theCanvas);
-				HitTestResult hr1 = VisualTreeHelper.HitTest(theCanvas, pt1);
-				Object obj1 = hr1.VisualHit;
-				if (obj1 is Ellipse)
-				{
-					_shapeSelected = (Shape)obj1;
-					if (_shapeSelected.Name.Contains("E")) //kolla närmre på detta
-					{
-						int vald = Int32.Parse(_shapeSelected.Name.Remove(0, 1));
-						int antalPjäser = 1;
-						int i = 0;
-						while (antalPjäser != 0)
-						{
-							antalPjäser = mr.Triangel[vald, i++];
-						}
-						mr.Triangel[vald, i - 2] = 0;
-						pjäsVald = vald;    //Sätts till vald triangel.
-                        pjäsValdPlats = i-2;  //Används ifall man vill byta pjäs att flytta.
-						ritaPjäser();
-					}
-				}
+                if (dice1 != 0 || dice2 != 0)
+                {
+                    Point pt1 = e.GetPosition(theCanvas);
+                    HitTestResult hr1 = VisualTreeHelper.HitTest(theCanvas, pt1);
+                    Object obj1 = hr1.VisualHit;
+                    if (obj1 is Ellipse)
+                    {
+                        _shapeSelected = (Shape)obj1;
+                        if (_shapeSelected.Name.Contains("E")) //kolla närmre på detta
+                        {
+                            int vald = Int32.Parse(_shapeSelected.Name.Remove(0, 1));
+                            int antalPjäser = 1;
+                            int i = 0;
+                            while (antalPjäser != 0)
+                            {
+                                antalPjäser = mr.Triangel[vald, i++];
+                            }
+                            mr.Triangel[vald, i - 2] = 0;
+                            pjäsVald = vald;    //Sätts till vald triangel.
+                            pjäsValdPlats = i - 2;  //Används ifall man vill byta pjäs att flytta.
+                            ritaPjäser();
+                        }
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Inga drag kvar!");
+                }
 			}			
 		}
 
