@@ -78,6 +78,8 @@ namespace Backgammon
 
 		private void btnDice_Click(object sender, RoutedEventArgs e)
 		{
+            image1.Opacity = 1;
+            image2.Opacity = 1;
 			if (mr.Player == 1)
 			{
 				mr.Player = 2;
@@ -174,7 +176,6 @@ namespace Backgammon
                         }
                         else if ((pjäsVald + dice1) == valdTri) 
                         {
-                            MessageBox.Show("1  dice1: " + dice1 + " // dice2; " + dice2);
                             while (pjäsVärde != 0)
 						    {
                                 pjäsVärde = mr.Triangel[valdTri, i++];
@@ -192,7 +193,6 @@ namespace Backgammon
 					    }
                         else if ((pjäsVald + dice2) == valdTri)
                         {
-                            MessageBox.Show("2  dice1: " + dice1 + " // dice2; " + dice2);
                             while (pjäsVärde != 0)
                             {
                                 pjäsVärde = mr.Triangel[valdTri, i++];
