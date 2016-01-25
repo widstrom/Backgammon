@@ -318,19 +318,26 @@ namespace Backgammon
                     if (obj1 is Ellipse)
                     {
                         _shapeSelected = (Shape)obj1;
-                        if (_shapeSelected.Name.Contains("E")) //kolla närmre på detta
+                        if (_shapeSelected.Name.Contains("E"))
                         {
                             int vald = Int32.Parse(_shapeSelected.Name.Remove(0, 1));
                             int antalPjäser = 1;
                             int i = 0;
-                            while (antalPjäser != 0)
+                            if (mr.Triangel[vald, 0] != mr.Player) //Kollar så du bara kan klicka på dina egna pjäser
                             {
-                                antalPjäser = mr.Triangel[vald, i++];
+                                MessageBox.Show("Du kan bara välja dina pjäser!");
                             }
-                            mr.Triangel[vald, i - 2] = 0;
-                            pjäsVald = vald;    //Sätts till vald triangel.
-                            pjäsValdPlats = i - 2;  //Används ifall man vill byta pjäs att flytta.
-                            ritaPjäser();
+                            else
+                            {                            
+                                while (antalPjäser != 0)
+                                {
+                                    antalPjäser = mr.Triangel[vald, i++];
+                                }
+                                mr.Triangel[vald, i - 2] = 0;
+                                pjäsVald = vald;    //Sätts till vald triangel.
+                                pjäsValdPlats = i - 2;  //Används ifall man vill byta pjäs att flytta.
+                                ritaPjäser();
+                            }
                         }
                     }
                 }
