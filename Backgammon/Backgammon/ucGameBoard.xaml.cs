@@ -155,8 +155,13 @@ namespace Backgammon
 				Point pt2 = e.GetPosition(theCanvas);
 				HitTestResult hr2 = VisualTreeHelper.HitTest(theCanvas, pt2);
 				Object obj2 = hr2.VisualHit;
-				_shapeSelected = (Shape)obj2;
-
+                try
+                {
+                    _shapeSelected = (Shape)obj2;
+                }
+                catch
+                {
+                }
 
                 if (_shapeSelected.Name.Contains("t") || _shapeSelected.Name.Contains("E"))
 				{                   
@@ -303,8 +308,8 @@ namespace Backgammon
                             ritaPjäser();
                         }
                         
-                    }
-				}
+                    }                    
+				}                
             }
 
 
