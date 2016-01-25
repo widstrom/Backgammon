@@ -29,9 +29,11 @@ namespace Backgammon
 
 		private DispatcherTimer timer = new DispatcherTimer(); //globalvariabel för dispatchertimern
 		private int count = 0;
-		int pjäsVald = -1;  //Den triangel som pjäsen ska flyttas ifrån.
+		int pjäsVald = -1;      // Den triangel som pjäsen ska flyttas ifrån.
+        int pjäsValdPlats = 0;  // Den plats på triangels som pjäsen ska flyttas ifrån.
 		int dice1 = 0;
 		int dice2 = 0;
+        
 
 		public ucGameBoard()
 		{
@@ -145,7 +147,7 @@ namespace Backgammon
 				MessageBox.Show("Rulla tärningarna först!");   
 			}
 			
-			if (pjäsVald >= 0) // Är 1 om du valt en pjäs att flytta. Sedan flyttas pjäsen till den triangel du valt.
+			else if (pjäsVald >= 0) // Är 1 om du valt en pjäs att flytta. Sedan flyttas pjäsen till den triangel du valt.
 			{
 
 				Point pt2 = e.GetPosition(theCanvas);
@@ -154,16 +156,22 @@ namespace Backgammon
 				_shapeSelected = (Shape)obj2;
 
 
-				if(_shapeSelected.Name.Contains("t"))
+                if (_shapeSelected.Name.Contains("t") || _shapeSelected.Name.Contains("E"))
 				{                   
 					int valdTri = Int32.Parse(_shapeSelected.Name.Remove(0, 1));
 					int pjäsVärde = 1;
 					int i = 0;
-
+                    
                     // SVART : Utgår från träningarna.
                     if (mr.Player == 1)
-					{                        
-                        if ((pjäsVald + dice1) == valdTri || (pjäsVald + dice2) == valdTri) 
+					{
+                        if (pjäsVald == valdTri)    //Ångra vilken du vill flytta.
+                        {
+                            mr.Triangel[pjäsVald, pjäsValdPlats] = 1;
+                            ritaPjäser();
+                            pjäsVald = -1;
+                        }
+                        else if ((pjäsVald + dice1) == valdTri || (pjäsVald + dice2) == valdTri) 
                         {
                             while (pjäsVärde != 0)
 						    {
@@ -172,39 +180,41 @@ namespace Backgammon
                             if (mr.Triangel[valdTri, 0] == 2 && mr.Triangel[valdTri, 1] == 0) //Knock out
                             {
                                 mr.Triangel[valdTri, 0] = 1;
-                                pjäsVald = -1;
-                                ritaPjäser();
                             }
                             else
                             {
-                                mr.Triangel[valdTri, i - 1] = 1;
-                                pjäsVald = -1; //Blir -1 igen.
-                                ritaPjäser();
+                                mr.Triangel[valdTri, i - 1] = 1;                                
                             }
+                            pjäsVald = -1; //Blir -1 igen.
+                            ritaPjäser();
 					    }
                        
                     }
                     // RÖD : Utgår från träningarna.
                     else                   
                     {
+                        if (pjäsVald == valdTri)    //Ångra vilken du vill flytta.
+                        {
+                            mr.Triangel[pjäsVald, pjäsValdPlats] = 2;
+                            ritaPjäser();
+                            pjäsVald = -1;
+                        }
                         if ((pjäsVald - dice1) == valdTri || (pjäsVald - dice2) == valdTri)
                         {
                             while (pjäsVärde != 0)
                             {
                                 pjäsVärde = mr.Triangel[valdTri, i++];
                             }
-                            if (mr.Triangel[valdTri, 0] == 1 && mr.Triangel[valdTri, 1] == 0)
+                            if (mr.Triangel[valdTri, 0] == 1 && mr.Triangel[valdTri, 1] == 0) //Knock out
                             {
                                 mr.Triangel[valdTri, 0] = 2;
-                                pjäsVald = -1;
-                                ritaPjäser();
                             }
                             else
                             {
-                                mr.Triangel[valdTri, i - 1] = 2;
-                                pjäsVald = -1; //Blir -1 igen.
-                                ritaPjäser();
+                                mr.Triangel[valdTri, i - 1] = 2;                               
                             }
+                            pjäsVald = -1; //Blir -1 igen.
+                            ritaPjäser();
                         }                       
                     }
 				}
@@ -229,7 +239,8 @@ namespace Backgammon
 							antalPjäser = mr.Triangel[vald, i++];
 						}
 						mr.Triangel[vald, i - 2] = 0;
-						pjäsVald = vald; //Sätts till vald triangel.
+						pjäsVald = vald;    //Sätts till vald triangel.
+                        pjäsValdPlats = i-2;  //Används ifall man vill byta pjäs att flytta.
 						ritaPjäser();
 					}
 				}
@@ -238,6 +249,7 @@ namespace Backgammon
 
 		private void showalltop(int x)
 		{
+            ritaPjäser();
 			for (int i = 0; i < 24; i++)
 			{
 				for (int z = 0; z < 5; z++)
