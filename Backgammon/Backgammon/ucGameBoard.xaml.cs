@@ -174,7 +174,7 @@ namespace Backgammon
                             pjäsVald = -1;
                             pjäsValdPlats = 0;
                         }
-                        else if ((pjäsVald + dice1) == valdTri) 
+                        else if ((pjäsVald + dice1) == valdTri) //dice 1
                         {
                             while (pjäsVärde != 0)
 						    {
@@ -183,15 +183,27 @@ namespace Backgammon
                             if (mr.Triangel[valdTri, 0] == 2 && mr.Triangel[valdTri, 1] == 0) //Knock out
                             {
                                 mr.Triangel[valdTri, 0] = 1;
+                                dice1 = 0;
+                                image1.Opacity = 0.5;
+                            }
+                            else if (mr.Triangel[valdTri, 0] == 2 && mr.Triangel[valdTri, 1] == 2)
+                            {
+                                MessageBox.Show("Felaktigt move!");
+                                mr.Triangel[pjäsVald, pjäsValdPlats] = 1;
+                                ritaPjäser();
+                                pjäsVald = -1;
+                                pjäsValdPlats = 0;
                             }
                             else
                             {
-                                mr.Triangel[valdTri, i - 1] = 1;                                
-                            }
-                            dice1 = 0;
-                            image1.Opacity = 0.5;
+                                mr.Triangel[valdTri, i - 1] = 1;
+                                dice1 = 0;
+                                image1.Opacity = 0.5;
+                            }                            
+                            pjäsVald = -1; //Blir -1 igen.
+                            ritaPjäser();
 					    }
-                        else if ((pjäsVald + dice2) == valdTri)
+                        else if ((pjäsVald + dice2) == valdTri) //dice 2
                         {
                             while (pjäsVärde != 0)
                             {
@@ -200,16 +212,27 @@ namespace Backgammon
                             if (mr.Triangel[valdTri, 0] == 2 && mr.Triangel[valdTri, 1] == 0) //Knock out
                             {
                                 mr.Triangel[valdTri, 0] = 1;
+                                dice2 = 0;
+                                image2.Opacity = 0.5;
+                            }
+                            else if (mr.Triangel[valdTri, 0] == 2 && mr.Triangel[valdTri, 1] == 2)
+                            {
+                                MessageBox.Show("Felaktigt move!");
+                                mr.Triangel[pjäsVald, pjäsValdPlats] = 1;
+                                ritaPjäser();
+                                pjäsVald = -1;
+                                pjäsValdPlats = 0;
                             }
                             else
                             {
                                 mr.Triangel[valdTri, i - 1] = 1;
-                            }
-                            dice2 = 0;
-                            image2.Opacity = 0.5;
+                                dice2 = 0;
+                                image2.Opacity = 0.5;
+                            }                            
+                            pjäsVald = -1; //Blir -1 igen.
+                            ritaPjäser();
                         }
-                        pjäsVald = -1; //Blir -1 igen.
-                        ritaPjäser();                       
+                                               
                     }
                     // RÖD : Utgår från träningarna.
                     else                   
@@ -230,13 +253,25 @@ namespace Backgammon
                             if (mr.Triangel[valdTri, 0] == 1 && mr.Triangel[valdTri, 1] == 0) //Knock out
                             {
                                 mr.Triangel[valdTri, 0] = 2;
+                                dice1 = 0;
+                                image1.Opacity = 0.5;
+                            }
+                            else if (mr.Triangel[valdTri, 0] == 1 && mr.Triangel[valdTri, 1] == 1)
+                            {
+                                MessageBox.Show("Felaktigt move!");
+                                mr.Triangel[pjäsVald, pjäsValdPlats] = 2;
+                                ritaPjäser();
+                                pjäsVald = -1;
+                                pjäsValdPlats = 0;
                             }
                             else
                             {
-                                mr.Triangel[valdTri, i - 1] = 2;                               
-                            }
-                            dice1 = 0;
-                            image1.Opacity = 0.5;
+                                mr.Triangel[valdTri, i - 1] = 2;
+                                dice1 = 0;
+                                image1.Opacity = 0.5;
+                            }                            
+                            pjäsVald = -1; //Blir -1 igen.
+                            ritaPjäser();
                         }
                         else if ((pjäsVald - dice2) == valdTri)
                         {
@@ -247,16 +282,27 @@ namespace Backgammon
                             if (mr.Triangel[valdTri, 0] == 1 && mr.Triangel[valdTri, 1] == 0) //Knock out
                             {
                                 mr.Triangel[valdTri, 0] = 2;
+                                dice2 = 0;
+                                image2.Opacity = 0.5;
+                            }
+                            else if (mr.Triangel[valdTri, 0] == 1 && mr.Triangel[valdTri, 1] == 1)
+                            {
+                                MessageBox.Show("Felaktigt move!");
+                                mr.Triangel[pjäsVald, pjäsValdPlats] = 2;
+                                ritaPjäser();
+                                pjäsVald = -1;
+                                pjäsValdPlats = 0;
                             }
                             else
                             {
                                 mr.Triangel[valdTri, i - 1] = 2;
-                            }
-                            dice2 = 0;
-                            image2.Opacity = 0.5;
+                                dice2 = 0;
+                                image2.Opacity = 0.5;
+                            }                            
+                            pjäsVald = -1; //Blir -1 igen.
+                            ritaPjäser();
                         }
-                        pjäsVald = -1; //Blir -1 igen.
-                        ritaPjäser();
+                        
                     }
 				}
             }
