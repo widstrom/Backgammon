@@ -18,37 +18,46 @@ using System.Windows.Threading;
 
 namespace Backgammon
 {
-	/// <summary>
-	/// Interaction logic for ucGameBoard.xaml
-	/// </summary>
-	public partial class ucGameBoard : UserControl //UCGAMEBOARD ÄR ENDAST TILL FÖR ANIMATIONER, SKAPA EN NY KLASS FÖR ATT HÅLLA KOLL PÅ REGLER OCH ARRAYER
-	{
-		MatchResult mr = new MatchResult();
-		Shape _shapeSelected = null;
-		ucPiece[] uc = new ucPiece[24]; //EN array med alla pieces
+    /// <summary>
+    /// Interaction logic for ucGameBoard.xaml
+    /// </summary>
+    public partial class ucGameBoard : UserControl //UCGAMEBOARD ÄR ENDAST TILL FÖR ANIMATIONER, SKAPA EN NY KLASS FÖR ATT HÅLLA KOLL PÅ REGLER OCH ARRAYER
+    {
+        MatchResult mr = new MatchResult();
+        Shape _shapeSelected = null;
+        ucPiece[] uc = new ucPiece[24]; //EN array med alla pieces
+        double cordfromX = 0;
+        double cordfromY = 0;
+        double cordToX = 0;
+        double cordToY = 0;
 
-		private DispatcherTimer timer = new DispatcherTimer(); //globalvariabel för dispatchertimern
-		private int count = 0;
-		int pjäsVald = -1;      // Den triangel som pjäsen ska flyttas ifrån.
-        int pjäsValdPlats = 0;  // Den plats på triangels som pjäsen ska flyttas ifrån.
-		int dice1 = 0;
-		int dice2 = 0;
-        
+        private DispatcherTimer timer = new DispatcherTimer(); //globalvariabel för dispatchertimern
+        private int count = 0;
+        int recentTriangel = 0;
+        int dice1 = 0;
+        int dice2 = 0;
+        int dice3 = 0;
+        int dice4 = 0;
 
-		public ucGameBoard()
-		{
-			InitializeComponent();
 
-			mr.startpositions(); //när gameborder öppnas fylls arraysen med start värdena.
-			initialall(); //här itiallerar vi uc arrayen med dess gridar med children 1
-			ritaPjäser();
+        public ucGameBoard()
+        {
+            InitializeComponent();
+            mr.startpositions(); //när gameborder öppnas fylls arraysen med start värdena.
+            initialall(); //här itiallerar vi uc arrayen med dess gridar med children 1
+            ritaPjäser();
 
-			timer.Interval = TimeSpan.FromMilliseconds(50); //sätter rullhastigheten till 0,05sekunder
-			timer.Tick += timer_Tick; //timer.tick sätts till funktionen timer_tick
+            timer.Interval = TimeSpan.FromMilliseconds(50); //sätter rullhastigheten till 0,05sekunder
+            timer.Tick += timer_Tick; //timer.tick sätts till funktionen timer_tick
 
-		}
-		public void initialall()
-		{
+        }
+
+
+
+
+
+        public void initialall()
+        {
             uc[0] = this.grid0.Children[1] as ucPiece;
             uc[1] = this.grid1.Children[1] as ucPiece;
             uc[2] = this.grid2.Children[1] as ucPiece;
@@ -74,302 +83,264 @@ namespace Backgammon
             uc[22] = this.grid22.Children[1] as ucPiece;
             uc[23] = this.grid23.Children[1] as ucPiece;
 
-		}
+        }
 
-		private void btnDice_Click(object sender, RoutedEventArgs e)
-		{
+        private void btnDice_Click(object sender, RoutedEventArgs e)
+        {
             image1.Opacity = 1;
             image2.Opacity = 1;
-			if (mr.Player == 1)
-			{
-				mr.Player = 2;
-				kastaTärning();
-			}
-			else
-			{
-				mr.Player = 1;
-				kastaTärning();
-			}
-		}
+            if (mr.Player == 1)
+            {
+                mr.Player = 2;
+                kastaTärning();
+            }
+            else
+            {
+                mr.Player = 1;
+                kastaTärning();
+            }
+        }
 
-		private void kastaTärning()
-		{
-			timer.Start();
-			Random num = new Random();
-			int number = num.Next(1, 7);
-			int number2 = num.Next(1, 7);
-			BitmapImage Img2 = new BitmapImage(new Uri(number2.ToString() + ".png", UriKind.Relative));
-			image2.Source = Img2;
-			BitmapImage Img = new BitmapImage(new Uri(number.ToString() + ".png", UriKind.Relative));
-			image1.Source = Img;			
-			showalltop(mr.Player);
-		}
+        private void kastaTärning()
+        {
+            ritaPjäser();
+            timer.Start();
+            Random num = new Random();
+            int number = num.Next(1, 7);
+            int number2 = num.Next(1, 7);
+            BitmapImage Img2 = new BitmapImage(new Uri(number2.ToString() + ".png", UriKind.Relative));
+            image2.Source = Img2;
+            BitmapImage Img = new BitmapImage(new Uri(number.ToString() + ".png", UriKind.Relative));
+            image1.Source = Img;
 
-		void timer_Tick(object sender, EventArgs e)
-		{
-			count++;
-			if (count == 40) //här ändrar vi hur länge den ska snurra
-			{
-				count = 0;
-				timer.Stop();
-			}
-			Random num = new Random();
-			int number = num.Next(1, 7);
-			int number2 = num.Next(1, 7);
-			BitmapImage Img2 = new BitmapImage(new Uri(number2.ToString() + ".png", UriKind.Relative));
-			image2.Source = Img2;
-			BitmapImage Img = new BitmapImage(new Uri(number.ToString() + ".png", UriKind.Relative));
-			image1.Source = Img;
+            showalltop(mr.Player);
+        }
+
+        void timer_Tick(object sender, EventArgs e)
+        {
+            count++;
+            if (count == 40) //här ändrar vi hur länge den ska snurra
+            {
+                count = 0;
+                timer.Stop();
+            }
+            Random num = new Random();
+            int number = num.Next(1, 7);
+            int number2 = num.Next(1, 7);
+            BitmapImage Img2 = new BitmapImage(new Uri(number2.ToString() + ".png", UriKind.Relative));
+            image2.Source = Img2;
+            BitmapImage Img = new BitmapImage(new Uri(number.ToString() + ".png", UriKind.Relative));
+            image1.Source = Img;
             dice1 = number;
             dice2 = number2;
-		}
+
+        }
 
 
-		public void ritaPjäser()
-		{
-			for (int i = 0; i < 24; i++)
-			{
-				for (int z = 0; z < 5; z++)
-					uc[i].fillEllipse(mr.Triangel[i, z], z, i);
-			}
-		}
+        public void ritaPjäser()
+        {
+            for (int i = 0; i < 24; i++)
+            {
+                for (int z = 0; z < 5; z++)
+                    uc[i].fillEllipse(mr.Triangel[i, z], z, i);
+            }
+        }
 
 
 
 
-		//|*********************************************************************|
-		//| UPPGIFT: Hitta objekten som skall flyttas på brädet.                |
-		//| NOTERA:  Gör en ifsats som hittar de rätta objekten.                |
-		//|                                                                     |
-		//|*********************************************************************|
-		private void theCanvas_MouseDown(object sender, MouseButtonEventArgs e)
-		{
-			if (mr.Player == 0) //Player är 0, innan man rullat tärningarna första gången.
-			{
-				MessageBox.Show("Rulla tärningarna först!");   
-			}
-			
-			else if (pjäsVald >= 0) // Är 1 om du valt en pjäs att flytta. Sedan flyttas pjäsen till den triangel du valt.
-			{
+        //|*********************************************************************|
+        //| UPPGIFT: Hitta objekten som skall flyttas på brädet.                |
+        //| NOTERA:  Gör en ifsats som hittar de rätta objekten.                |
+        //|                                                                     |
+        //|*********************************************************************|
+        private void theCanvas_MouseDown(object sender, MouseButtonEventArgs e)
+        {
 
-				Point pt2 = e.GetPosition(theCanvas);
-				HitTestResult hr2 = VisualTreeHelper.HitTest(theCanvas, pt2);
-				Object obj2 = hr2.VisualHit;
-                try
-                {
-                    _shapeSelected = (Shape)obj2;
-                }
-                catch
-                {
-                }
-
-                if (_shapeSelected.Name.Contains("t") || _shapeSelected.Name.Contains("E"))
-				{                   
-					int valdTri = Int32.Parse(_shapeSelected.Name.Remove(0, 1));
-					int pjäsVärde = 1;
-					int i = 0;
-                    
-                    // SVART : Utgår från träningarna.
-                    if (mr.Player == 1)
-					{
-                        if (pjäsVald == valdTri)    //Ångra vilken du vill flytta.
-                        {
-                            mr.Triangel[pjäsVald, pjäsValdPlats] = 1;
-                            ritaPjäser();
-                            pjäsVald = -1;
-                            pjäsValdPlats = 0;
-                        }
-                        else if ((pjäsVald + dice1) == valdTri) //dice 1
-                        {
-                            while (pjäsVärde != 0)
-						    {
-                                pjäsVärde = mr.Triangel[valdTri, i++];
-						    }                           
-                            if (mr.Triangel[valdTri, 0] == 2 && mr.Triangel[valdTri, 1] == 0) //Knock out
-                            {
-                                mr.Triangel[valdTri, 0] = 1;
-                                dice1 = 0;
-                                image1.Opacity = 0.5;
-                            }
-                            else if (mr.Triangel[valdTri, 0] == 2 && mr.Triangel[valdTri, 1] == 2)
-                            {
-                                MessageBox.Show("Felaktigt move!");
-                                mr.Triangel[pjäsVald, pjäsValdPlats] = 1;
-                                ritaPjäser();
-                                pjäsVald = -1;
-                                pjäsValdPlats = 0;
-                            }
-                            else
-                            {
-                                mr.Triangel[valdTri, i - 1] = 1;
-                                dice1 = 0;
-                                image1.Opacity = 0.5;
-                            }                            
-                            pjäsVald = -1; //Blir -1 igen.
-                            ritaPjäser();
-					    }
-                        else if ((pjäsVald + dice2) == valdTri) //dice 2
-                        {
-                            while (pjäsVärde != 0)
-                            {
-                                pjäsVärde = mr.Triangel[valdTri, i++];
-                            }
-                            if (mr.Triangel[valdTri, 0] == 2 && mr.Triangel[valdTri, 1] == 0) //Knock out
-                            {
-                                mr.Triangel[valdTri, 0] = 1;
-                                dice2 = 0;
-                                image2.Opacity = 0.5;
-                            }
-                            else if (mr.Triangel[valdTri, 0] == 2 && mr.Triangel[valdTri, 1] == 2)
-                            {
-                                MessageBox.Show("Felaktigt move!");
-                                mr.Triangel[pjäsVald, pjäsValdPlats] = 1;
-                                ritaPjäser();
-                                pjäsVald = -1;
-                                pjäsValdPlats = 0;
-                            }
-                            else
-                            {
-                                mr.Triangel[valdTri, i - 1] = 1;
-                                dice2 = 0;
-                                image2.Opacity = 0.5;
-                            }                            
-                            pjäsVald = -1; //Blir -1 igen.
-                            ritaPjäser();
-                        }
-                                               
-                    }
-                    // RÖD : Utgår från träningarna.
-                    else                   
-                    {
-                        if (pjäsVald == valdTri)    //Ångra vilken du vill flytta.
-                        {
-                            mr.Triangel[pjäsVald, pjäsValdPlats] = 2;
-                            ritaPjäser();
-                            pjäsVald = -1;
-                            pjäsValdPlats = 0;
-                        }
-                        else if ((pjäsVald - dice1) == valdTri)
-                        {
-                            while (pjäsVärde != 0)
-                            {
-                                pjäsVärde = mr.Triangel[valdTri, i++];
-                            }
-                            if (mr.Triangel[valdTri, 0] == 1 && mr.Triangel[valdTri, 1] == 0) //Knock out
-                            {
-                                mr.Triangel[valdTri, 0] = 2;
-                                dice1 = 0;
-                                image1.Opacity = 0.5;
-                            }
-                            else if (mr.Triangel[valdTri, 0] == 1 && mr.Triangel[valdTri, 1] == 1)
-                            {
-                                MessageBox.Show("Felaktigt move!");
-                                mr.Triangel[pjäsVald, pjäsValdPlats] = 2;
-                                ritaPjäser();
-                                pjäsVald = -1;
-                                pjäsValdPlats = 0;
-                            }
-                            else
-                            {
-                                mr.Triangel[valdTri, i - 1] = 2;
-                                dice1 = 0;
-                                image1.Opacity = 0.5;
-                            }                            
-                            pjäsVald = -1; //Blir -1 igen.
-                            ritaPjäser();
-                        }
-                        else if ((pjäsVald - dice2) == valdTri)
-                        {
-                            while (pjäsVärde != 0)
-                            {
-                                pjäsVärde = mr.Triangel[valdTri, i++];
-                            }
-                            if (mr.Triangel[valdTri, 0] == 1 && mr.Triangel[valdTri, 1] == 0) //Knock out
-                            {
-                                mr.Triangel[valdTri, 0] = 2;
-                                dice2 = 0;
-                                image2.Opacity = 0.5;
-                            }
-                            else if (mr.Triangel[valdTri, 0] == 1 && mr.Triangel[valdTri, 1] == 1)
-                            {
-                                MessageBox.Show("Felaktigt move!");
-                                mr.Triangel[pjäsVald, pjäsValdPlats] = 2;
-                                ritaPjäser();
-                                pjäsVald = -1;
-                                pjäsValdPlats = 0;
-                            }
-                            else
-                            {
-                                mr.Triangel[valdTri, i - 1] = 2;
-                                dice2 = 0;
-                                image2.Opacity = 0.5;
-                            }                            
-                            pjäsVald = -1; //Blir -1 igen.
-                            ritaPjäser();
-                        }
-                        
-                    }                    
-				}                
+            if (mr.Player == 0) //Player är 0, innan man rullat tärningarna första gången.
+            {
+                MessageBox.Show("Rulla tärningarna först!");
             }
 
+            else
+            {
 
-            else // Tar bort den översta pjässen på vald triangel.
-			{
-                if (dice1 != 0 || dice2 != 0)
+                //showalltop(mr.Player);
+                Point pt2 = e.GetPosition(theCanvas);
+                HitTestResult hr2 = VisualTreeHelper.HitTest(theCanvas, pt2);
+                Object obj2 = hr2.VisualHit;
+                if (obj2 is Shape)
                 {
-                    Point pt1 = e.GetPosition(theCanvas);
-                    HitTestResult hr1 = VisualTreeHelper.HitTest(theCanvas, pt1);
-                    Object obj1 = hr1.VisualHit;
-                    if (obj1 is Ellipse)
+                    _shapeSelected = (Shape)obj2;
+                    showalltop(mr.Player);
+                    if (_shapeSelected is Rectangle)
                     {
-                        _shapeSelected = (Shape)obj1;
-                        if (_shapeSelected.Name.Contains("E"))
-                        {
-                            int vald = Int32.Parse(_shapeSelected.Name.Remove(0, 1));
-                            int antalPjäser = 1;
-                            int i = 0;
-                            if (mr.Triangel[vald, 0] != mr.Player) //Kollar så du bara kan klicka på dina egna pjäser
-                            {
-                                MessageBox.Show("Du kan bara välja dina pjäser!");
-                            }
-                            else
-                            {                            
-                                while (antalPjäser != 0)
-                                {
-                                    antalPjäser = mr.Triangel[vald, i++];
-                                }
-                                mr.Triangel[vald, i - 2] = 0;
-                                pjäsVald = vald;    //Sätts till vald triangel.
-                                pjäsValdPlats = i - 2;  //Används ifall man vill byta pjäs att flytta.
-                                ritaPjäser();
-                            }
-                        }
+
                     }
+                    else
+                    {
+                        int valdTri = Int32.Parse(_shapeSelected.Name.Remove(0, 1));
+
+                        if (_shapeSelected.Stroke == Brushes.Black)
+                        {
+
+                            mr.Triangel[valdTri, FirstEmpty(valdTri)] = mr.Player;
+                            mr.Triangel[recentTriangel, FirstBrick(recentTriangel)] = 0;
+                            kickPlayer(valdTri);
+                            ritaPjäser();
+                            showalltop(mr.Player);
+                            changeDice(valdTri);
+
+                        }
+                        else if (mr.Triangel[valdTri, 0] == mr.Player && _shapeSelected.Stroke == Brushes.Gold)
+                        {
+                            cordfromX = pt2.X;
+                            cordfromY = pt2.Y;
+                            _shapeSelected.Stroke = Brushes.Green;
+                            ritaPjäser();
+                            showallmoves(valdTri);
+                            showalltop(mr.Player);
+                            recentTriangel = valdTri;
+
+
+                        }
+
+
+
+                    }
+                }
+            }
+        }
+        private void kickPlayer(int triangle)
+        {
+            int firstcolor = mr.Triangel[triangle, 0];
+            int secondcolor = mr.Triangel[triangle, 1];
+
+            if (firstcolor != secondcolor && secondcolor != 0)
+            {
+                if (mr.Triangel[triangle, 0] == 1)
+                    MessageBox.Show("Svart mark utskickad!");
+                else
+                    MessageBox.Show("Vit Mark utskickad!");
+
+                mr.Triangel[triangle, 0] = secondcolor;
+                mr.Triangel[triangle, 1] = 0;
+
+
+            }
+        }
+        private void changeDice(int triangle)
+        {
+            if (mr.Player == 1)
+            {
+                int step = triangle - recentTriangel;
+                if (dice1 == step)
+                {
+                    dice1 = 0;
+                    image1.Opacity = 0.25;
                 }
                 else
                 {
-                    MessageBox.Show("Inga drag kvar!");
+                    image2.Opacity = 0.25;
+                    dice2 = 0;
+                    ritaPjäser();
                 }
-			}			
-		}
+            }
+            else
+            {
+                int step = recentTriangel - triangle;
+                if (dice1 == step)
+                {
+                    dice1 = 0;
+                    image1.Opacity = 0.25;
+                }
+                else
+                {
+                    image2.Opacity = 0.25;
+                    dice2 = 0;
 
-		private void showalltop(int x)
-		{
-            ritaPjäser();
-			for (int i = 0; i < 24; i++)
-			{
-				for (int z = 0; z < 5; z++)
-				{
+                }
+            }
+        }
+        private void showallmoves(int triangelFrom)
+        {
+
+
+            if (mr.Player == 1)
+            {
+                int first = triangelFrom + dice1;
+                int second = triangelFrom + dice2;
+                int third = triangelFrom + dice3;
+                int fourth = triangelFrom + dice4;
+
+                if (first < 23 && first != triangelFrom)
+                    uc[first].fillEllipseGold(FirstEmpty(first), mr.Player);
+                if (second < 23 && second != triangelFrom)
+                    uc[second].fillEllipseGold(FirstEmpty(second), mr.Player);
+
+
+            }
+            else
+            {
+                int first = triangelFrom - dice1;
+                int second = triangelFrom - dice2;
+
+                if (first >= 0 && first != triangelFrom)
+                    uc[first].fillEllipseGold(FirstEmpty(first), mr.Player);
+                if (second >= 0 && second != triangelFrom)
+                    uc[second].fillEllipseGold(FirstEmpty(second), mr.Player);
+
+            }
+
+        }
+
+        private int FirstEmpty(int triangelto)
+        {
+
+            for (int i = 0; i < 5; i++)
+            {
+                if (i == 4 && mr.Triangel[triangelto, i] == 0)
+                {
+                    return i;
+                }
+                else if (mr.Triangel[triangelto, i] == 0)
+                {
+                    return i;
+                }
+
+            }
+            return 4; //kolla om den ritar?
+
+        }
+        private int FirstBrick(int recenttri)
+        {
+            for (int i = 4; i >= 0; i--)
+            {
+                if (mr.Triangel[recenttri, i] != 0)
+                {
+                    return i;
+                }
+
+            }
+            return 0;
+        }
+
+        private void showalltop(int x)
+        {
+            for (int i = 0; i < 24; i++)
+            {
+                for (int z = 0; z < 5; z++)
+                {
                     if (z == 4 && mr.Triangel[i, z] == x)
                     {
                         uc[i].showstroke(z);
                     }
-                    else if (mr.Triangel[i, z] == x && mr.Triangel[i, z+1] == 0)
+                    else if (mr.Triangel[i, z] == x && mr.Triangel[i, z + 1] == 0)
                     {
                         uc[i].showstroke(z);
                     }
-				}
-			}
-		}
-	}
+                }
+            }
+        }
+    }
 }

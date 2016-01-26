@@ -30,8 +30,9 @@ namespace Backgammon
         {
 
             UniformGrid grid = this.pieceGrid as UniformGrid;
-            Ellipse p = grid.Children[x] as Ellipse;            
+            Ellipse p = grid.Children[x] as Ellipse;
             p.Name = "E" + z;
+            p.Opacity = 1;
             if (i == 0)
             {
                 p.Fill = null;
@@ -47,6 +48,39 @@ namespace Backgammon
                 p.Fill = Brushes.White;
                 p.Stroke = Brushes.DarkSlateGray;
             }
+        }
+
+        public void fillEllipseGold(int x, int player)
+        {
+            UniformGrid grid = this.pieceGrid as UniformGrid;
+            Ellipse p = grid.Children[x] as Ellipse;
+            bool black = false;
+            bool white = false;
+            if (x > 1)
+            {
+                Ellipse Pbefore = grid.Children[x - 1] as Ellipse;
+                if (Pbefore.Fill == Brushes.White)
+                    white = true;
+                else
+                    black = true;
+            }
+
+            if (player == 1 && p.Fill != Brushes.White && white == false)
+            {
+
+                p.Fill = Brushes.Gold;
+                p.Stroke = Brushes.Black;
+                p.Opacity = 0.5;
+            }
+            else if (player == 2 && p.Fill != Brushes.Black && black == false)
+            {
+                p.Fill = Brushes.Gold;
+                p.Stroke = Brushes.Black;
+                p.Opacity = 0.5;
+            }
+
+
+
         }
         public void showstroke(int x)
         {
