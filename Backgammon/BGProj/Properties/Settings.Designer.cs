@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Backgammon.Properties
+namespace BGProj.Properties
 {
 
 
