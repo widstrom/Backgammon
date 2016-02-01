@@ -7,6 +7,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="270" d:DesignWidth="480" Background="BurlyWood">
     <Grid>
+        
         <Canvas x:Name="theCanvas" Height="270" Width="480" MouseDown="theCanvas_MouseDown">
 
             <Grid>
@@ -448,7 +449,7 @@
                         <Polygon Points= "40,15 20,30 20,15" Fill="SaddleBrown" RenderTransformOrigin="0.384,0.379" ></Polygon>
                         <Polygon Points= "0,15 20,30 20,15" Fill="SaddleBrown" RenderTransformOrigin="0.622,0.358" ></Polygon>
                     </Grid>
-                    <UniformGrid Columns="2" Rows="6" Grid.Row="0" Grid.Column="1" Opacity="0.8">
+                    <UniformGrid Name="prisonBlack" Columns="2" Rows="6" Grid.Row="0" Grid.Column="1" Opacity="0.8">
                         <Rectangle Fill="SaddleBrown" ></Rectangle>
                         <Rectangle Fill="SandyBrown" ></Rectangle>
                         <Rectangle Fill="SandyBrown" ></Rectangle>
@@ -463,7 +464,7 @@
                         <Rectangle Fill="SaddleBrown" ></Rectangle>
 
                     </UniformGrid>
-                    <UniformGrid Columns="2" Rows="6"  Grid.Row="2" Grid.Column="1" Opacity="0.8">
+                    <UniformGrid Name="prisonWhite" Columns="2" Rows="6"  Grid.Row="2" Grid.Column="1" Opacity="0.8">
                         <Rectangle Fill="SaddleBrown" ></Rectangle>
                         <Rectangle Fill="SandyBrown" ></Rectangle>
                         <Rectangle Fill="SandyBrown" ></Rectangle>
@@ -479,15 +480,33 @@
                     </UniformGrid>
                 </Grid>
                 <Grid Grid.Column="1">
+                    <Rectangle Name="playerWhiteHome" Width="45" VerticalAlignment="Top" Margin="20" Height="70" Fill="SaddleBrown" 
+                    Stroke="White" StrokeThickness="2" RadiusX="5" RadiusY="5"/>
+                    <Rectangle Width="45" VerticalAlignment="Top" Margin="20" Height="70" Fill="Transparent" 
+                    Stroke="White" StrokeThickness="2" RadiusX="5" RadiusY="5">
+                        <Rectangle.Effect>
+                            <DropShadowEffect ShadowDepth="0" BlurRadius="5" Color="DarkSlateGray"/>
+                        </Rectangle.Effect>
+                        <Rectangle.Clip>
+                            <RectangleGeometry Rect="0,0,45,70" RadiusX="6" RadiusY="6"/>
+                        </Rectangle.Clip>
+                    </Rectangle>
+                    <!--<Rectangle Name="playerWhiteHome" RadiusX="4" RadiusY="4" Stroke="White" Width="45" Height="70" VerticalAlignment="Top" Margin="20" StrokeThickness="3">
+                        
+                        <Rectangle.Fill>
+                            <RadialGradientBrush GradientOrigin="0.75,0.25">
 
-                    <Grid Name="player1Home" Width="45" Height="70" Margin="20" Background="Wheat" VerticalAlignment="Top">
-                        <Label Name="Player1" VerticalAlignment="Top" HorizontalAlignment="Center" Foreground="Black" FontSize="9">Player 1</Label>
-                        <Grid.Effect>
-                            
-                            <DropShadowEffect BlurRadius="5" Direction="320" ShadowDepth="4"></DropShadowEffect>
-                        </Grid.Effect>                        
-                        <!--<Ellipse Name="turn1" Height="35" Width="35" Fill="Black" Stroke="Gray"></Ellipse>-->
-                    </Grid>
+                                <GradientStop Color="White" Offset="0.0" />
+                                <GradientStop Color="SaddleBrown" Offset="0.4" />
+                            </RadialGradientBrush>
+                        </Rectangle.Fill>
+                        <Rectangle.Effect>
+                            <DropShadowEffect BlurRadius="5" ShadowDepth="5"></DropShadowEffect>
+                        </Rectangle.Effect>
+
+                    </Rectangle>-->
+
+                    
 
                     <Grid Height="80" Width="70">
                         <UniformGrid  Rows="2" Columns="1" Name="Dices" Width="70" Height="60" >
@@ -501,13 +520,36 @@
                         </UniformGrid>
 
                     </Grid>
-                    <Grid Name="player2Home" Width="45" Height="70" Margin="20" Background="Wheat" VerticalAlignment="Bottom">
-                        <Label VerticalAlignment="Top" HorizontalAlignment="Center" Foreground="Red" FontSize="9">Player 2</Label>
-                        <Grid.Effect>
-                            <DropShadowEffect BlurRadius="5" Direction="320" ShadowDepth="4"></DropShadowEffect>
-                        </Grid.Effect>
-                        <!--<Ellipse Name="turn2" Height="35" Width="35" Fill="Red" Stroke="Gray"></Ellipse>-->
-                    </Grid>
+                    
+                    <Rectangle Name="playerBlackHome" Width="45" VerticalAlignment="Bottom" Margin="20" Height="70" Fill="SaddleBrown" 
+                    Stroke="Black" StrokeThickness="2" RadiusX="5" RadiusY="5"/>
+                    <Rectangle Width="45" VerticalAlignment="Bottom" Margin="20" Height="70" Fill="Transparent" 
+                    Stroke="Black" StrokeThickness="2" RadiusX="5" RadiusY="5">
+                        <Rectangle.Effect>
+                            <DropShadowEffect ShadowDepth="0" BlurRadius="5" Color="DarkSlateGray"/>
+                        </Rectangle.Effect>
+                        <Rectangle.Clip>
+                            <RectangleGeometry Rect="0,0,45,70" RadiusX="5" RadiusY="5"/>
+                        </Rectangle.Clip>
+                    </Rectangle>
+                    <!--<Rectangle Name="playerBlackHome" RadiusX="4" RadiusY="4" Stroke="Black" Width="45" Height="70" VerticalAlignment="Bottom" ClipToBounds="True" Margin="20" StrokeThickness="3">
+                        
+
+                        <Rectangle.Fill>
+                            <SolidColorBrush Color="SaddleBrown"/>
+                            --><!--<RadialGradientBrush GradientOrigin="0.75,0.25">
+
+                                <GradientStop Color="Black" Offset="0.2" />
+                                <GradientStop Color="SaddleBrown" Offset="0.4" />
+                            </RadialGradientBrush>--><!--
+                        </Rectangle.Fill>
+                        <Rectangle.Effect>
+                                <DropShadowEffect BlurRadius="5" ShadowDepth="5"></DropShadowEffect>
+                            </Rectangle.Effect>
+                            
+                        </Rectangle>-->
+                       
+                    
 
                 </Grid>
             </Grid>

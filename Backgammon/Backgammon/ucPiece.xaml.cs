@@ -33,6 +33,15 @@ namespace Backgammon
             Ellipse p = grid.Children[x] as Ellipse;
             p.Name = "E" + z;
             p.Opacity = 1;
+            RadialGradientBrush myBrushWhite = new RadialGradientBrush();
+            myBrushWhite.GradientOrigin = new Point(0.75, 0.25);
+            myBrushWhite.GradientStops.Add(new GradientStop(Colors.White, 0.3));
+            myBrushWhite.GradientStops.Add(new GradientStop(Colors.Wheat, 0.7));
+            
+            RadialGradientBrush myBrushBlack = new RadialGradientBrush();
+            myBrushBlack.GradientOrigin = new Point(0.75, 0.25);
+            myBrushBlack.GradientStops.Add(new GradientStop(Colors.Wheat, -0.2));
+            myBrushBlack.GradientStops.Add(new GradientStop(Colors.Black, 0.4));
             if (i == 0)
             {
                 p.Fill = null;
@@ -42,11 +51,13 @@ namespace Backgammon
             {
                 p.Fill = Brushes.Black;
                 p.Stroke = Brushes.DarkSlateGray;
+                p.Fill = myBrushBlack;
             }
             else if (i == 2)
             {
                 p.Fill = Brushes.White;
                 p.Stroke = Brushes.DarkSlateGray;
+                p.Fill = myBrushWhite;
             }
         }
 
