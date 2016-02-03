@@ -63,6 +63,7 @@
             </Grid>
             <Canvas Name="theCanvas" MouseDown="theCanvas_MouseDown" Height="270" Width="480" Background="BurlyWood" Margin="10" Grid.ColumnSpan="2">
 
+
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="400"/>
@@ -183,8 +184,8 @@
                             <Rectangle Fill="SandyBrown"></Rectangle>
                             <Rectangle Fill="SaddleBrown"></Rectangle>
                             <Rectangle Fill="SandyBrown"></Rectangle>
-                            
-                            
+
+
                         </UniformGrid>
                         <Image Name="Dice1" Grid.Column="2" Grid.Row="1" Height="25" Width="25" Margin="0,0,120,0" Stretch="Fill">
                             <Image.Effect>
@@ -507,7 +508,7 @@
                                         </LinearGradientBrush>
                                     </Polygon.Fill>
                                 </Polygon>
-                                <local:ucPiece RenderTransformOrigin="0.5,0.5">
+                                <local:ucPiece RenderTransformOrigin="0.5,0.5" Margin="0,1,0,-1">
                                     <local:ucPiece.RenderTransform>
                                         <TransformGroup>
                                             <ScaleTransform ScaleY="-1" ScaleX="1"/>
@@ -520,12 +521,12 @@
                             </Grid>
                         </UniformGrid>
                         <Grid Grid.Row="1" Grid.Column="1">
-                            
+
                             <Polygon Points="0,15 20,0 20,15" Fill="SaddleBrown" ></Polygon>
                             <Polygon Points= "40,15 20,0 20,15" Fill="SaddleBrown" RenderTransformOrigin="0.381,0.604" ></Polygon>
                             <Polygon Points= "40,15 20,30 20,15" Fill="SaddleBrown" RenderTransformOrigin="0.384,0.379" ></Polygon>
                             <Polygon Points= "0,15 20,30 20,15" Fill="SaddleBrown" RenderTransformOrigin="0.622,0.358" ></Polygon>
-                            
+
                         </Grid>
                         <UniformGrid Columns="2" Rows="6" Grid.Row="0" Grid.Column="1" Opacity="0.8">
                             <Rectangle Fill="SaddleBrown" ></Rectangle>
@@ -543,7 +544,10 @@
 
                         </UniformGrid>
                         <Grid Grid.Row="0" Name="LockedP1" Grid.Column="1" Height="24" Width="24">
-                            <Ellipse Name="E1" Height="24" Width="24"></Ellipse>
+                            <Ellipse Name="P1" Height="24" Width="24"></Ellipse>
+                        </Grid>
+                        <Grid Grid.Row="2" Name="LockedP2" Grid.Column="1" Height="24" Width="24">
+                            <Ellipse Name="P2" Height="24" Width="24"></Ellipse>
                         </Grid>
                         <UniformGrid Columns="2" Rows="6"  Grid.Row="2" Grid.Column="1" Opacity="0.8">
                             <Rectangle Fill="SaddleBrown" ></Rectangle>
@@ -590,8 +594,54 @@
 
 
 
-                        <Grid Name="player1Home" Width="45" Height="70" Margin="10,25,10,0" Background="Wheat" VerticalAlignment="Top">
-                            <UniformGrid Height="45" Width="40" Margin="0,10,0,0" Rows="15">
+                        <Grid Grid.Column="1">
+                            <UniformGrid Height="45" Width="40" Margin="0,30,0,0" Rows="15" VerticalAlignment="Top" Panel.ZIndex="1">
+                                <Border CornerRadius="10,10,10,10" Background="White" BorderThickness="0.6" BorderBrush="DarkGray"></Border>
+                                <Border CornerRadius="10,10,10,10" Background="White" BorderThickness="0.6" BorderBrush="DarkGray"></Border>
+                                <Border CornerRadius="10,10,10,10" Background="White" BorderThickness="0.6" BorderBrush="DarkGray"></Border>
+                                <Border CornerRadius="10,10,10,10" Background="White" BorderThickness="0.6" BorderBrush="DarkGray"></Border>
+                                <Border CornerRadius="10,10,10,10" Background="White" BorderThickness="0.6" BorderBrush="DarkGray"></Border>
+                                <Border CornerRadius="10,10,10,10" Background="White" BorderThickness="0.6" BorderBrush="DarkGray"></Border>
+                                <Border CornerRadius="10,10,10,10" Background="White" BorderThickness="0.6" BorderBrush="DarkGray"></Border>
+                                <Border CornerRadius="10,10,10,10" Background="White" BorderThickness="0.6" BorderBrush="DarkGray"></Border>
+                                <Border CornerRadius="10,10,10,10" Background="White" BorderThickness="0.6" BorderBrush="DarkGray"></Border>
+                                <Border CornerRadius="10,10,10,10" Background="White" BorderThickness="0.6" BorderBrush="DarkGray"></Border>
+                                <Border CornerRadius="10,10,10,10" Background="White" BorderThickness="0.6" BorderBrush="DarkGray"></Border>
+                                <Border CornerRadius="10,10,10,10" Background="White" BorderThickness="0.6" BorderBrush="DarkGray"></Border>
+                                <Border CornerRadius="10,10,10,10" Background="White" BorderThickness="0.6" BorderBrush="DarkGray"></Border>
+                                <Border CornerRadius="10,10,10,10" Background="White" BorderThickness="0.6" BorderBrush="DarkGray"></Border>
+                                <Border CornerRadius="10,10,10,10" Background="White" BorderThickness="0.6" BorderBrush="DarkGray"></Border>
+                            </UniformGrid>
+                            <Rectangle Name="playerWhiteHome" Width="45" VerticalAlignment="Top" Margin="20" Height="70" Fill="SaddleBrown" 
+                                Stroke="White" StrokeThickness="2"  RadiusX="5" RadiusY="5">
+
+                            </Rectangle>
+
+                            <Rectangle Width="45" VerticalAlignment="Top" Margin="20" Height="70" Fill="Transparent" 
+                                Stroke="White" StrokeThickness="2" RadiusX="5" RadiusY="5">
+
+                                <Rectangle.Effect>
+                                    <DropShadowEffect ShadowDepth="0" BlurRadius="5" Color="DarkSlateGray"/>
+                                </Rectangle.Effect>
+                                <Rectangle.Clip>
+                                    <RectangleGeometry Rect="0,0,45,70" RadiusX="6" RadiusY="6"/>
+                                </Rectangle.Clip>
+
+                            </Rectangle>
+
+
+                            <Rectangle Name="playerBlackHome" Width="45" VerticalAlignment="Bottom" Margin="20" Height="70" Fill="SaddleBrown" 
+                                Stroke="Black" StrokeThickness="2" RadiusX="5" RadiusY="5"/>
+                            <Rectangle Width="45" VerticalAlignment="Bottom" Margin="20" Height="70" Fill="Transparent" 
+                                Stroke="Black" StrokeThickness="2" RadiusX="5" RadiusY="5">
+                                <Rectangle.Effect>
+                                    <DropShadowEffect ShadowDepth="0" BlurRadius="5" Color="DarkSlateGray"/>
+                                </Rectangle.Effect>
+                                <Rectangle.Clip>
+                                    <RectangleGeometry Rect="0,0,45,70" RadiusX="5" RadiusY="5"/>
+                                </Rectangle.Clip>
+                            </Rectangle>
+                            <UniformGrid Height="45" Width="40" Margin="0,0,0,30" Rows="15" VerticalAlignment="Bottom" Panel.ZIndex="1">
                                 <Border CornerRadius="10,10,10,10" Background="Black" BorderBrush="DarkGray" BorderThickness="0.6"></Border>
                                 <Border CornerRadius="10,10,10,10" Background="Black" BorderBrush="DarkGray" BorderThickness="0.6"></Border>
                                 <Border CornerRadius="10,10,10,10" Background="Black" BorderBrush="DarkGray" BorderThickness="0.6"></Border>
@@ -609,16 +659,14 @@
                                 <Border CornerRadius="10,10,10,10" Background="Black" BorderBrush="DarkGray" BorderThickness="0.6"></Border>
 
                             </UniformGrid>
-                            <Label Name="Player1" VerticalAlignment="Top" HorizontalAlignment="Center" Foreground="Black" FontSize="9">Player 1</Label>
-                            <Grid.Effect>
-                                <DropShadowEffect BlurRadius="5" Direction="320" ShadowDepth="4"></DropShadowEffect>
-                            </Grid.Effect>
-                            
-                            <!--<Ellipse Name="turn1" Height="35" Width="35" Fill="Black" Stroke="Gray"></Ellipse>-->
+
+
+
                         </Grid>
-                        
-                        <Border Name="Border1" MouseDown="Border1_MouseDown" MouseEnter="Border_MouseEnter" MouseLeave="Border_MouseLeave" Height="50" Width="50" BorderThickness="1"
-        CornerRadius="20,20,20,20" BorderBrush="SaddleBrown" Background="Wheat" RenderTransformOrigin="0.5,0.5">
+
+
+                        <Border Name="Border1" MouseDown="Border1_MouseDown" MouseEnter="Border_MouseEnter" MouseLeave="Border_MouseLeave" Height="45" Width="45" BorderThickness="1"
+                            CornerRadius="5,5,5,5" BorderBrush="SaddleBrown" Background="Wheat" RenderTransformOrigin="0.5,0.5">
                             <Border.RenderTransform>
                                 <TransformGroup>
                                     <ScaleTransform/>
@@ -631,12 +679,12 @@
                                 <DropShadowEffect/>
                             </Border.Effect>
                             <Grid>
-                                <Label HorizontalAlignment="Center" Margin="0,5,0,0">ROLL</Label>
+                                <Label HorizontalAlignment="Center" Margin="0,0,0,0">ROLL</Label>
                                 <Label VerticalAlignment="Center"  HorizontalAlignment="Center" Margin="0,10,-1,0">DICES</Label>
                             </Grid>
                         </Border>
                         <Border Name="Border2"  MouseEnter="Border2_MouseEnter" MouseLeave="Border2_MouseLeave"  MouseDown="Border2_MouseDown" Visibility="Hidden" Height="35" Width="35" BorderThickness="1"
-        CornerRadius="20,20,20,20" BorderBrush="SaddleBrown" Background="Wheat" RenderTransformOrigin="0.5,0.5">
+                            CornerRadius="20,20,20,20" BorderBrush="SaddleBrown" Background="Wheat" RenderTransformOrigin="0.5,0.5">
                             <Border.RenderTransform>
                                 <TransformGroup>
                                     <ScaleTransform/>
@@ -652,34 +700,18 @@
                                 <Image Source="appbar.infinite.png"></Image>
                             </Grid>
                         </Border>
-                        <Grid Name="player2Home" Width="45" Height="70" Margin="20" Background="Wheat" VerticalAlignment="Bottom">
-                            <UniformGrid Height="45" Width="40" Margin="0,10,0,0" Rows="15">
-                                <Border CornerRadius="10,10,10,10" Background="White" BorderThickness="0.6" BorderBrush="DarkGray"></Border>
-                                <Border CornerRadius="10,10,10,10" Background="White" BorderThickness="0.6" BorderBrush="DarkGray"></Border>
-                                <Border CornerRadius="10,10,10,10" Background="White" BorderThickness="0.6" BorderBrush="DarkGray"></Border>
-                                <Border CornerRadius="10,10,10,10" Background="White" BorderThickness="0.6" BorderBrush="DarkGray"></Border>
-                                <Border CornerRadius="10,10,10,10" Background="White" BorderThickness="0.6" BorderBrush="DarkGray"></Border>
-                                <Border CornerRadius="10,10,10,10" Background="White" BorderThickness="0.6" BorderBrush="DarkGray"></Border>
-                                <Border CornerRadius="10,10,10,10" Background="White" BorderThickness="0.6" BorderBrush="DarkGray"></Border>
-                                <Border CornerRadius="10,10,10,10" Background="White" BorderThickness="0.6" BorderBrush="DarkGray"></Border>
-                                <Border CornerRadius="10,10,10,10" Background="White" BorderThickness="0.6" BorderBrush="DarkGray"></Border>
-                                <Border CornerRadius="10,10,10,10" Background="White" BorderThickness="0.6" BorderBrush="DarkGray"></Border>
-                                <Border CornerRadius="10,10,10,10" Background="White" BorderThickness="0.6" BorderBrush="DarkGray"></Border>
-                                <Border CornerRadius="10,10,10,10" Background="White" BorderThickness="0.6" BorderBrush="DarkGray"></Border>
-                                <Border CornerRadius="10,10,10,10" Background="White" BorderThickness="0.6" BorderBrush="DarkGray"></Border>
-                                <Border CornerRadius="10,10,10,10" Background="White" BorderThickness="0.6" BorderBrush="DarkGray"></Border>
-                                <Border CornerRadius="10,10,10,10" Background="White" BorderThickness="0.6" BorderBrush="DarkGray"></Border>
-                            </UniformGrid>
-                            <Label VerticalAlignment="Top" HorizontalAlignment="Center" Foreground="Black" FontSize="9">Player 2</Label>
-                            <Grid.Effect>
-                                <DropShadowEffect BlurRadius="5" Direction="320" ShadowDepth="4"></DropShadowEffect>
-                            </Grid.Effect>
-                            <!--<Ellipse Name="turn2" Height="35" Width="35" Fill="Red" Stroke="Gray"></Ellipse>-->
-                        </Grid>
+
 
                     </Grid>
                 </Grid>
+                <Label Name="Player_One_Roll" Content="" FontSize="20" FontStyle="Italic" Foreground="White" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Canvas.Left="423" Canvas.Top="47" Width="38"/>
+                <Label Name="Player_Two_Roll" Content="" FontSize="20" FontStyle="Italic" Foreground="Black" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Canvas.Left="423" Canvas.Top="202" Width="38" Height="37" RenderTransformOrigin="-1.345,0.427"/>
 
+
+
+                <!-- Här ska "jail" vara, försöker klura ut att sätta in textblock tsm med ellipse utan att använda grid-->
+                <!--<Ellipse Name="jail_Black" Fill="Transparent" Height="20" Canvas.Left="190" Canvas.Top="90" Width="20"/>
+                <Ellipse Name="jail_White" Fill="Transparent" Height="20" Canvas.Left="190" Canvas.Top="160" Width="20"/>-->
 
             </Canvas>
         </Grid>

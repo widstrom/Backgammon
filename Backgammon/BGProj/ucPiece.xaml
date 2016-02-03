@@ -5,13 +5,28 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
              d:DesignHeight="120" d:DesignWidth="25">
-    
-        <UniformGrid Name="pieceGrid" Rows="5" Background="Transparent">
+
+    <UniformGrid Name="pieceGrid" Rows="5" Background="Transparent">
+        <Grid>
             <Ellipse  Height="24" Width="24" ></Ellipse>
+            <TextBlock Text="" TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
+        </Grid>
+        <Grid>
             <Ellipse  Height="24" Width="24" ></Ellipse>
+
+        </Grid>
+        <Grid>
             <Ellipse  Height="24" Width="24" ></Ellipse>
+
+        </Grid>
+        <Grid>
             <Ellipse  Height="24" Width="24" ></Ellipse>
-            <Ellipse  Height="24" Width="24" ></Ellipse>
+
+        </Grid>
+        <Grid>
+            <Ellipse  Height="24" Width="24"  ></Ellipse>
+            <TextBlock Text="" TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
+        </Grid>
     </UniformGrid>
-    
+
 </UserControl>

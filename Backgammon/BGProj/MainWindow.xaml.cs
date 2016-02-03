@@ -32,26 +32,32 @@ namespace BGProj
         int firstClicked;
         int secondClick;
         bool rolled = false;
+        bool firstTimeRolled = true;
 
         public MainWindow()
         {
             InitializeComponent();
 
 
-            bool ok = Bmodel.Modeltests();
-            if (ok)
-                MessageBox.Show("Självtest lyckades!");
-            else
-                MessageBox.Show("Självtest misslyckades!");
+            //bool ok = Bmodel.Modeltests();
+            //if (ok)
+            //    MessageBox.Show("Självtest lyckades!");
+            //else
+            //    MessageBox.Show("Självtest misslyckades!");
 
             timer.Interval = TimeSpan.FromMilliseconds(75); //sätter rullhastigheten till 0,05sekunder
             timer.Tick += timer_Tick; //timer.tick sätts till funktionen timer_tick
             Bmodel.startPositions();
             initialall();
-            drawBoard();
+
+            //drawBoard();
 
 
         }
+
+
+
+
         public void initialall()
         {
             uc[0] = this.grid0.Children[1] as ucPiece;
@@ -123,35 +129,61 @@ namespace BGProj
         }
         private void Border_MouseEnter(object sender, MouseEventArgs e)
         {
-            Dice3.Source = null;
-            Dice4.Source = null;
-            if (!rolled)
+            if (!firstTimeRolled)
             {
-                Mouse.OverrideCursor = Cursors.Hand;
-                scale = new ScaleTransform(1.2, 1.2);
-                Border1.RenderTransform = scale;
-                timer.Start();
+                Dice3.Source = null;
+                Dice4.Source = null;
+                if (!rolled)
+                {
+                    Mouse.OverrideCursor = Cursors.Hand;
+                    scale = new ScaleTransform(1.2, 1.2);
+                    Border1.RenderTransform = scale;
+                    timer.Start();
+                }
             }
+
         }
         private void Border_MouseLeave(object sender, MouseEventArgs e)
         {
-            Mouse.OverrideCursor = Cursors.Arrow;
-            scale = new ScaleTransform(1, 1);
-            Border1.RenderTransform = scale;
-            
-            if (!rolled)
+            if (!firstTimeRolled)
             {
-                Dice1.Source = null;
-                Dice2.Source = null;
-                Dice3.Source = null;
-                Dice4.Source = null;
-                timer.Stop();
+                Mouse.OverrideCursor = Cursors.Arrow;
+                scale = new ScaleTransform(1, 1);
+                Border1.RenderTransform = scale;
+
+                if (!rolled)
+                {
+                    Dice1.Source = null;
+                    Dice2.Source = null;
+                    Dice3.Source = null;
+                    Dice4.Source = null;
+                    timer.Stop();
+                }
             }
-            
-
-
 
         }
+
+        private bool RollTurn()
+        {
+            Random p = new Random();
+            int first, second;
+
+            while (true)
+            {
+                first = p.Next(1, 7) + p.Next(1, 7);
+                second = p.Next(1, 7) + p.Next(1, 7);
+
+                Player_One_Roll.Content = first;
+                Player_Two_Roll.Content = second;
+
+                if (first > second)
+                    return false;
+
+                else if (second > first)
+                    return true;
+            }
+        }
+
         private void Border1_MouseDown(object sender, MouseButtonEventArgs e)
         {
             rolled = true;
@@ -159,20 +191,35 @@ namespace BGProj
             Border2.Visibility = Visibility.Visible;
             scale = new ScaleTransform(1, 1);
             Border1.RenderTransform = scale;
-          
+
             timer.Stop();
-            Bmodel.rollDices();
-            drawBoard();
-            showalltop();
-            BitmapImage Img1 = new BitmapImage(new Uri(Bmodel.dice1.ToString() + ".png", UriKind.Relative));
-            BitmapImage Img2 = new BitmapImage(new Uri(Bmodel.dice2.ToString() + ".png", UriKind.Relative));
-            BitmapImage Img3 = new BitmapImage(new Uri(Bmodel.dice3.ToString() + ".png", UriKind.Relative));
-            BitmapImage Img4 = new BitmapImage(new Uri(Bmodel.dice4.ToString() + ".png", UriKind.Relative));
-            Dice1.Source = Img1;
-            Dice2.Source = Img2;
-            Dice3.Source = Img3;
-            Dice4.Source = Img4;
-            
+
+            if (firstTimeRolled)
+            {
+                Bmodel.playerturn = RollTurn();
+                firstTimeRolled = false;
+            }
+
+            else
+            {
+                Player_One_Roll.Content = "";
+                Player_Two_Roll.Content = "";
+
+                Bmodel.rollDices();
+                drawBoard();
+                showalltop();
+                BitmapImage Img1 = new BitmapImage(new Uri(Bmodel.dice1.ToString() + ".png", UriKind.Relative));
+                BitmapImage Img2 = new BitmapImage(new Uri(Bmodel.dice2.ToString() + ".png", UriKind.Relative));
+                BitmapImage Img3 = new BitmapImage(new Uri(Bmodel.dice3.ToString() + ".png", UriKind.Relative));
+                BitmapImage Img4 = new BitmapImage(new Uri(Bmodel.dice4.ToString() + ".png", UriKind.Relative));
+                Dice1.Source = Img1;
+                Dice2.Source = Img2;
+                Dice3.Source = Img3;
+                Dice4.Source = Img4;
+            }
+
+
+
         }
         private void Image6_MouseDown(object sender, MouseButtonEventArgs e)
         {
@@ -201,62 +248,65 @@ namespace BGProj
             Border1.Visibility = Visibility.Visible;
             rolled = false;
 
-            
 
-        }   
+
+        }
         private void drawBoard()
         {
-            if (Bmodel.player1locked > 0 && Bmodel.playerturn)
+            if (Bmodel.playerWhite > 0 && Bmodel.playerturn)
             {
-                E1.Fill = Brushes.Black;
-                E1.Stroke = Brushes.Gold;
+                P2.Fill = Brushes.Black;
+                P2.Stroke = Brushes.Gold;
             }
-            else if (Bmodel.player2locked > 0 && !Bmodel.playerturn)
+            else if (Bmodel.playerBlack > 0 && !Bmodel.playerturn)
             {
-                E1.Fill = Brushes.Black;
-                E1.Stroke = Brushes.Gold;
+                P1.Fill = Brushes.Black;
+                P1.Stroke = Brushes.Gold;
             }
             for (int i = 0; i < 24; i++)
                 uc[i].FillTriangel(Bmodel.returnHighest(i), Bmodel.returnColor(i), i);
-            
+
         }
         private void showalltop()
         {
 
-            
-                if (Bmodel.player1locked > 0 && Bmodel.playerturn)
+
+            if (Bmodel.playerWhite > 0 && Bmodel.playerturn)
+            {
+                P2.Fill = Brushes.White;
+                P2.Stroke = Brushes.Gold;
+            }
+            else if (Bmodel.playerBlack > 0 && !Bmodel.playerturn)
+            {
+                P1.Fill = Brushes.Black;
+                P1.Stroke = Brushes.Gold;
+            }
+            else
+            {
+                for (int i = 0; i < 24; i++)
                 {
-                    E1.Fill = Brushes.Black;
-                    E1.Stroke = Brushes.Gold;
-                }
-                else if (Bmodel.player2locked > 0 && !Bmodel.playerturn)
-                {
-                    E1.Fill = Brushes.Black;
-                    E1.Stroke = Brushes.Gold;
-                }
-                else
-                {
-                    for (int i = 0; i < 24; i++)
+                    int high = Bmodel.returnHighest(i);
+                    bool turn = Bmodel.returnColor(i);
+                    if (turn == Bmodel.playerturn && high > 0)
                     {
-                        int high = Bmodel.returnHighest(i);
-                        bool turn = Bmodel.returnColor(i);
-                        if (turn == Bmodel.playerturn && high > 0)
-                        {
-                            if (high > 4)
-                                high = 5;
+                        int z, x, c, v, b;
+                        Bmodel.availableMove(i, out z, out x, out c, out v, out b);
 
-                            int z, x, c, v, b;
-                            Bmodel.availableMove(i, out z, out x, out c, out v, out b);
+                        if (z >= 0 || x >= 0 || c >= 0 || v >= 0 || b >= 0)
+                            uc[i].FillTop(Bmodel.returnHighest(i) - 1);
 
-                            if (z >= 0 || x >= 0 || c >= 0 || v >= 0 || b >= 0)
-                                uc[i].FillTop(Bmodel.returnHighest(i) - 1);
-                        }
+                        //Print number on piece
+                        if (high > 5)
+                            uc[i].WriteNumber(high, Bmodel.playerturn);
+                        //Erase number on piece
+                        else uc[i].eraseNumber(high);
                     }
                 }
+            }
         }
         void timer_Tick(object sender, EventArgs e)
         {
-            
+
             Random num = new Random();
             int number = num.Next(1, 7);
             int number2 = num.Next(1, 7);
@@ -278,44 +328,46 @@ namespace BGProj
                     Object obj = hr2.VisualHit;
                     _shapeSelected = (Shape)obj;
 
-                  
+
                     if (_shapeSelected.Stroke == Brushes.Gold)
                     {
 
-                       Bmodel.controlOut();
-                       if (_shapeSelected.Name == "E1")
-                           firstClicked = -1;
-                       else
-                       firstClicked = Int32.Parse(_shapeSelected.Name.Remove(0, 1));
+                        Bmodel.controlOut();
+                        if (_shapeSelected.Name == "P1")
+                            firstClicked = -1;
+                        else if (_shapeSelected.Name == "P2")
+                            firstClicked = 24;
+                        else
+                            firstClicked = Int32.Parse(_shapeSelected.Name.Remove(0, 1));
                         int z, x, c, v, b;
-                        Bmodel.availableMove(firstClicked, out z, out x, out c, out v,out b);
+                        Bmodel.availableMove(firstClicked, out z, out x, out c, out v, out b);
                         drawBoard();
                         showalltop();//ritar ut pjäserna 
-                        
+
                         //_shapeSelected.Stroke = Brushes.Green;
                         if (z >= 0)
                         {
-                           uc[z].FillMove(Bmodel.returnFirstFree(z), z);
+                            uc[z].FillMove(Bmodel.returnFirstFree(z), z);
                         }
-                        if(x>=0)
+                        if (x >= 0)
                             uc[x].FillMove(Bmodel.returnFirstFree(x), x);
-                        if(c>=0)
+                        if (c >= 0)
                             uc[c].FillMove(Bmodel.returnFirstFree(c), c);
-                        if(v>=0)
+                        if (v >= 0)
                             uc[v].FillMove(Bmodel.returnFirstFree(v), v);
                         if (b >= 0)
                             uc[b].FillMove(Bmodel.returnFirstFree(b), b);
 
-                       //gå ut?
-                            
-                            
+                        //gå ut?
 
-                        
+
+
+
                     }
-                    else if (_shapeSelected.Fill == Brushes.Gold)
+                    else if (_shapeSelected.Name.Contains("M"))
                     {
-                        secondClick  = Int32.Parse(_shapeSelected.Name.Remove(0, 1));
-                        Bmodel.controlLMove(firstClicked, secondClick);
+                        secondClick = Int32.Parse(_shapeSelected.Name.Remove(0, 1));
+                        Bmodel.controlMove(firstClicked, secondClick);
                         BitmapImage Img1 = new BitmapImage(new Uri(Bmodel.dice1.ToString() + ".png", UriKind.Relative));
                         Dice1.Source = Img1;
                         BitmapImage Img2 = new BitmapImage(new Uri(Bmodel.dice2.ToString() + ".png", UriKind.Relative));
@@ -326,18 +378,23 @@ namespace BGProj
                         Dice4.Source = Img4;
                         drawBoard();
                         showalltop();
-                        
-                        
 
-                        
+
+
+
                         //Bmodel.returnFirstFree(secondClick));
-                        
+
                     }
-                    
+                    else if (_shapeSelected is Ellipse)
+                    {
+                        MessageBox.Show("NEJ!");
+
+                    }
+
                 }
                 catch (Exception ex)
                 {
-                   
+
                 }
 
 

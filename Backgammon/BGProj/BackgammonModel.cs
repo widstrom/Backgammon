@@ -14,15 +14,15 @@ namespace BGProj
         public int dice2 = 0;
         public int dice3 = 0;
         public int dice4 = 0;
-        public int player1locked = 0;
-        public int player2locked = 0;
+        public int playerWhite = 0;
+        public int playerBlack = 0;
         public bool player1out = false;
         public bool player2out = false;
-        public bool playerturn = true;
+        public bool playerturn;
         private struct Triangel
         {
             public int number;
-            public bool color; //true = svart false = vit
+            public bool color; //true = vit false = svart
         }
         private Triangel[] triangels = new Triangel[24];
         public bool Modeltests()
@@ -33,26 +33,22 @@ namespace BGProj
                 ok = true;
             if (returnHighest(0) == 2)
                 ok = true;
-            
+
             return ok;
         }
-       
         public void startPositions()
         {
             triangels[0].number = 2; triangels[0].color = false;
             triangels[5].number = 5; triangels[5].color = true;
             triangels[7].number = 3; triangels[7].color = true;
             triangels[11].number = 5; triangels[11].color = false;
-            triangels[12].number = 5;triangels[12].color = true;
+            triangels[12].number = 5; triangels[12].color = true;
             triangels[16].number = 3; triangels[16].color = false;
             triangels[18].number = 5; triangels[18].color = false;
             triangels[23].number = 2; triangels[23].color = true;
-            
-            
-            
-                
-                }
-        public int returnHighest(int arr) 
+        }
+
+        public int returnHighest(int arr)
         {
             return triangels[arr].number;
         }
@@ -77,7 +73,7 @@ namespace BGProj
             v = -1;
             b = -1;
 
-            if (playerturn)
+            if (!playerturn)
             {
                 int first = arr + dice1;
                 int second = arr + dice2;
@@ -90,7 +86,7 @@ namespace BGProj
                     if (triangels[first].color == playerturn || triangels[first].number <= 1)
                         z = first;
                 }
-              
+
                 if (second < 24 && second != arr)
                 {
                     if (triangels[second].color == playerturn || triangels[second].number <= 1)
@@ -134,9 +130,6 @@ namespace BGProj
                 }
 
 
-                
-
-
             }
             else
             {
@@ -146,7 +139,7 @@ namespace BGProj
                 int fourth = arr - dice1 - dice2 - dice3;
                 int five = arr - dice1 - dice2 - dice3 - dice4;
 
-                if (first > -1  && first != arr)
+                if (first > -1 && first != arr)
                 {
                     if (triangels[first].color == playerturn || triangels[first].number <= 1)
                         z = first;
@@ -194,50 +187,56 @@ namespace BGProj
                 }
 
             }
-
-            
         }
-        public void controlLMove(int moveFrom, int Moveto)
+        public void controlMove(int moveFrom, int Moveto)
         {
+            int move;
             if (triangels[Moveto].number == 1 && triangels[Moveto].color != playerturn)
             {
-                if (!playerturn)
+                if (playerturn)
                 {
-                    player1locked += 1;
+                    playerBlack += 1;
+                    triangels[Moveto].number = 1;
+                    triangels[Moveto].color = true;
+                    triangels[moveFrom].number -= 1;
+                    move = moveFrom - Moveto;
+                }
+                else
+                {
+                    playerWhite += 1;
                     triangels[Moveto].number = 1;
                     triangels[Moveto].color = false;
                     triangels[moveFrom].number -= 1;
-                }
-                else
-                {
-                    triangels[Moveto].number = 1;
-                    triangels[Moveto].color = true;
-                    player2locked += 1;
+                    move = Moveto - moveFrom;
+
                 }
             }
-            else if(moveFrom == -1)
+            else if (moveFrom == -1)
             {
-                player1locked -= 1;
-               
+                playerBlack -= 1;
+                triangels[Moveto].number += 1;
+                triangels[Moveto].color = playerturn;
+                move = Moveto - moveFrom;
+                changeDices(move);
+
             }
             else
             {
-                int move;
                 if (playerturn)
-                    move = Moveto - moveFrom;
-                else
                     move = moveFrom - Moveto;
-                changeDices(move);
+                else
+                    move = Moveto - moveFrom;
                 triangels[moveFrom].number -= 1;
                 triangels[Moveto].number += 1;
                 triangels[Moveto].color = playerturn;
             }
+            changeDices(move);
 
 
         }
         public void availableMoveout()
         {
-            
+
 
         }
         public void controlOut()
@@ -265,22 +264,25 @@ namespace BGProj
                 if (countplayer2 == 0)
                     player2out = true;
             }
-            
+
         }
+
         private void changeDices(int move)
         {
-                if (dice4 == move) { dice4 = 0; }
-                else if(dice4 + dice3 == move){ dice4 = 0; dice3 = 0;}
-                else if(dice4 + dice3 + dice2 == move){dice4 = 0; dice3 = 0; dice2 = 0;}
-                else if(dice4 + dice3 + dice2 + dice1 == move){dice4 = 0; dice3 = 0; dice2 = 0; dice1 = 0;}
-                else if(dice3 == move){dice3= 0;}
-                else if(dice3 + dice2 == move){dice3=0; dice2=0;}
-                else if(dice3 + dice2 + dice1 == move){dice3=0;dice2=0;dice1=0;}
-                else if(dice2==move){dice2=0;}
-                else if(dice2 + dice1 == move){dice2=0; dice1=0;}
-                else if(dice1 == move){dice1 =0;}
+            if (dice4 == move) { dice4 = 0; }
+            else if (dice4 + dice3 == move) { dice4 = 0; dice3 = 0; }
+            else if (dice4 + dice3 + dice2 == move) { dice4 = 0; dice3 = 0; dice2 = 0; }
+            else if (dice4 + dice3 + dice2 + dice1 == move) { dice4 = 0; dice3 = 0; dice2 = 0; dice1 = 0; }
+            else if (dice3 == move) { dice3 = 0; }
+            else if (dice3 + dice2 == move) { dice3 = 0; dice2 = 0; }
+            else if (dice3 + dice2 + dice1 == move) { dice3 = 0; dice2 = 0; dice1 = 0; }
+            else if (dice2 == move) { dice2 = 0; }
+            else if (dice2 + dice1 == move) { dice2 = 0; dice1 = 0; }
+            else if (dice1 == move) { dice1 = 0; }
         }
-        public void rollDices(){
+
+        public void rollDices()
+        {
             dice3 = 0;
             dice4 = 0;
             Random num = new Random();
@@ -288,11 +290,20 @@ namespace BGProj
             int number2 = num.Next(1, 7);
             dice1 = number;
             dice2 = number2;
-            if(dice1 == dice2){
+            if (dice1 == dice2)
+            {
                 dice3 = dice1;
                 dice4 = dice3;
             }
         }
+        //public void ShowMessage(string textIn)
+        //{
+        //    Text.Content = textIn;
+        //    this.Visibility = System.Windows.Visibility.Visible;
+        //    DoubleAnimation animation = new DoubleAnimation(1, 0, TimeSpan.FromSeconds(5));
+        //    this.BeginAnimation(System.Windows.Controls.Canvas.OpacityProperty, animation); 
+
+        //}
 
     }
 }
