@@ -320,7 +320,7 @@ namespace BGProj
                         if (high > 5)
                             uc[i].WriteNumber(high, i);
                         //Erase number on piece
-                        else uc[i].eraseNumber(high);
+                        else uc[i].eraseNumber(high, i);
                     }
                 }
             }

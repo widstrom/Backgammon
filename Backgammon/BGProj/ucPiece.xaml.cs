@@ -136,12 +136,25 @@ namespace BGProj
         }
 
         //Erases number on stack
-        public void eraseNumber(int index)
+        public void eraseNumber(int index, int triangel)
         {
             UniformGrid grid = this.pieceGrid as UniformGrid;
-            Grid cell = grid.Children[4] as Grid;
-            TextBlock t = cell.Children[1] as TextBlock;
-            t.Text = "";
+
+            if (triangel > 11)
+            {
+                Grid cell = grid.Children[0] as Grid;
+                TextBlock t = cell.Children[1] as TextBlock;
+                t.Text = "";
+                
+            }
+            else
+            {
+                Grid cell = grid.Children[4] as Grid;
+                TextBlock t = cell.Children[1] as TextBlock;
+                t.Text = "";
+            }
+            
+            
         }
 
         public void FillTop(int ellipse, int triangle)

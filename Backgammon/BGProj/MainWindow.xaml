@@ -617,7 +617,7 @@
                                 Stroke="White" StrokeThickness="2"  RadiusX="5" RadiusY="5">
                             </Rectangle>
 
-                            <Rectangle Width="45" VerticalAlignment="Top" Margin="20" Height="70" Fill="Transparent" 
+                            <Rectangle Width="45" VerticalAlignment="Top" Margin="20,20,20,0" Height="70" Fill="Transparent" 
                                 Stroke="White" StrokeThickness="2" RadiusX="5" RadiusY="5">
 
                                 <Rectangle.Effect>
