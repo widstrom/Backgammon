@@ -292,8 +292,6 @@ namespace BGProj
         }
         private void showalltop()
         {
-
-
             if (Bmodel.playerWhite > 0 && Bmodel.playerturn)
             {
                 P2.Fill = Brushes.Wheat;
@@ -316,11 +314,11 @@ namespace BGProj
                         Bmodel.availableMove(i, out z, out x, out c, out v, out b);
 
                         if (z >= 0 || x >= 0 || c >= 0 || v >= 0 || b >= 0)
-                            uc[i].FillTop(Bmodel.returnHighest(i) - 1);
+                            uc[i].FillTop(Bmodel.returnHighest(i) - 1, i);
 
                         //Print number on piece
                         if (high > 5)
-                            uc[i].WriteNumber(high, Bmodel.playerturn);
+                            uc[i].WriteNumber(high, i);
                         //Erase number on piece
                         else uc[i].eraseNumber(high);
                     }

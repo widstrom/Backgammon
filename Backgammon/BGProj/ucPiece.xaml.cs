@@ -26,6 +26,7 @@ namespace BGProj
         {
             InitializeComponent();
         }
+
         public void FillTriangel(int triangel, bool color, int number)
         {
 
@@ -43,57 +44,95 @@ namespace BGProj
 
             UniformGrid grid = this.pieceGrid as UniformGrid;
 
-
-
             if (triangel > 5)
                 triangel = 5;
 
-            for (int i = 0; i < triangel; i++)
-            {
-                Grid cell = grid.Children[i] as Grid;
-                Ellipse p = cell.Children[0] as Ellipse;
-
-                p.Name = "E" + number;
-
-
-                if (color == true)
+            if (number > 11)
+            {    
+                for (int i = 4; i > (5 - triangel) - 1; i--)
                 {
-                    p.Fill = myBrushWhite;
-                    //p.Stroke = Brushes.DarkSlateGray;
-                    p.Opacity = 1;
-                }
-                else if (color == false)
-                {
-                    p.Fill = myBrushBlack;
-                    //p.Stroke = Brushes.DarkSlateGray;
-                    p.Opacity = 1;
-                }
-            }
-            for (int k = triangel; k < 5; k++)
-            {
-                Grid cell = grid.Children[k] as Grid;
-                Ellipse l = cell.Children[0] as Ellipse;
-                l.Fill = null;
-                l.Stroke = null;
-            }
-        }
+                    Grid cell = grid.Children[i] as Grid;
+                    Ellipse p = cell.Children[0] as Ellipse;
 
-        //Writing a number on pieces when number of pieces on one triangle excceeds 5
-        public void WriteNumber(int index, bool playerturn)
-        {
-            UniformGrid grid = this.pieceGrid as UniformGrid;
-            Grid cell = grid.Children[4] as Grid;
-            TextBlock t = cell.Children[1] as TextBlock;
-            if (playerturn)
-            {
-                t.Text = index.ToString();
-                t.Foreground = Brushes.Red;
+                    p.Name = "E" + number;
+
+                    if (color == true)
+                    {
+                        p.Fill = myBrushWhite;
+                        //p.Stroke = Brushes.DarkSlateGray;
+                        p.Opacity = 1;
+                    }
+                    else if (color == false)
+                    {
+                        p.Fill = myBrushBlack;
+                        //p.Stroke = Brushes.DarkSlateGray;
+                        p.Opacity = 1;
+                    }
+                }
+
+                for (int k = 0; k < (4 - triangel) + 1; k++)
+                {
+                    Grid cell = grid.Children[k] as Grid;
+                    Ellipse l = cell.Children[0] as Ellipse;
+                    l.Fill = null;
+                    l.Stroke = null;
+                }
             }
             else
             {
+                for (int i = 0; i < triangel; i++)
+                {
+                    Grid cell = grid.Children[i] as Grid;
+                    Ellipse p = cell.Children[0] as Ellipse;
+
+                    p.Name = "E" + number;
+
+                    if (color == true)
+                    {
+                        p.Fill = myBrushWhite;
+                        //p.Stroke = Brushes.DarkSlateGray;
+                        p.Opacity = 1;
+                    }
+                    else if (color == false)
+                    {
+                        p.Fill = myBrushBlack;
+                        //p.Stroke = Brushes.DarkSlateGray;
+                        p.Opacity = 1;
+                    }
+                }
+                for (int k = triangel; k < 5; k++)
+                {
+                    Grid cell = grid.Children[k] as Grid;
+                    Ellipse l = cell.Children[0] as Ellipse;
+                    l.Fill = null;
+                    l.Stroke = null;
+                }
+            }
+
+        }
+
+
+        //Writing a number on pieces when number of pieces on one triangle excceeds 5
+        public void WriteNumber(int index, int triangle)
+        {
+            UniformGrid grid = this.pieceGrid as UniformGrid;
+
+            if (triangle > 11)
+            {
+                Grid cell = grid.Children[0] as Grid;
+                TextBlock t = cell.Children[1] as TextBlock;
+                t.Text = index.ToString();
+                t.Foreground = Brushes.Red;
+
+            }
+            else
+            {
+                Grid cell = grid.Children[4] as Grid;
+                TextBlock t = cell.Children[1] as TextBlock;
                 t.Text = index.ToString();
                 t.Foreground = Brushes.Red;
             }
+           
         }
 
         //Erases number on stack
@@ -102,21 +141,32 @@ namespace BGProj
             UniformGrid grid = this.pieceGrid as UniformGrid;
             Grid cell = grid.Children[4] as Grid;
             TextBlock t = cell.Children[1] as TextBlock;
-
             t.Text = "";
-            t.Foreground = Brushes.Transparent;
         }
 
-        public void FillTop(int ellipse)
+        public void FillTop(int ellipse, int triangle)
         {
             if (ellipse == 5)
                 ellipse = 4;
             UniformGrid grid = this.pieceGrid as UniformGrid;
-            Grid cell = grid.Children[ellipse] as Grid;
-            Ellipse p = cell.Children[0] as Ellipse;
 
-            p.StrokeThickness = 0.7;
-            p.Stroke = Brushes.Gold;
+            if (triangle > 11)
+            {
+                Grid cell = grid.Children[4 - ellipse] as Grid;
+                Ellipse p = cell.Children[0] as Ellipse;
+
+                p.StrokeThickness = 0.7;
+                p.Stroke = Brushes.Gold;
+            }
+            else
+            {
+                Grid cell = grid.Children[ellipse] as Grid;
+                Ellipse p = cell.Children[0] as Ellipse;
+
+                p.StrokeThickness = 0.7;
+                p.Stroke = Brushes.Gold;
+            }
+            
 
         }
         public void FillMove(int highest, int number)
@@ -128,18 +178,36 @@ namespace BGProj
             myBrushWhite.GradientStops.Add(new GradientStop(Colors.Wheat, 0.7));
 
 
+            if (number > 11)
+            {
+                UniformGrid grid = this.pieceGrid as UniformGrid;
+                Grid cell = grid.Children[4 - highest] as Grid;
+                Ellipse p = cell.Children[0] as Ellipse;
+                p.Name = "M" + number;
 
-            UniformGrid grid = this.pieceGrid as UniformGrid;
-            Grid cell = grid.Children[highest] as Grid;
-            Ellipse p = cell.Children[0] as Ellipse;
-            p.Name = "M" + number;
+                SolidColorBrush brush = new SolidColorBrush(Color.FromArgb(238, 234, 168, 80));
+                p.Fill = brush;
+                p.StrokeThickness = 0.5;
+                p.Stroke = Brushes.SlateGray;
+                p.Opacity = 1;
+                //p.Stroke = Brushes.DarkSlateGray;
+            }
+            else
+            {
+                UniformGrid grid = this.pieceGrid as UniformGrid;
+                Grid cell = grid.Children[highest] as Grid;
+                Ellipse p = cell.Children[0] as Ellipse;
+                p.Name = "M" + number;
 
-            SolidColorBrush brush = new SolidColorBrush(Color.FromArgb(238, 234, 168, 80));
-            p.Fill = brush;
-            p.StrokeThickness = 0.5;
-            p.Stroke = Brushes.SlateGray;
-            p.Opacity = 1;
-            //p.Stroke = Brushes.DarkSlateGray;
+                SolidColorBrush brush = new SolidColorBrush(Color.FromArgb(238, 234, 168, 80));
+                p.Fill = brush;
+                p.StrokeThickness = 0.5;
+                p.Stroke = Brushes.SlateGray;
+                p.Opacity = 1;
+                //p.Stroke = Brushes.DarkSlateGray;
+            }
+
+            
 
 
 

@@ -287,14 +287,14 @@
                                     </Polygon.Fill>
                                 </Polygon>
                                 <local:ucPiece RenderTransformOrigin="0.5,0.5">
-                                    <local:ucPiece.RenderTransform>
+                                    <!--<local:ucPiece.RenderTransform>
                                         <TransformGroup>
                                             <ScaleTransform ScaleY="-1" ScaleX="1"/>
                                             <SkewTransform AngleY="0" AngleX="0"/>
                                             <RotateTransform Angle="0"/>
                                             <TranslateTransform/>
                                         </TransformGroup>
-                                    </local:ucPiece.RenderTransform>
+                                    </local:ucPiece.RenderTransform>-->
                                 </local:ucPiece>
                             </Grid>
                             <Grid Name="grid13">
@@ -307,14 +307,14 @@
                                     </Polygon.Fill>
                                 </Polygon>
                                 <local:ucPiece RenderTransformOrigin="0.5,0.5">
-                                    <local:ucPiece.RenderTransform>
+                                    <!--<local:ucPiece.RenderTransform>
                                         <TransformGroup>
                                             <ScaleTransform ScaleY="-1" ScaleX="1"/>
                                             <SkewTransform AngleY="0" AngleX="0"/>
                                             <RotateTransform Angle="0"/>
                                             <TranslateTransform/>
                                         </TransformGroup>
-                                    </local:ucPiece.RenderTransform>
+                                    </local:ucPiece.RenderTransform>-->
                                 </local:ucPiece>
                             </Grid>
                             <Grid Name="grid14">
@@ -327,14 +327,14 @@
                                     </Polygon.Fill>
                                 </Polygon>
                                 <local:ucPiece RenderTransformOrigin="0.5,0.5">
-                                    <local:ucPiece.RenderTransform>
+                                    <!--<local:ucPiece.RenderTransform>
                                         <TransformGroup>
                                             <ScaleTransform ScaleY="-1" ScaleX="1"/>
                                             <SkewTransform AngleY="0" AngleX="0"/>
                                             <RotateTransform Angle="0"/>
                                             <TranslateTransform/>
                                         </TransformGroup>
-                                    </local:ucPiece.RenderTransform>
+                                    </local:ucPiece.RenderTransform>-->
                                 </local:ucPiece>
                             </Grid>
                             <Grid Name="grid15">
@@ -347,14 +347,14 @@
                                     </Polygon.Fill>
                                 </Polygon>
                                 <local:ucPiece RenderTransformOrigin="0.5,0.5">
-                                    <local:ucPiece.RenderTransform>
+                                    <!--<local:ucPiece.RenderTransform>
                                         <TransformGroup>
                                             <ScaleTransform ScaleY="-1" ScaleX="1"/>
                                             <SkewTransform AngleY="0" AngleX="0"/>
                                             <RotateTransform Angle="0"/>
                                             <TranslateTransform/>
                                         </TransformGroup>
-                                    </local:ucPiece.RenderTransform>
+                                    </local:ucPiece.RenderTransform>-->
                                 </local:ucPiece>
                             </Grid>
                             <Grid Name="grid16">
@@ -367,14 +367,14 @@
                                     </Polygon.Fill>
                                 </Polygon>
                                 <local:ucPiece RenderTransformOrigin="0.5,0.5">
-                                    <local:ucPiece.RenderTransform>
+                                    <!--<local:ucPiece.RenderTransform>
                                         <TransformGroup>
                                             <ScaleTransform ScaleY="-1" ScaleX="1"/>
                                             <SkewTransform AngleY="0" AngleX="0"/>
                                             <RotateTransform Angle="0"/>
                                             <TranslateTransform/>
                                         </TransformGroup>
-                                    </local:ucPiece.RenderTransform>
+                                    </local:ucPiece.RenderTransform>-->
                                 </local:ucPiece>
                             </Grid>
                             <Grid Name="grid17">
@@ -387,14 +387,14 @@
                                     </Polygon.Fill>
                                 </Polygon>
                                 <local:ucPiece RenderTransformOrigin="0.5,0.5">
-                                    <local:ucPiece.RenderTransform>
+                                    <!--<local:ucPiece.RenderTransform>
                                         <TransformGroup>
                                             <ScaleTransform ScaleY="-1" ScaleX="1"/>
                                             <SkewTransform AngleY="0" AngleX="0"/>
                                             <RotateTransform Angle="0"/>
                                             <TranslateTransform/>
                                         </TransformGroup>
-                                    </local:ucPiece.RenderTransform>
+                                    </local:ucPiece.RenderTransform>-->
                                 </local:ucPiece>
                             </Grid>
                         </UniformGrid>
@@ -409,14 +409,14 @@
                                     </Polygon.Fill>
                                 </Polygon>
                                 <local:ucPiece RenderTransformOrigin="0.5,0.5">
-                                    <local:ucPiece.RenderTransform>
+                                    <!--<local:ucPiece.RenderTransform>
                                         <TransformGroup>
                                             <ScaleTransform ScaleY="-1" ScaleX="1"/>
                                             <SkewTransform AngleY="0" AngleX="0"/>
                                             <RotateTransform Angle="0"/>
                                             <TranslateTransform/>
                                         </TransformGroup>
-                                    </local:ucPiece.RenderTransform>
+                                    </local:ucPiece.RenderTransform>-->
                                 </local:ucPiece>
                             </Grid>
                             <Grid Name="grid19">
@@ -429,14 +429,14 @@
                                     </Polygon.Fill>
                                 </Polygon>
                                 <local:ucPiece RenderTransformOrigin="0.5,0.5">
-                                    <local:ucPiece.RenderTransform>
+                                    <!--<local:ucPiece.RenderTransform>
                                         <TransformGroup>
                                             <ScaleTransform ScaleY="-1" ScaleX="1"/>
                                             <SkewTransform AngleY="0" AngleX="0"/>
                                             <RotateTransform Angle="0"/>
                                             <TranslateTransform/>
                                         </TransformGroup>
-                                    </local:ucPiece.RenderTransform>
+                                    </local:ucPiece.RenderTransform>-->
                                 </local:ucPiece>
                             </Grid>
                             <Grid Name="grid20">
@@ -449,14 +449,14 @@
                                     </Polygon.Fill>
                                 </Polygon>
                                 <local:ucPiece RenderTransformOrigin="0.5,0.5">
-                                    <local:ucPiece.RenderTransform>
+                                    <!--<local:ucPiece.RenderTransform>
                                         <TransformGroup>
                                             <ScaleTransform ScaleY="-1" ScaleX="1"/>
                                             <SkewTransform AngleY="0" AngleX="0"/>
                                             <RotateTransform Angle="0"/>
                                             <TranslateTransform/>
                                         </TransformGroup>
-                                    </local:ucPiece.RenderTransform>
+                                    </local:ucPiece.RenderTransform>-->
                                 </local:ucPiece>
                             </Grid>
                             <Grid Name="grid21">
@@ -469,14 +469,14 @@
                                     </Polygon.Fill>
                                 </Polygon>
                                 <local:ucPiece RenderTransformOrigin="0.5,0.5">
-                                    <local:ucPiece.RenderTransform>
+                                    <!--<local:ucPiece.RenderTransform>
                                         <TransformGroup>
                                             <ScaleTransform ScaleY="-1" ScaleX="1"/>
                                             <SkewTransform AngleY="0" AngleX="0"/>
                                             <RotateTransform Angle="0"/>
                                             <TranslateTransform/>
                                         </TransformGroup>
-                                    </local:ucPiece.RenderTransform>
+                                    </local:ucPiece.RenderTransform>-->
                                 </local:ucPiece>
                             </Grid>
                             <Grid Name="grid22">
@@ -489,14 +489,14 @@
                                     </Polygon.Fill>
                                 </Polygon>
                                 <local:ucPiece RenderTransformOrigin="0.5,0.5">
-                                    <local:ucPiece.RenderTransform>
+                                    <!--<local:ucPiece.RenderTransform>
                                         <TransformGroup>
                                             <ScaleTransform ScaleY="-1" ScaleX="1"/>
                                             <SkewTransform AngleY="0" AngleX="0"/>
                                             <RotateTransform Angle="0"/>
                                             <TranslateTransform/>
                                         </TransformGroup>
-                                    </local:ucPiece.RenderTransform>
+                                    </local:ucPiece.RenderTransform>-->
                                 </local:ucPiece>
                             </Grid>
                             <Grid Name="grid23">
@@ -508,15 +508,15 @@
                                         </LinearGradientBrush>
                                     </Polygon.Fill>
                                 </Polygon>
-                                <local:ucPiece RenderTransformOrigin="0.5,0.5" Margin="0,1,0,-1">
-                                    <local:ucPiece.RenderTransform>
+                                <local:ucPiece RenderTransformOrigin="0.5,0.5">
+                                    <!--<local:ucPiece.RenderTransform>
                                         <TransformGroup>
                                             <ScaleTransform ScaleY="-1" ScaleX="1"/>
                                             <SkewTransform AngleY="0" AngleX="0"/>
                                             <RotateTransform Angle="0"/>
                                             <TranslateTransform/>
                                         </TransformGroup>
-                                    </local:ucPiece.RenderTransform>
+                                    </local:ucPiece.RenderTransform>-->
                                 </local:ucPiece>
                             </Grid>
                         </UniformGrid>

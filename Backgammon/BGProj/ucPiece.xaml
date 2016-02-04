@@ -27,9 +27,7 @@
         </Grid>
         <Grid>
             <Ellipse  Height="24" Width="24"  ></Ellipse>
-            <TextBlock Text="" TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center">
-                
-            </TextBlock>
+            <TextBlock Text="" TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
         </Grid>
     </UniformGrid>
 
