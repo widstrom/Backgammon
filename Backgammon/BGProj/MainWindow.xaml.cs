@@ -99,6 +99,11 @@ namespace BGProj
             scale = new ScaleTransform(1, 1);
             image4.RenderTransform = scale;
         }
+        private void image4_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            System.Diagnostics.Process.Start(Application.ResourceAssembly.Location);
+            Application.Current.Shutdown();
+        }
         private void image5_MouseEnter(object sender, MouseEventArgs e)
         {
             Mouse.OverrideCursor = Cursors.Hand;
@@ -113,7 +118,15 @@ namespace BGProj
         }
         private void image5_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            MessageBox.Show("Här ska det vara settings!");
+            if (WindowState == WindowState.Maximized)
+            {
+                WindowState = WindowState.Normal;
+                //Width = 1280;
+                //Height = 720;
+            }
+            else
+                WindowState = WindowState.Maximized;
+            //MessageBox.Show("Här ska det vara settings!");
         }
         private void Image6_MouseEnter(object sender, MouseEventArgs e)
         {
@@ -413,5 +426,7 @@ namespace BGProj
 
 
         }
+
+        
     }
 }

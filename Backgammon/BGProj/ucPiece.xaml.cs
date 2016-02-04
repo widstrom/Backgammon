@@ -59,13 +59,13 @@ namespace BGProj
                 if (color == true)
                 {
                     p.Fill = myBrushWhite;
-                    p.Stroke = Brushes.DarkSlateGray;
+                    //p.Stroke = Brushes.DarkSlateGray;
                     p.Opacity = 1;
                 }
                 else if (color == false)
                 {
                     p.Fill = myBrushBlack;
-                    p.Stroke = Brushes.DarkSlateGray;
+                    //p.Stroke = Brushes.DarkSlateGray;
                     p.Opacity = 1;
                 }
             }
@@ -87,12 +87,12 @@ namespace BGProj
             if (playerturn)
             {
                 t.Text = index.ToString();
-                t.Foreground = Brushes.White;
+                t.Foreground = Brushes.Red;
             }
             else
             {
                 t.Text = index.ToString();
-                t.Foreground = Brushes.Black;
+                t.Foreground = Brushes.Red;
             }
         }
 
