@@ -115,7 +115,7 @@ namespace BGProj
             Grid cell = grid.Children[ellipse] as Grid;
             Ellipse p = cell.Children[0] as Ellipse;
 
-
+            p.StrokeThickness = 0.7;
             p.Stroke = Brushes.Gold;
 
         }

@@ -204,7 +204,7 @@ namespace BGProj
             Border2.Visibility = Visibility.Visible;
             scale = new ScaleTransform(1, 1);
             Border1.RenderTransform = scale;
-
+            
             timer.Stop();
 
             if (firstTimeRolled)
@@ -266,9 +266,19 @@ namespace BGProj
         }
         private void drawBoard()
         {
+            if (Bmodel.playerWhite == 0)
+            {
+                P2.Fill = null;
+                P2.Stroke = null;
+            }
+            if (Bmodel.playerBlack == 0)
+            {
+                P1.Fill = null;
+                P1.Stroke = null;
+            }
             if (Bmodel.playerWhite > 0 && Bmodel.playerturn)
             {
-                P2.Fill = Brushes.Black;
+                P2.Fill = Brushes.Wheat;
                 P2.Stroke = Brushes.Gold;
             }
             else if (Bmodel.playerBlack > 0 && !Bmodel.playerturn)
@@ -286,7 +296,7 @@ namespace BGProj
 
             if (Bmodel.playerWhite > 0 && Bmodel.playerturn)
             {
-                P2.Fill = Brushes.White;
+                P2.Fill = Brushes.Wheat;
                 P2.Stroke = Brushes.Gold;
             }
             else if (Bmodel.playerBlack > 0 && !Bmodel.playerturn)
@@ -391,10 +401,6 @@ namespace BGProj
                         Dice4.Source = Img4;
                         drawBoard();
                         showalltop();
-
-
-
-
                         //Bmodel.returnFirstFree(secondClick));
 
                     }
@@ -409,21 +415,7 @@ namespace BGProj
                 {
 
                 }
-
-
             }
-
-
-
-
-
-
-
-
-
-
-
-
 
         }
 

@@ -191,7 +191,43 @@ namespace BGProj
         public void controlMove(int moveFrom, int Moveto)
         {
             int move;
-            if (triangels[Moveto].number == 1 && triangels[Moveto].color != playerturn)
+            if (moveFrom == -1)
+            {
+                playerBlack -= 1;
+                if (triangels[Moveto].number == 1 && triangels[Moveto].color != playerturn)
+                {
+                    playerWhite += 1;
+                    triangels[Moveto].number = 1;
+                    triangels[Moveto].color = false;
+                }
+                else
+                {
+                    triangels[Moveto].number += 1;
+                    triangels[Moveto].color = playerturn;
+                }
+                move = Moveto - moveFrom;
+
+
+            }
+            else if (moveFrom == 24)
+            {
+                playerWhite -= 1;
+                if (triangels[Moveto].number == 1 && triangels[Moveto].color != playerturn)
+                {
+                    playerBlack += 1;
+                    triangels[Moveto].number = 1;
+                    triangels[Moveto].color = true;
+                }
+                else
+                {
+                    triangels[Moveto].number += 1;
+                    triangels[Moveto].color = playerturn;
+                }
+                move = moveFrom - Moveto;
+
+
+            }
+            else if (triangels[Moveto].number == 1 && triangels[Moveto].color != playerturn)
             {
                 if (playerturn)
                 {
@@ -211,15 +247,6 @@ namespace BGProj
 
                 }
             }
-            else if (moveFrom == -1)
-            {
-                playerBlack -= 1;
-                triangels[Moveto].number += 1;
-                triangels[Moveto].color = playerturn;
-                move = Moveto - moveFrom;
-                changeDices(move);
-
-            }
             else
             {
                 if (playerturn)
@@ -231,9 +258,8 @@ namespace BGProj
                 triangels[Moveto].color = playerturn;
             }
             changeDices(move);
-
-
         }
+
         public void availableMoveout()
         {
 
