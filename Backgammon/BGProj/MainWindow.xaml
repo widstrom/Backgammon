@@ -541,14 +541,13 @@
                             <Rectangle Fill="SandyBrown" ></Rectangle>
                             <Rectangle Fill="SandyBrown" ></Rectangle>
                             <Rectangle Fill="SaddleBrown" ></Rectangle>
-
                         </UniformGrid>
                         <Grid Grid.Row="0" Name="LockedP1" Grid.Column="1" Height="24" Width="24">
                             <Ellipse Name="P1" Height="24" Width="24"></Ellipse>
                         </Grid>
-                        <Grid Grid.Row="2" Name="LockedP2" Grid.Column="1" Height="24" Width="24">
-                            <Ellipse Name="P2" Height="24" Width="24"></Ellipse>
-                        </Grid>
+                        <Grid Panel.ZIndex="5" Grid.Row="2" Name="LockedP2" Grid.Column="1" Height="24" Width="24">
+                            <Ellipse Name="P2" Height="24" Width="24" ></Ellipse>
+                        </Grid>                        
                         <UniformGrid Columns="2" Rows="6"  Grid.Row="2" Grid.Column="1" Opacity="0.8">
                             <Rectangle Fill="SaddleBrown" ></Rectangle>
                             <Rectangle Fill="SandyBrown" ></Rectangle>
