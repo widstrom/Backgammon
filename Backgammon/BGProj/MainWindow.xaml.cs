@@ -84,7 +84,7 @@ namespace BGProj
             uc[21] = this.grid21.Children[1] as ucPiece;
             uc[22] = this.grid22.Children[1] as ucPiece;
             uc[23] = this.grid23.Children[1] as ucPiece;
-
+            
         }
 
         private void Image4_MouseEnter(object sender, MouseEventArgs e)
@@ -308,20 +308,25 @@ namespace BGProj
                 {
                     int high = Bmodel.returnHighest(i);
                     bool turn = Bmodel.returnColor(i);
+                    uc[i].resetFillTop(Bmodel.returnHighest(i)); //temporär lösning
+
                     if (turn == Bmodel.playerturn && high > 0)
                     {
                         int z, x, c, v, b;
                         Bmodel.availableMove(i, out z, out x, out c, out v, out b);
+                        
 
                         if (z >= 0 || x >= 0 || c >= 0 || v >= 0 || b >= 0)
                             uc[i].FillTop(Bmodel.returnHighest(i) - 1, i);
-
-                        //Print number on piece
-                        if (high > 5)
-                            uc[i].WriteNumber(high, i);
-                        //Erase number on piece
-                        else uc[i].eraseNumber(high, i);
                     }
+
+                    //Print number on piece
+                    if (high > 5)
+                        uc[i].WriteNumber(high, i);
+                    //Erase number on piece
+                    else if (high == 5)
+                        uc[i].eraseNumber(high, i);
+                    
                 }
             }
         }
@@ -367,9 +372,7 @@ namespace BGProj
 
                         //_shapeSelected.Stroke = Brushes.Green;
                         if (z >= 0)
-                        {
                             uc[z].FillMove(Bmodel.returnFirstFree(z), z);
-                        }
                         if (x >= 0)
                             uc[x].FillMove(Bmodel.returnFirstFree(x), x);
                         if (c >= 0)
@@ -380,10 +383,6 @@ namespace BGProj
                             uc[b].FillMove(Bmodel.returnFirstFree(b), b);
 
                         //gå ut?
-
-
-
-
                     }
                     else if (_shapeSelected.Name.Contains("M"))
                     {

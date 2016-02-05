@@ -179,9 +179,23 @@ namespace BGProj
                 p.StrokeThickness = 0.7;
                 p.Stroke = Brushes.Gold;
             }
-            
-
         }
+        
+        public void resetFillTop(int ellipse)
+        {
+            UniformGrid grid = this.pieceGrid as UniformGrid;
+            if (ellipse > 0)
+            {
+                for (int i = 0; i < 5; i++)
+                {
+                    Grid cell = grid.Children[i] as Grid;
+                    Ellipse p = cell.Children[0] as Ellipse;
+                    p.Stroke = null;
+                }
+            }
+        }
+
+
         public void FillMove(int highest, int number)
         {
 
@@ -190,10 +204,11 @@ namespace BGProj
             myBrushWhite.GradientStops.Add(new GradientStop(Colors.White, 0.3));
             myBrushWhite.GradientStops.Add(new GradientStop(Colors.Wheat, 0.7));
 
+            UniformGrid grid = this.pieceGrid as UniformGrid;
 
             if (number > 11)
             {
-                UniformGrid grid = this.pieceGrid as UniformGrid;
+                
                 Grid cell = grid.Children[4 - highest] as Grid;
                 Ellipse p = cell.Children[0] as Ellipse;
                 p.Name = "M" + number;
@@ -207,7 +222,6 @@ namespace BGProj
             }
             else
             {
-                UniformGrid grid = this.pieceGrid as UniformGrid;
                 Grid cell = grid.Children[highest] as Grid;
                 Ellipse p = cell.Children[0] as Ellipse;
                 p.Name = "M" + number;
