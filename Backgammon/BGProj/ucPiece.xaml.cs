@@ -59,13 +59,13 @@ namespace BGProj
                     if (color == true)
                     {
                         p.Fill = myBrushWhite;
-                        //p.Stroke = Brushes.DarkSlateGray;
+                        p.Stroke = null;
                         p.Opacity = 1;
                     }
                     else if (color == false)
                     {
                         p.Fill = myBrushBlack;
-                        //p.Stroke = Brushes.DarkSlateGray;
+                        p.Stroke = null;
                         p.Opacity = 1;
                     }
                 }
@@ -90,13 +90,13 @@ namespace BGProj
                     if (color == true)
                     {
                         p.Fill = myBrushWhite;
-                        //p.Stroke = Brushes.DarkSlateGray;
+                        p.Stroke = null;
                         p.Opacity = 1;
                     }
                     else if (color == false)
                     {
                         p.Fill = myBrushBlack;
-                        //p.Stroke = Brushes.DarkSlateGray;
+                        p.Stroke = null;
                         p.Opacity = 1;
                     }
                 }
@@ -180,20 +180,7 @@ namespace BGProj
                 p.Stroke = Brushes.Gold;
             }
         }
-        
-        public void resetFillTop(int ellipse)
-        {
-            UniformGrid grid = this.pieceGrid as UniformGrid;
-            if (ellipse > 0)
-            {
-                for (int i = 0; i < 5; i++)
-                {
-                    Grid cell = grid.Children[i] as Grid;
-                    Ellipse p = cell.Children[0] as Ellipse;
-                    p.Stroke = null;
-                }
-            }
-        }
+       
 
 
         public void FillMove(int highest, int number)
