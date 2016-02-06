@@ -332,10 +332,10 @@ namespace BGProj
             dice3 = 0;
             dice4 = 0;
             Random num = new Random();
-            int number = num.Next(1, 7);
-            int number2 = num.Next(1, 7);
-            //int number = 1;
-            //int number2 = 3;
+            //int number = num.Next(1, 7);
+            //int number2 = num.Next(1, 7);
+            int number = 2;
+            int number2 = 3;
             dice1 = number;
             dice2 = number2;
             if (dice1 == dice2)

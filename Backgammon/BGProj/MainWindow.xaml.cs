@@ -187,10 +187,10 @@ namespace BGProj
 
             while (true)
             {
-                first = p.Next(1, 7) + p.Next(1, 7);
-                second = p.Next(1, 7) + p.Next(1, 7);
-                //first = 1;
-                //second = 4;
+                //first = p.Next(1, 7) + p.Next(1, 7);
+                //second = p.Next(1, 7) + p.Next(1, 7);
+                first = 11;
+                second = 4;
 
                 Player_One_Roll.Content = first;
                 Player_Two_Roll.Content = second;
@@ -327,11 +327,12 @@ namespace BGProj
                     }
 
                     //Print number on piece
-                    if (high > 5)
-                        uc[i].WriteNumber(high, i);
-                    //Erase number on piece
-                    else if (high == 5)
-                        uc[i].eraseNumber(high, i);
+                        if (high > 5)
+                            uc[i].WriteNumber(high, i);
+                        //Erase number on piece
+                        else if (high == 5)
+                            uc[i].eraseNumber(high, i);
+                     
 
                 }
             }

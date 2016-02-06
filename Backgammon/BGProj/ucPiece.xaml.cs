@@ -159,7 +159,7 @@ namespace BGProj
 
         public void FillTop(int ellipse, int triangle)
         {
-            if (ellipse == 5)
+            if (ellipse >= 5)
                 ellipse = 4;
             UniformGrid grid = this.pieceGrid as UniformGrid;
 
