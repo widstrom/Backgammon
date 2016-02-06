@@ -23,7 +23,7 @@ namespace BGProj
     /// </summary>
     public partial class MainWindow : Window
     {
-
+        private ucMessage message = null;
         private ScaleTransform scale;
         BackgammonModel Bmodel = new BackgammonModel();
         Shape _shapeSelected = null;
@@ -38,7 +38,7 @@ namespace BGProj
         {
             InitializeComponent();
 
-
+            
             //bool ok = Bmodel.Modeltests();
             //if (ok)
             //    MessageBox.Show("Självtest lyckades!");
@@ -84,7 +84,11 @@ namespace BGProj
             uc[21] = this.grid21.Children[1] as ucPiece;
             uc[22] = this.grid22.Children[1] as ucPiece;
             uc[23] = this.grid23.Children[1] as ucPiece;
-            
+
+            message = theGrid.Children[0] as ucMessage;
+
+            // test
+            message.showMessage("Slå om vem som börjar");
         }
 
         private void Image4_MouseEnter(object sender, MouseEventArgs e)
@@ -292,6 +296,7 @@ namespace BGProj
         }
         private void showalltop()
         {
+            message.showMessage("hej"); //test
             if (Bmodel.playerWhite > 0 && Bmodel.playerturn)
             {
                 P2.Fill = Brushes.Wheat;

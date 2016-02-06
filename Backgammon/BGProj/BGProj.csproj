@@ -54,6 +54,9 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="BackgammonModel.cs" />
+    <Compile Include="ucMessage.xaml.cs">
+      <DependentUpon>ucMessage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ucPiece.xaml.cs">
       <DependentUpon>ucPiece.xaml</DependentUpon>
     </Compile>
@@ -69,6 +72,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="ucMessage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="ucPiece.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
