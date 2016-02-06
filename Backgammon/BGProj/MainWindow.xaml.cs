@@ -308,7 +308,6 @@ namespace BGProj
                 {
                     int high = Bmodel.returnHighest(i);
                     bool turn = Bmodel.returnColor(i);
-                    uc[i].resetFillTop(Bmodel.returnHighest(i)); //temporär lösning
 
                     if (turn == Bmodel.playerturn && high > 0)
                     {
