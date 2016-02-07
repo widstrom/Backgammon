@@ -296,7 +296,7 @@ namespace BGProj
         }
         private void showalltop()
         {
-            message.showMessage("hej"); //test
+            //message.showMessage("hej"); //test
             if (Bmodel.playerWhite > 0 && Bmodel.playerturn)
             {
                 P2.Fill = Brushes.Wheat;
