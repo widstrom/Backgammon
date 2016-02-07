@@ -372,21 +372,21 @@ namespace BGProj
                 t.Text = black.ToString();
                 t.Foreground = Brushes.Red;
             }
-            else if (white > 0)
+            if (white > 0)
             {
                 Grid cell = this.LockedP2 as Grid;
                 TextBlock t = cell.Children[1] as TextBlock;
                 t.Text = white.ToString();
                 t.Foreground = Brushes.Red;
             }
-            else if (white < 1)
+            if (white < 1)
             {
                 Grid cell = this.LockedP2 as Grid;
                 TextBlock t = cell.Children[1] as TextBlock;
                 t.Text = string.Empty;
                 t.Foreground = Brushes.Transparent;
             }
-            else if (black < 1)
+            if (black < 1)
             {
                 Grid cell = this.LockedP1 as Grid;
                 TextBlock t = cell.Children[1] as TextBlock;
