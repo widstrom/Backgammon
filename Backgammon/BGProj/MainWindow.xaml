@@ -5,7 +5,7 @@
         Title="MainWindow" Height="720" Width="1280" Background="Tan" WindowStyle="None">
 
     <Grid Name="theGrid">
-        <local:ucMessage HorizontalAlignment="Center" VerticalAlignment="Center" Panel.ZIndex="1" Width="350" Height="100" Visibility="Collapsed"></local:ucMessage>
+        <local:ucMessage HorizontalAlignment="Left" VerticalAlignment="Center" Panel.ZIndex="1" Width="300" Height="100" Visibility="Collapsed"></local:ucMessage>
         <Viewbox Stretch="Uniform">
 
         <Grid Margin="5">
@@ -94,9 +94,8 @@
                                         </LinearGradientBrush>
                                     </Polygon.Fill>
                                 </Polygon>
-                                <local:ucPiece ></local:ucPiece>
-                                <Label VerticalAlignment="Center" Margin="3,0,0,0"></Label>
-                            </Grid>
+                                    <local:ucPiece ></local:ucPiece>
+                                </Grid>
                             <Grid Name="grid10">
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="23*"/>
@@ -548,10 +547,12 @@
                         </UniformGrid>
                         <Grid Grid.Row="0" Name="LockedP1" Grid.Column="1" Height="24" Width="24">
                             <Ellipse Name="P1" Height="24" Width="24"></Ellipse>
+                                <TextBlock Text="" TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
                         </Grid>
                         <Grid Panel.ZIndex="5" Grid.Row="2" Name="LockedP2" Grid.Column="1" Height="24" Width="24">
                             <Ellipse Name="P2" Height="24" Width="24" ></Ellipse>
-                        </Grid>                        
+                            <TextBlock Text="" TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
+                            </Grid>                        
                         <UniformGrid Columns="2" Rows="6"  Grid.Row="2" Grid.Column="1" Opacity="0.8">
                             <Rectangle Fill="SaddleBrown" ></Rectangle>
                             <Rectangle Fill="SandyBrown" ></Rectangle>
@@ -598,29 +599,31 @@
 
 
                         <Grid Grid.Column="1">
-                            <UniformGrid Height="45" Width="40" Margin="0,35,0,0" Rows="15" VerticalAlignment="Top" Panel.ZIndex="1">
-                                <Border CornerRadius="10,10,10,10" Background="Wheat" BorderThickness="0.6" ></Border>
-                                <Border CornerRadius="10,10,10,10" Background="Wheat" BorderThickness="0.6" ></Border>
-                                <Border CornerRadius="10,10,10,10" Background="Wheat" BorderThickness="0.6" ></Border>
-                                <Border CornerRadius="10,10,10,10" Background="Wheat" BorderThickness="0.6" ></Border>
-                                <Border CornerRadius="10,10,10,10" Background="Wheat" BorderThickness="0.6" ></Border>
-                                <Border CornerRadius="10,10,10,10" Background="Wheat" BorderThickness="0.6" ></Border>
-                                <Border CornerRadius="10,10,10,10" Background="Wheat" BorderThickness="0.6" ></Border>
-                                <Border CornerRadius="10,10,10,10" Background="Wheat" BorderThickness="0.6" ></Border>
-                                <Border CornerRadius="10,10,10,10" Background="Wheat" BorderThickness="0.6" ></Border>
-                                <Border CornerRadius="10,10,10,10" Background="Wheat" BorderThickness="0.6" ></Border>
-                                <Border CornerRadius="10,10,10,10" Background="Wheat" BorderThickness="0.6" ></Border>
-                                <Border CornerRadius="10,10,10,10" Background="Wheat" BorderThickness="0.6" ></Border>
-                                <Border CornerRadius="10,10,10,10" Background="Wheat" BorderThickness="0.6" ></Border>
-                                <Border CornerRadius="10,10,10,10" Background="Wheat" BorderThickness="0.6" ></Border>
-                                <Border CornerRadius="10,10,10,10" Background="Wheat" BorderThickness="0.6" ></Border>
-                            </UniformGrid>
+                            <UniformGrid  Name="gridWhiteOut" Height="45" Width="40" Margin="0,35,0,0" Rows="15" VerticalAlignment="Top" Panel.ZIndex="1">
+                                    <Border CornerRadius="10,10,10,10"  BorderThickness="0.6" ></Border>
+                                    <Border CornerRadius="10,10,10,10"  BorderThickness="0.6" ></Border>
+                                    <Border CornerRadius="10,10,10,10"  BorderThickness="0.6" ></Border>
+                                    <Border CornerRadius="10,10,10,10"  BorderThickness="0.6" ></Border>
+                                    <Border CornerRadius="10,10,10,10"  BorderThickness="0.6" ></Border>
+                                    <Border CornerRadius="10,10,10,10"  BorderThickness="0.6" ></Border>
+                                    <Border CornerRadius="10,10,10,10"  BorderThickness="0.6" ></Border>
+                                    <Border CornerRadius="10,10,10,10"  BorderThickness="0.6" ></Border>
+                                    <Border CornerRadius="10,10,10,10"  BorderThickness="0.6" ></Border>
+                                    <Border CornerRadius="10,10,10,10"  BorderThickness="0.6" ></Border>
+                                    <Border CornerRadius="10,10,10,10"  BorderThickness="0.6" ></Border>
+                                    <Border CornerRadius="10,10,10,10"  BorderThickness="0.6" ></Border>
+                                    <Border CornerRadius="10,10,10,10"  BorderThickness="0.6" ></Border>
+                                    <Border CornerRadius="10,10,10,10"  BorderThickness="0.6" ></Border>
+                                    <Border CornerRadius="10,10,10,10"  BorderThickness="0.6" ></Border>
+                                    
+
+                                </UniformGrid>
                             
-                            <Rectangle Name="playerWhiteHome" Width="45" VerticalAlignment="Top" Margin="20" Height="70" Fill="SaddleBrown" 
+                            <Rectangle  Width="45" VerticalAlignment="Top" Margin="20" Height="70" Fill="SaddleBrown" 
                                 Stroke="White" StrokeThickness="2"  RadiusX="5" RadiusY="5">
                             </Rectangle>
 
-                            <Rectangle Width="45" VerticalAlignment="Top" Margin="20,20,20,0" Height="70" Fill="Transparent" 
+                                <Rectangle Name="playerHomeWhite" Width="45" VerticalAlignment="Top" Margin="20,20,20,0" Height="70" Fill="Transparent" 
                                 Stroke="White" StrokeThickness="2" RadiusX="5" RadiusY="5">
 
                                 <Rectangle.Effect>
@@ -631,9 +634,9 @@
                                 </Rectangle.Clip>
                             </Rectangle>
 
-                            <Rectangle Name="playerBlackHome" Width="45" VerticalAlignment="Bottom" Margin="20" Height="70" Fill="SaddleBrown" 
+                            <Rectangle  Width="45" VerticalAlignment="Bottom" Margin="20" Height="70" Fill="SaddleBrown" 
                                 Stroke="Black" StrokeThickness="2" RadiusX="5" RadiusY="5"/>
-                            <Rectangle Width="45" VerticalAlignment="Bottom" Margin="20" Height="70" Fill="Transparent" 
+                                <Rectangle Name="playerHomeBlack" Width="45" VerticalAlignment="Bottom" Margin="20" Height="70" Fill="Transparent" 
                                 Stroke="Black" StrokeThickness="2" RadiusX="5" RadiusY="5">
                                 <Rectangle.Effect>
                                     <DropShadowEffect ShadowDepth="0" BlurRadius="5" Color="DarkSlateGray"/>
@@ -643,24 +646,27 @@
                                 </Rectangle.Clip>
                             </Rectangle>
                             
-                            <UniformGrid Height="45" Width="40" Margin="0,0,0,30" Rows="15" VerticalAlignment="Bottom" Panel.ZIndex="1">
-                                <Border CornerRadius="10,10,10,10" Background="Black" BorderThickness="0.6"></Border>
-                                <Border CornerRadius="10,10,10,10" Background="Black" BorderThickness="0.6"></Border>
-                                <Border CornerRadius="10,10,10,10" Background="Black" BorderThickness="0.6"></Border>
-                                <Border CornerRadius="10,10,10,10" Background="Black" BorderThickness="0.6"></Border>
-                                <Border CornerRadius="10,10,10,10" Background="Black" BorderThickness="0.6"></Border>
-                                <Border CornerRadius="10,10,10,10" Background="Black" BorderThickness="0.6"></Border>
-                                <Border CornerRadius="10,10,10,10" Background="Black" BorderThickness="0.6"></Border>
-                                <Border CornerRadius="10,10,10,10" Background="Black" BorderThickness="0.6"></Border>
-                                <Border CornerRadius="10,10,10,10" Background="Black" BorderThickness="0.6"></Border>
-                                <Border CornerRadius="10,10,10,10" Background="Black" BorderThickness="0.6"></Border>
-                                <Border CornerRadius="10,10,10,10" Background="Black" BorderThickness="0.6"></Border>
-                                <Border CornerRadius="10,10,10,10" Background="Black" BorderThickness="0.6"></Border>
-                                <Border CornerRadius="10,10,10,10" Background="Black" BorderThickness="0.6"></Border>
-                                <Border CornerRadius="10,10,10,10" Background="Black" BorderThickness="0.6"></Border>
-                                <Border CornerRadius="10,10,10,10" Background="Black" BorderThickness="0.6"></Border>
+                            <UniformGrid Name="gridBlackOut" Height="45" Width="40" Margin="0,0,0,30" Rows="15" VerticalAlignment="Bottom" Panel.ZIndex="1">
+                                    <Border CornerRadius="10,10,10,10"  BorderThickness="0.6"></Border>
+                                    <Border CornerRadius="10,10,10,10"  BorderThickness="0.6"></Border>
+                                    <Border CornerRadius="10,10,10,10"  BorderThickness="0.6"></Border>
+                                    <Border CornerRadius="10,10,10,10"  BorderThickness="0.6"></Border>
+                                    <Border CornerRadius="10,10,10,10"  BorderThickness="0.6"></Border>
+                                    <Border CornerRadius="10,10,10,10"  BorderThickness="0.6"></Border>
+                                    <Border CornerRadius="10,10,10,10"  BorderThickness="0.6"></Border>
+                                    <Border CornerRadius="10,10,10,10"  BorderThickness="0.6"></Border>
+                                    <Border CornerRadius="10,10,10,10"  BorderThickness="0.6"></Border>
+                                    <Border CornerRadius="10,10,10,10"  BorderThickness="0.6"></Border>
+                                    <Border CornerRadius="10,10,10,10"  BorderThickness="0.6"></Border>
+                                    <Border CornerRadius="10,10,10,10"  BorderThickness="0.6"></Border>
+                                    <Border CornerRadius="10,10,10,10"  BorderThickness="0.6"></Border>
+                                    <Border CornerRadius="10,10,10,10"  BorderThickness="0.6"></Border>
+                                    <Border CornerRadius="10,10,10,10"  BorderThickness="0.6"></Border>
+                                    
 
-                            </UniformGrid>
+
+
+                                </UniformGrid>
 
                         </Grid>
 

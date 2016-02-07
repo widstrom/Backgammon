@@ -27,7 +27,7 @@ namespace BGProj
             InitializeComponent();
         }
 
-        public void FillTriangel(int triangel, bool color, int number)
+        public void FillTriangel(int triangel, bool? color, int number)
         {
 
 
@@ -132,7 +132,6 @@ namespace BGProj
                 t.Text = index.ToString();
                 t.Foreground = Brushes.Red;
             }
-           
         }
 
         //Erases number on stack
