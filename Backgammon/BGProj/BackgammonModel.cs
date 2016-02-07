@@ -65,6 +65,26 @@ namespace BGProj
         {
             return triangels[arr].color;
         }
+
+        public bool availableMoveTest(int triangle, int dice)
+        {
+            //Left-Down-Right direction
+            if (playerturn && (triangle - dice) > -1)
+            {
+                if (triangels[triangle - dice].color == true || triangels[triangle - dice].number <= 1)
+                    return true;
+            }
+
+                //Left-up-right direction
+            else if (!playerturn && (triangle + dice) < 24)
+            {
+                if (triangels[triangle + dice].color == false || triangels[triangle + dice].number <= 1)
+                    return true;
+            }
+            return false;
+        }
+
+
         public void availableMove(int arr, out int z, out int x, out int c, out int v, out int b)
         {
             z = -1;
@@ -312,8 +332,10 @@ namespace BGProj
             dice3 = 0;
             dice4 = 0;
             Random num = new Random();
-            int number = num.Next(1, 7);
-            int number2 = num.Next(1, 7);
+            //int number = num.Next(1, 7);
+            //int number2 = num.Next(1, 7);
+            int number = 2;
+            int number2 = 3;
             dice1 = number;
             dice2 = number2;
             if (dice1 == dice2)

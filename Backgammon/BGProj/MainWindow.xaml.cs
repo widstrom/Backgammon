@@ -38,7 +38,7 @@ namespace BGProj
         {
             InitializeComponent();
 
-            
+
             //bool ok = Bmodel.Modeltests();
             //if (ok)
             //    MessageBox.Show("Självtest lyckades!");
@@ -88,7 +88,7 @@ namespace BGProj
             message = theGrid.Children[0] as ucMessage;
 
             // test
-            message.showMessage("Slå om vem som börjar");
+            //message.showMessage("Slå om vem som börjar");
         }
 
         private void Image4_MouseEnter(object sender, MouseEventArgs e)
@@ -187,8 +187,10 @@ namespace BGProj
 
             while (true)
             {
-                first = p.Next(1, 7) + p.Next(1, 7);
-                second = p.Next(1, 7) + p.Next(1, 7);
+                //first = p.Next(1, 7) + p.Next(1, 7);
+                //second = p.Next(1, 7) + p.Next(1, 7);
+                first = 11;
+                second = 4;
 
                 Player_One_Roll.Content = first;
                 Player_Two_Roll.Content = second;
@@ -208,7 +210,7 @@ namespace BGProj
             Border2.Visibility = Visibility.Visible;
             scale = new ScaleTransform(1, 1);
             Border1.RenderTransform = scale;
-            
+
             timer.Stop();
 
             if (firstTimeRolled)
@@ -318,19 +320,20 @@ namespace BGProj
                     {
                         int z, x, c, v, b;
                         Bmodel.availableMove(i, out z, out x, out c, out v, out b);
-                        
+
 
                         if (z >= 0 || x >= 0 || c >= 0 || v >= 0 || b >= 0)
                             uc[i].FillTop(Bmodel.returnHighest(i) - 1, i);
                     }
 
                     //Print number on piece
-                    if (high > 5)
-                        uc[i].WriteNumber(high, i);
-                    //Erase number on piece
-                    else if (high == 5)
-                        uc[i].eraseNumber(high, i);
-                    
+                        if (high > 5)
+                            uc[i].WriteNumber(high, i);
+                        //Erase number on piece
+                        else if (high == 5)
+                            uc[i].eraseNumber(high, i);
+                     
+
                 }
             }
         }
@@ -344,6 +347,35 @@ namespace BGProj
             Dice1.Source = Img2;
             BitmapImage Img = new BitmapImage(new Uri(number.ToString() + ".png", UriKind.Relative));
             Dice2.Source = Img;
+        }
+
+        private void CallFillMove(bool player)
+        {
+            //Dice sum up
+            int[] dicesSum = new int[]{Bmodel.dice1, Bmodel.dice2, Bmodel.dice1 + Bmodel.dice2,
+                        Bmodel.dice1 + Bmodel.dice2 + Bmodel.dice3, Bmodel.dice1 + Bmodel.dice2 + Bmodel.dice3 + Bmodel.dice4};
+
+            for (int i = 0; i < dicesSum.Length; i++)
+            {
+                if (player)
+                {
+                    if (Bmodel.availableMoveTest(firstClicked, dicesSum[i]))
+                    {
+                        int pos = firstClicked - dicesSum[i];
+                        uc[pos].FillMove(Bmodel.returnFirstFree(pos), pos);
+                    }
+
+                }
+                else
+                {
+                    if (Bmodel.availableMoveTest(firstClicked, dicesSum[i]))
+                    {
+                        int pos = firstClicked + dicesSum[i];
+                        uc[pos].FillMove(Bmodel.returnFirstFree(pos), pos);
+                    }
+                }
+
+            }
         }
 
         private void theCanvas_MouseDown(object sender, MouseButtonEventArgs e)
@@ -369,22 +401,24 @@ namespace BGProj
                             firstClicked = 24;
                         else
                             firstClicked = Int32.Parse(_shapeSelected.Name.Remove(0, 1));
-                        int z, x, c, v, b;
-                        Bmodel.availableMove(firstClicked, out z, out x, out c, out v, out b);
+                        //int z, x, c, v, b;
+                        //Bmodel.availableMove(firstClicked, out z, out x, out c, out v, out b);
+
                         drawBoard();
                         showalltop();//ritar ut pjäserna 
+                        CallFillMove(Bmodel.playerturn);
 
-                        //_shapeSelected.Stroke = Brushes.Green;
-                        if (z >= 0)
-                            uc[z].FillMove(Bmodel.returnFirstFree(z), z);
-                        if (x >= 0)
-                            uc[x].FillMove(Bmodel.returnFirstFree(x), x);
-                        if (c >= 0)
-                            uc[c].FillMove(Bmodel.returnFirstFree(c), c);
-                        if (v >= 0)
-                            uc[v].FillMove(Bmodel.returnFirstFree(v), v);
-                        if (b >= 0)
-                            uc[b].FillMove(Bmodel.returnFirstFree(b), b);
+                        _shapeSelected.Stroke = Brushes.Green;
+                        //if (z >= 0)
+                        //    uc[z].FillMove(Bmodel.returnFirstFree(z), z);
+                        //if (x >= 0)
+                        //    uc[x].FillMove(Bmodel.returnFirstFree(x), x);
+                        //if (c >= 0)
+                        //    uc[c].FillMove(Bmodel.returnFirstFree(c), c);
+                        //if (v >= 0)
+                        //    uc[v].FillMove(Bmodel.returnFirstFree(v), v);
+                        //if (b >= 0)
+                        //    uc[b].FillMove(Bmodel.returnFirstFree(b), b);
 
                         //gå ut?
                     }
@@ -420,6 +454,6 @@ namespace BGProj
 
         }
 
-        
+
     }
 }
