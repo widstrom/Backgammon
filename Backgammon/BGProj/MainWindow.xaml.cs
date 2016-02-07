@@ -187,19 +187,26 @@ namespace BGProj
 
             while (true)
             {
-                //first = p.Next(1, 7) + p.Next(1, 7);
-                //second = p.Next(1, 7) + p.Next(1, 7);
-                first = 11;
-                second = 4;
+                first = p.Next(1, 7) + p.Next(1, 7);
+                second = p.Next(1, 7) + p.Next(1, 7);
 
-                Player_One_Roll.Content = first;
-                Player_Two_Roll.Content = second;
+                //first = 11;
+                //second = 4;
+                //Player_One_Roll.Content = first;
+                //Player_Two_Roll.Content = second;
 
+                
                 if (first > second)
-                    return false;
+                {
+                    message.showMessage("Black: " + first + " White: " + second + "\n   -Black Start-");
+                    return true;
+                }
 
                 else if (second > first)
-                    return true;
+                {
+                    message.showMessage("Black: " + first + " White: " + second + "\n   -White Start-");
+                    return false;
+                }
             }
         }
 
@@ -221,8 +228,8 @@ namespace BGProj
 
             else
             {
-                Player_One_Roll.Content = "";
-                Player_Two_Roll.Content = "";
+                //Player_One_Roll.Content = "";
+                //Player_Two_Roll.Content = "";
 
                 Bmodel.rollDices();
                 drawBoard();
@@ -432,7 +439,15 @@ namespace BGProj
 
         private void theCanvas_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            if (rolled)
+            if ( Bmodel.blackPiecesOut == 15)
+            {
+                message.showMessage("Black WINS!");
+            }
+            else if (Bmodel.whitePiecesOut == 15)
+            {
+                message.showMessage("White WINS!");
+            }
+            else if (rolled)
             {
                 HitTestResult target = VisualTreeHelper.HitTest(theCanvas, e.GetPosition(theCanvas));
                 Point pt = e.GetPosition(theCanvas);
@@ -461,6 +476,11 @@ namespace BGProj
                         _shapeSelected.Stroke = Brushes.Green;
 
                     }
+                    else if(_shapeSelected.Stroke == Brushes.Green)
+                    {
+                        drawBoard();
+                        showalltop();
+                    }
                     else if (_shapeSelected.Name.Contains("M"))
                     {
                         secondClick = Int32.Parse(_shapeSelected.Name.Remove(0, 1));
@@ -474,16 +494,16 @@ namespace BGProj
                     }
                     else if (_shapeSelected is Ellipse)
                     {
-                        message.showMessage("hej"); //test
+                        message.showMessage("Illegal move!");
                     }
-                    else if (_shapeSelected.Name.Contains("playerHomeBlack"))
+                    else if (_shapeSelected.Name.Contains("playerHomeBlack") || _shapeSelected.Name.Contains("gridBlackOut") ||_shapeSelected.Name.Contains("Player_Two_Roll"))
                     {
                         Bmodel.moveOut(firstClicked);
                         paintDices();
                         drawBoard();
                         showalltop();
                     }
-                    else if (_shapeSelected.Name.Contains("playerHomeWhite"))
+                    else if (_shapeSelected.Name.Contains("playerHomeWhite") || _shapeSelected.Name.Contains("gridWhiteOut") || _shapeSelected.Name.Contains("Player_One_Roll"))
                     {
                         Bmodel.moveOut(firstClicked);
                         paintDices();
@@ -496,9 +516,6 @@ namespace BGProj
 
                 }
             }
-
         }
-
-
     }
 }

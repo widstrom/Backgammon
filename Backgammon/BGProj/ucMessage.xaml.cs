@@ -31,7 +31,7 @@ namespace BGProj
         {
             Meddelande.Content = str;
             this.Visibility = System.Windows.Visibility.Visible;
-            DoubleAnimation anim = new DoubleAnimation(3, 0, TimeSpan.FromSeconds(5));
+            DoubleAnimation anim = new DoubleAnimation(3, 0, TimeSpan.FromSeconds(3));
             this.BeginAnimation(Canvas.OpacityProperty, anim);
         }
     }

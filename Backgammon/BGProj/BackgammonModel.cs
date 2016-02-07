@@ -52,7 +52,7 @@ namespace BGProj
             //triangels[0].number = 3; triangels[0].color = true;
             //triangels[5].number = 5; triangels[5].color = true;
             //triangels[2].number = 5; triangels[2].color = true;
-            
+
 
             //triangels[16].number = 1; triangels[16].color = false;
             //triangels[18].number = 5; triangels[18].color = false;
@@ -106,12 +106,10 @@ namespace BGProj
             {
                 move = Moveto - moveFrom;
                 blackPiecesOut += 1;
-                changeDices(move);
             }
             else if (Moveto < 0) {
                 move = moveFrom - Moveto;
-                whitePiecesOut += 1;
-                changeDices(move);
+                whitePiecesOut += 1;               
             }
             else if (moveFrom == -1)
             {
@@ -308,30 +306,46 @@ namespace BGProj
 
         private void changeDices(int move)
         {
-            if (dice4 == move) {
+            if (dice4 == move) 
+            {
                 dice4 = 0; 
             }
-            else if(dice4 + dice3 == move) { 
+            else if(dice4 + dice3 == move) 
+            { 
                 dice4 = 0; dice3 = 0; 
             }
-            else if(dice4 + dice3 + dice2 == move) { 
+            else if(dice4 + dice3 + dice2 == move) 
+            { 
                 dice4 = 0; dice3 = 0; dice2 = 0; 
             }
-            else if(dice4 + dice3 + dice2 + dice1 == move) { 
+            else if(dice4 + dice3 + dice2 + dice1 == move) 
+            { 
                 dice4 = 0; dice3 = 0; dice2 = 0; dice1 = 0;
             }
-            else if(dice3 == move) { 
+            else if(dice3 == move) 
+            { 
                 dice3 = 0; 
             }
-            else if(dice3 + dice2 == move) { dice3 = 0; dice2 = 0; }
-            else if(dice3 + dice2 + dice1 == move) { dice3 = 0; dice2 = 0; dice1 = 0; }
-            else if(dice2 == move) { dice2 = 0; }
-            else if(dice2 + dice1 == move) { dice2 = 0; dice1 = 0; }
-            else if(dice1 == move) { dice1 = 0; }
-            else
-            {
-                dice1 = 0;
+            else if(dice3 + dice2 == move) 
+            { 
+                dice3 = 0; dice2 = 0; 
             }
+            else if(dice3 + dice2 + dice1 == move) 
+            { 
+                dice3 = 0; dice2 = 0; dice1 = 0; 
+            }
+            else if(dice2 == move) 
+            { 
+                dice2 = 0; 
+            }
+            else if(dice2 + dice1 == move)
+            { 
+                dice2 = 0; dice1 = 0; 
+            }
+            else if(dice1 == move) 
+            { 
+                dice1 = 0; 
+            }            
         }
 
         public void rollDices()

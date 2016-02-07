@@ -599,7 +599,7 @@
 
 
                         <Grid Grid.Column="1">
-                            <UniformGrid  Name="gridWhiteOut" Height="45" Width="40" Margin="0,35,0,0" Rows="15" VerticalAlignment="Top" Panel.ZIndex="1">
+                            <UniformGrid Name="gridWhiteOut" Height="45" Width="40" Margin="0,35,0,0" Rows="15" VerticalAlignment="Top" Panel.ZIndex="5">
                                     <Border CornerRadius="10,10,10,10"  BorderThickness="0.6" ></Border>
                                     <Border CornerRadius="10,10,10,10"  BorderThickness="0.6" ></Border>
                                     <Border CornerRadius="10,10,10,10"  BorderThickness="0.6" ></Border>
@@ -646,7 +646,7 @@
                                 </Rectangle.Clip>
                             </Rectangle>
                             
-                            <UniformGrid Name="gridBlackOut" Height="45" Width="40" Margin="0,0,0,30" Rows="15" VerticalAlignment="Bottom" Panel.ZIndex="1">
+                            <UniformGrid Name="gridBlackOut" Height="45" Width="40" Margin="0,0,0,30" Rows="15" VerticalAlignment="Bottom" Panel.ZIndex="5">
                                     <Border CornerRadius="10,10,10,10"  BorderThickness="0.6"></Border>
                                     <Border CornerRadius="10,10,10,10"  BorderThickness="0.6"></Border>
                                     <Border CornerRadius="10,10,10,10"  BorderThickness="0.6"></Border>
@@ -709,8 +709,8 @@
 
                     </Grid>
                 </Grid>
-                <Label Name="Player_One_Roll" Content="" FontSize="20" FontStyle="Italic" Foreground="Black" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Canvas.Left="423" Canvas.Top="47" Width="38"/>
-                <Label Name="Player_Two_Roll" Content="" FontSize="20" FontStyle="Italic" Foreground="White" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Canvas.Left="423" Canvas.Top="202" Width="38" Height="37" RenderTransformOrigin="-1.345,0.427"/>
+                <!--<Label Name="Player_One_Roll" Content="" FontSize="20" FontStyle="Italic" Foreground="Black" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Canvas.Left="423" Canvas.Top="47" Width="38"/>
+                <Label Name="Player_Two_Roll" Content="" FontSize="20" FontStyle="Italic" Foreground="White" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Canvas.Left="423" Canvas.Top="202" Width="38" Height="37" RenderTransformOrigin="-1.345,0.427"/>-->
                
 
             </Canvas>
