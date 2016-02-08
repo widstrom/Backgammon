@@ -9,7 +9,6 @@ namespace BGProj
 {
     class BackgammonModel
     {
-        public int[] diceCombination = new int[4];
         public int dice1 = 0;
         public int dice2 = 0;
         public int dice3 = 0;
@@ -58,6 +57,10 @@ namespace BGProj
             //triangels[18].number = 5; triangels[18].color = false;
             //triangels[23].number = 2; triangels[23].color = false;
 
+            //triangels[0].number = 2; triangels[0].color = false;
+            //triangels[6].number = 2; triangels[6].color = true;
+            //triangels[8].number = 3; triangels[8].color = true;
+            //triangels[11].number = 5; triangels[11].color = false;
 
 
         }
@@ -356,7 +359,7 @@ namespace BGProj
             int number = num.Next(1, 7);
             int number2 = num.Next(1, 7);
             //int number = 2;
-            //int number2 = 3;
+            //int number2 = 2;
             dice1 = number;
             dice2 = number2;
             if (dice1 == dice2)

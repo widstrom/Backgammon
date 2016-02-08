@@ -187,15 +187,15 @@ namespace BGProj
 
             while (true)
             {
-                //first = p.Next(1, 7) + p.Next(1, 7);
-                //second = p.Next(1, 7) + p.Next(1, 7);
+                first = p.Next(1, 7) + p.Next(1, 7);
+                second = p.Next(1, 7) + p.Next(1, 7);
 
-                first = 11;
-                second = 4;
+                //first = 11;
+                //second = 4;
                 //Player_One_Roll.Content = first;
                 //Player_Two_Roll.Content = second;
 
-                
+
                 if (first > second)
                 {
                     message.showMessage("Black: " + first + " White: " + second + "\n   -Black Start-");
@@ -240,7 +240,7 @@ namespace BGProj
                 Dice2.Source = Img2;
                 Dice3.Source = Img3;
                 Dice4.Source = Img4;
-                
+
             }
 
 
@@ -289,11 +289,11 @@ namespace BGProj
                 bord.Background = Brushes.Wheat;
             }
 
-                if (Bmodel.playerWhite == 0)
-                {
-                    P2.Fill = null;
-                    P2.Stroke = null;
-                }
+            if (Bmodel.playerWhite == 0)
+            {
+                P2.Fill = null;
+                P2.Stroke = null;
+            }
             if (Bmodel.playerBlack == 0)
             {
                 P1.Fill = null;
@@ -303,7 +303,7 @@ namespace BGProj
             {
                 P2.Fill = Brushes.Wheat;
                 P2.Stroke = Brushes.Gold;
-                
+
             }
             else if (Bmodel.playerBlack > 0 && Bmodel.playerturn)
             {
@@ -315,7 +315,7 @@ namespace BGProj
 
         }
         private void showalltop()
-        {          
+        {
             if (Bmodel.playerWhite > 0 && Bmodel.playerturn)
             {
                 P2.Fill = Brushes.Wheat;
@@ -343,7 +343,7 @@ namespace BGProj
                             Bmodel.controlOut();
                             uc[i].FillTop(Bmodel.returnHighest(i) - 1, i);
                         }
-                            
+
 
                         //Checks if the piece can move, if not, set stroke to null
                         if (!Bmodel.availableMove(i, dicesSum[0]) && !Bmodel.availableMove(i, dicesSum[1]) &&
@@ -355,16 +355,16 @@ namespace BGProj
                             else if (!Bmodel.player2out && Bmodel.playerturn)
                                 uc[i].nullTop(Bmodel.returnHighest(i) - 1, i);
                         }
-                            
+
                     }
 
                     //Print number on piece
-                        if (high > 5)
-                            uc[i].WriteNumber(high, i);
-                        //Erase number on piece
-                        else if (high == 5)
-                            uc[i].eraseNumber(high, i);
-                     
+                    if (high > 5)
+                        uc[i].WriteNumber(high, i);
+                    //Erase number on piece
+                    else if (high == 5)
+                        uc[i].eraseNumber(high, i);
+
 
                 }
             }
@@ -380,7 +380,7 @@ namespace BGProj
             BitmapImage Img = new BitmapImage(new Uri(number.ToString() + ".png", UriKind.Relative));
             Dice2.Source = Img;
         }
-        
+
         private void CountPrison(int white, int black)
         {
             if (black > 0)
@@ -420,26 +420,47 @@ namespace BGProj
             //Movement combinations
             int[] dicesSum = new int[]{Bmodel.dice1, Bmodel.dice2, Bmodel.dice1 + Bmodel.dice2,
                         Bmodel.dice1 + Bmodel.dice2 + Bmodel.dice3, Bmodel.dice1 + Bmodel.dice2 + Bmodel.dice3 + Bmodel.dice4};
+            bool sameDice = false;
 
             for (int i = 0; i < dicesSum.Length; i++)
             {
                 if (player)
                 {
+
                     if (Bmodel.availableMove(firstClicked, dicesSum[i]))
                     {
+                       
                         int pos = firstClicked - dicesSum[i];
                         uc[pos].FillMove(Bmodel.returnFirstFree(pos), pos);
+
+                        if (i < dicesSum.Length - 1)
+                        {
+                            if (!Bmodel.availableMove(firstClicked, dicesSum[i + 1]))
+                                return;
+                        }
+
                     }
 
                 }
-                else
+                else //Black piece
                 {
+
                     if (Bmodel.availableMove(firstClicked, dicesSum[i]))
                     {
                         int pos = firstClicked + dicesSum[i];
                         uc[pos].FillMove(Bmodel.returnFirstFree(pos), pos);
+
+                        if (i < dicesSum.Length - 1)
+                        {
+                            if (!Bmodel.availableMove(firstClicked, dicesSum[i + 1]))
+                                return;
+                        }
+
                     }
                 }
+
+                if (!Bmodel.availableMove(firstClicked, dicesSum[i]) && !Bmodel.availableMove(firstClicked, dicesSum[i + 1]))
+                    return;
 
             }
         }
@@ -457,7 +478,7 @@ namespace BGProj
 
         private void theCanvas_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            if ( Bmodel.blackPiecesOut == 15)
+            if (Bmodel.blackPiecesOut == 15)
             {
                 message.showMessage("Black WINS!");
             }
@@ -494,7 +515,7 @@ namespace BGProj
                         _shapeSelected.Stroke = Brushes.Green;
 
                     }
-                    else if(_shapeSelected.Stroke == Brushes.Green)
+                    else if (_shapeSelected.Stroke == Brushes.Green)
                     {
                         drawBoard();
                         showalltop();
@@ -514,7 +535,7 @@ namespace BGProj
                     {
                         message.showMessage("Illegal move!");
                     }
-                    else if (_shapeSelected.Name.Contains("playerHomeBlack") || _shapeSelected.Name.Contains("gridBlackOut") ||_shapeSelected.Name.Contains("Player_Two_Roll"))
+                    else if (_shapeSelected.Name.Contains("playerHomeBlack") || _shapeSelected.Name.Contains("gridBlackOut") || _shapeSelected.Name.Contains("Player_Two_Roll"))
                     {
                         Bmodel.moveOut(firstClicked);
                         paintDices();
