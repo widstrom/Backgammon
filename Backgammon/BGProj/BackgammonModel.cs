@@ -9,17 +9,10 @@ namespace BGProj
 {
     class BackgammonModel
     {
-        public int[] diceCombination = new int[4];
-        public int dice1 = 0;
-        public int dice2 = 0;
-        public int dice3 = 0;
-        public int dice4 = 0;
-        public int playerWhite = 0;
-        public int playerBlack = 0;
-        public bool player1out = false;
-        public bool player2out = false;
-        public int blackPiecesOut = 0;
-        public int whitePiecesOut = 0;
+        public int dice1 = 0, dice2 = 0, dice3 = 0, dice4 = 0;
+        public int playerWhite = 0, playerBlack = 0;
+        public bool player1out = false, player2out = false;
+        public int blackPiecesOut = 0, whitePiecesOut = 0;
         public bool playerturn;
         private struct Triangel
         {
@@ -352,6 +345,7 @@ namespace BGProj
             }            
         }
 
+
         public void rollDices()
         {
             dice3 = 0;
@@ -359,8 +353,8 @@ namespace BGProj
             Random num = new Random();
             int number = num.Next(1, 7);
             int number2 = num.Next(1, 7);
-            //int number = 2;
-            //int number2 = 2;
+            //int number = 6;
+            //int number2 = 6;
             dice1 = number;
             dice2 = number2;
             if (dice1 == dice2)
@@ -368,6 +362,7 @@ namespace BGProj
                 dice3 = dice1;
                 dice4 = dice3;
             }
+
         }
         //public void ShowMessage(string textIn)
         //{

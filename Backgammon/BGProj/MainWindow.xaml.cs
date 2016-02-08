@@ -25,14 +25,15 @@ namespace BGProj
     {
         private ucMessage message = null;
         private ScaleTransform scale;
-        BackgammonModel Bmodel = new BackgammonModel();
-        Shape _shapeSelected = null;
-        ucPiece[] uc = new ucPiece[24]; //EN array med alla pieces
+        private BackgammonModel Bmodel = new BackgammonModel();
+        private Shape _shapeSelected = null;
+        private ucPiece[] uc = new ucPiece[24]; //EN array med alla pieces
         private DispatcherTimer timer = new DispatcherTimer();
-        int firstClicked;
-        int secondClick;
-        int time = 0;
-        bool firstTimeRolled = true;
+        private int firstClicked, secondClick;
+        private int time = 0;
+        private bool firstTimeRolled = true, tmp = true;
+
+        
 
         public MainWindow()
         {
@@ -210,11 +211,11 @@ namespace BGProj
 
             while (true)
             {
-                first = p.Next(1, 7) + p.Next(1, 7);
-                second = p.Next(1, 7) + p.Next(1, 7);
+                //first = p.Next(1, 7) + p.Next(1, 7);
+                //second = p.Next(1, 7) + p.Next(1, 7);
 
-                //first = 11;
-                //second = 4;
+                first = 1;
+                second = 4;
                 //Player_One_Roll.Content = first;
                 //Player_Two_Roll.Content = second;
 
@@ -334,6 +335,7 @@ namespace BGProj
             }
             else
             {
+                //Dice combinations/movement
                 int[] dicesSum = new int[]{Bmodel.dice1, Bmodel.dice2, Bmodel.dice1 + Bmodel.dice2,
                         Bmodel.dice1 + Bmodel.dice2 + Bmodel.dice3, Bmodel.dice1 + Bmodel.dice2 + Bmodel.dice3 + Bmodel.dice4};
 
@@ -344,23 +346,28 @@ namespace BGProj
 
                     if (turn == Bmodel.playerturn && high > 0)
                     {
+                        //If any of the dices aren't used, mark the pieces that can move
                         if (Bmodel.dice1 > 0 || Bmodel.dice2 > 0 || Bmodel.dice3 > 0 || Bmodel.dice4 > 0)
                         {
                             Bmodel.controlOut();
-                            uc[i].FillTop(Bmodel.returnHighest(i) - 1, i);
+                            uc[i].FillTop(Bmodel.returnHighest(i) - 1, i, false);
                         }
 
-
-                        //Checks if the piece can move, if not, set stroke to null
-                        if (!Bmodel.availableMove(i, dicesSum[0]) && !Bmodel.availableMove(i, dicesSum[1]) &&
-                            !Bmodel.availableMove(i, dicesSum[2]) && !Bmodel.availableMove(i, dicesSum[3]))
+                        if (!tmp) //Makes sure the code below does not run on the first roll of the game
                         {
-                            //Checks if all pieces are home and does not nullify piece if so
-                            if (!Bmodel.player1out && !Bmodel.playerturn)
-                                uc[i].nullTop(Bmodel.returnHighest(i) - 1, i);
-                            else if (!Bmodel.player2out && Bmodel.playerturn)
-                                uc[i].nullTop(Bmodel.returnHighest(i) - 1, i);
+                            //Checks if the piece can move, if not, set stroke to null
+                            if (!Bmodel.availableMove(i, dicesSum[0]) && !Bmodel.availableMove(i, dicesSum[1]) &&
+                                !Bmodel.availableMove(i, dicesSum[2]) && !Bmodel.availableMove(i, dicesSum[3]))
+                            {
+                                //Checks if all pieces are home and does not nullify piece if so
+                                if (!Bmodel.player1out && !Bmodel.playerturn)
+                                    uc[i].FillTop(Bmodel.returnHighest(i) - 1, i, true);
+                                else if (!Bmodel.player2out && Bmodel.playerturn)
+                                    uc[i].FillTop(Bmodel.returnHighest(i) - 1, i, true);
+                            }
                         }
+                        
+                        
 
                     }
 
@@ -370,14 +377,14 @@ namespace BGProj
                     //Erase number on piece
                     else if (high == 5)
                         uc[i].eraseNumber(high, i);
-
-
                 }
+
+                tmp = false;
             
             }
         }
        
-        
+        //Take number of prisons and print it
         private void CountPrison(int white, int black)
         {
             if (black > 0)
@@ -414,20 +421,21 @@ namespace BGProj
 
         private void CallFillMove(bool player)
         {
-            //Dice sum up
+            //Dice combinations/movements
             int[] dicesSum = new int[]{Bmodel.dice1, Bmodel.dice2, Bmodel.dice1 + Bmodel.dice2,
                         Bmodel.dice1 + Bmodel.dice2 + Bmodel.dice3, Bmodel.dice1 + Bmodel.dice2 + Bmodel.dice3 + Bmodel.dice4};
-            bool sameDice = false;
             for (int i = 0; i < dicesSum.Length; i++)
             {
                 if (player)
                 {
                     if (Bmodel.availableMove(firstClicked, dicesSum[i]))
                     {
-                        int pos = firstClicked - dicesSum[i];
-                        uc[pos].FillMove(Bmodel.returnFirstFree(pos), pos);
+                        int pos = firstClicked - dicesSum[i]; //The position from where user clicked to the next position
+                        uc[pos].FillMove(Bmodel.returnFirstFree(pos), pos); //Fills the next possible position
                         if (i < dicesSum.Length - 1)
                         {
+                            //If the next possible movement after using the first dice, jump out of loop
+                            //in order to not continue calling FillMove as seen above
                             if (!Bmodel.availableMove(firstClicked, dicesSum[i + 1]))
                                 return;
                         }
@@ -435,7 +443,7 @@ namespace BGProj
                     
 
                 }
-                else
+                else 
                 {
                     if (Bmodel.availableMove(firstClicked, dicesSum[i]))
                     {
@@ -449,6 +457,9 @@ namespace BGProj
 
                     }
                 }
+
+                //This if-statement is aimed at double dices, if receiving 4 dices, the result of not being able to move
+                //with the first two dices is the end of all moves
                 if (!Bmodel.availableMove(firstClicked, dicesSum[i]) && !Bmodel.availableMove(firstClicked, dicesSum[i + 1]))
                      return;
             }
@@ -496,24 +507,10 @@ namespace BGProj
                         else
                             firstClicked = Int32.Parse(_shapeSelected.Name.Remove(0, 1));
 
-                        drawBoard();
-                        showalltop();//ritar ut pjäserna
+                        drawBoard(); //Draw the pieces
+                        showalltop();//Markes the movable pieces
                         
-                        //int z, x, c, v, b;
-                        //Bmodel.availableMove(firstClicked, out z, out x, out c, out v, out b);
-                        //    if (z >= 0)
-                        //   uc[z].FillMove(Bmodel.returnFirstFree(z), z);
-                        //if (x >= 0)
-                        //    uc[x].FillMove(Bmodel.returnFirstFree(x), x);
-                        //if (c >= 0)
-                        //    uc[c].FillMove(Bmodel.returnFirstFree(c), c);
-                        //if (v >= 0)
-                        //    uc[v].FillMove(Bmodel.returnFirstFree(v), v);
-                        //if (b >= 0)
-                        //    uc[b].FillMove(Bmodel.returnFirstFree(b), b);
-                        CallFillMove(Bmodel.playerturn);
-                        
-
+                        CallFillMove(Bmodel.playerturn); //Draws the possible movement
                         _shapeSelected.Stroke = Brushes.Green;
 
                     }

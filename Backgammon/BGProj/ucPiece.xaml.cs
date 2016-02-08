@@ -156,7 +156,7 @@ namespace BGProj
             
         }
 
-        public void FillTop(int ellipse, int triangle)
+        public void FillTop(int ellipse, int triangle, bool test)
         {
             if (ellipse >= 5)
                 ellipse = 4;
@@ -166,17 +166,26 @@ namespace BGProj
             {
                 Grid cell = grid.Children[4 - ellipse] as Grid;
                 Ellipse p = cell.Children[0] as Ellipse;
-
-                p.StrokeThickness = 0.7;
-                p.Stroke = Brushes.Gold;
+                if (!test)
+                {
+                    p.StrokeThickness = 0.7;
+                    p.Stroke = Brushes.Gold;
+                }
+                else
+                    p.Stroke = Brushes.Transparent;
+                
             }
             else
             {
                 Grid cell = grid.Children[ellipse] as Grid;
                 Ellipse p = cell.Children[0] as Ellipse;
-
-                p.StrokeThickness = 0.7;
-                p.Stroke = Brushes.Gold;
+                if (!test)
+                {
+                    p.StrokeThickness = 0.7;
+                    p.Stroke = Brushes.Gold;
+                }
+                else p.Stroke = Brushes.Transparent;
+                
             }
         }
         public void nullTop(int ellipse, int triangle)
