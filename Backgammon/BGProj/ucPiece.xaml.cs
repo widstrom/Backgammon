@@ -27,7 +27,8 @@ namespace BGProj
             InitializeComponent();
         }
 
-        public void FillTriangel(int triangel, bool? color, int number)
+        //Draws the ellipeses on the board
+        public void FillTriangel(int ellipse, bool? color, int number)
         {
 
 
@@ -44,25 +45,28 @@ namespace BGProj
 
             UniformGrid grid = this.pieceGrid as UniformGrid;
 
-            if (triangel > 5)
-                triangel = 5;
+            //Since there are only 5 ellipses on each triangle (visually wise), set ellipse to 5 if > 5
+            if (ellipse > 5)
+                ellipse = 5;
 
-            if (number > 11)
-            {    
-                for (int i = 4; i > (5 - triangel) - 1; i--)
+            //Number represents which triangle on the board, top and bottom, 0-11 respectively 12-23
+            if (number > 11) //Bottom Triangles
+            {
+                //ucPiece ellipses are created top-bottom, which means last ellipse has index 4
+                for (int i = 4; i > (5 - ellipse) - 1; i--)
                 {
                     Grid cell = grid.Children[i] as Grid;
                     Ellipse p = cell.Children[0] as Ellipse;
 
-                    p.Name = "E" + number;
+                    p.Name = "E" + number; //Names the ellipse with correct position
 
-                    if (color == true)
+                    if (color == true) //White
                     {
                         p.Fill = myBrushWhite;
                         p.Stroke = null;
                         p.Opacity = 1;
                     }
-                    else if (color == false)
+                    else if (color == false) //Black
                     {
                         p.Fill = myBrushBlack;
                         p.Stroke = null;
@@ -70,7 +74,8 @@ namespace BGProj
                     }
                 }
 
-                for (int k = 0; k < (4 - triangel) + 1; k++)
+                //Nullify the remaining non-filled ellipses
+                for (int k = 0; k < (4 - ellipse) + 1; k++)
                 {
                     Grid cell = grid.Children[k] as Grid;
                     Ellipse l = cell.Children[0] as Ellipse;
@@ -78,9 +83,10 @@ namespace BGProj
                     l.Stroke = null;
                 }
             }
-            else
+
+            else //Top triangles
             {
-                for (int i = 0; i < triangel; i++)
+                for (int i = 0; i < ellipse; i++)
                 {
                     Grid cell = grid.Children[i] as Grid;
                     Ellipse p = cell.Children[0] as Ellipse;
@@ -100,7 +106,7 @@ namespace BGProj
                         p.Opacity = 1;
                     }
                 }
-                for (int k = triangel; k < 5; k++)
+                for (int k = ellipse; k < 5; k++)
                 {
                     Grid cell = grid.Children[k] as Grid;
                     Ellipse l = cell.Children[0] as Ellipse;
@@ -112,12 +118,12 @@ namespace BGProj
         }
 
 
-        //Writing a number on pieces when number of pieces on one triangle excceeds 5
+        //Writing a number on pieces
         public void WriteNumber(int index, int triangle)
         {
             UniformGrid grid = this.pieceGrid as UniformGrid;
 
-            if (triangle > 11)
+            if (triangle > 11) //Lower triangles
             {
                 Grid cell = grid.Children[0] as Grid;
                 TextBlock t = cell.Children[1] as TextBlock;
@@ -125,7 +131,7 @@ namespace BGProj
                 t.Foreground = Brushes.SaddleBrown;
 
             }
-            else
+            else //Upper Triangles
             {
                 Grid cell = grid.Children[4] as Grid;
                 TextBlock t = cell.Children[1] as TextBlock;
@@ -156,61 +162,41 @@ namespace BGProj
             
         }
 
-        public void FillTop(int ellipse, int triangle, bool test)
+        //The boolean value decides whether the strokes are to be colored or null
+        public void FillTop(int ellipse, int triangle, bool nullifyEllipse)
         {
             if (ellipse >= 5)
                 ellipse = 4;
             UniformGrid grid = this.pieceGrid as UniformGrid;
 
-            if (triangle > 11)
+            if (triangle > 11) //Lower
             {
                 Grid cell = grid.Children[4 - ellipse] as Grid;
                 Ellipse p = cell.Children[0] as Ellipse;
-                if (!test)
+                if (!nullifyEllipse)
                 {
                     p.StrokeThickness = 0.7;
                     p.Stroke = Brushes.Gold;
                 }
                 else
-                    p.Stroke = Brushes.Transparent;
+                    p.Stroke = null;
                 
             }
-            else
+            else //Upper
             {
                 Grid cell = grid.Children[ellipse] as Grid;
                 Ellipse p = cell.Children[0] as Ellipse;
-                if (!test)
+                if (!nullifyEllipse)
                 {
                     p.StrokeThickness = 0.7;
                     p.Stroke = Brushes.Gold;
                 }
-                else p.Stroke = Brushes.Transparent;
+                else p.Stroke = null;
                 
             }
         }
-        public void nullTop(int ellipse, int triangle)
-        {
-            if (ellipse >= 5)
-                ellipse = 4;
-            UniformGrid grid = this.pieceGrid as UniformGrid;
 
-            if (triangle > 11)
-            {
-                Grid cell = grid.Children[4 - ellipse] as Grid;
-                Ellipse p = cell.Children[0] as Ellipse;
-                p.Stroke = Brushes.Transparent;
-
-            }
-            else
-            {
-                Grid cell = grid.Children[ellipse] as Grid;
-                Ellipse p = cell.Children[0] as Ellipse;
-                p.Stroke = Brushes.Transparent;
-
-            }
-        }
-
-
+        //Draws the possible movement
         public void FillMove(int highest, int number)
         {
 

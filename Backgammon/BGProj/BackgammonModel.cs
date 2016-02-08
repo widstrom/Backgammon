@@ -31,6 +31,7 @@ namespace BGProj
 
             return ok;
         }
+        //Starting position for the pieces
         public void startPositions()
         {
             triangels[0].number = 2; triangels[0].color = false;
@@ -54,6 +55,8 @@ namespace BGProj
         {
             return triangels[arr].number;
         }
+
+        //Returns the first available ellipse on triangle
         public int returnFirstFree(int arr)
         {
             if (triangels[arr].number >= 5)
@@ -87,6 +90,7 @@ namespace BGProj
             return false;
         }
 
+        //Movement and increase/decrease in ellipses
         public void controlMove(int moveFrom, int Moveto)
         {
             int move;
@@ -95,6 +99,7 @@ namespace BGProj
                 move = Moveto - moveFrom;
                 blackPiecesOut += 1;
             }
+
             else if (Moveto < 0) {
                 move = moveFrom - Moveto;
                 whitePiecesOut += 1;               

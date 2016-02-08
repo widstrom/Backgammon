@@ -204,6 +204,8 @@ namespace BGProj
             BitmapImage Img = new BitmapImage(new Uri(number.ToString() + ".png", UriKind.Relative));
             Dice2.Source = Img;
         }
+        
+        //Rolling dice for taking turn
         private bool RollTurn()
         {
             Random p = new Random();
@@ -220,6 +222,7 @@ namespace BGProj
                 //Player_Two_Roll.Content = second;
 
                 
+                //Display message of whom starts
                 if (first > second)
                 {
                     message.showMessage("Black: " + first + " White: " + second + "\n   -Black Start-");
@@ -318,11 +321,16 @@ namespace BGProj
                 P1.Fill = myBrushBlack;
                 
             }
+
+            //Draws the ellipses
             for (int i = 0; i < 24; i++)
                 uc[i].FillTriangel(Bmodel.returnHighest(i), Bmodel.returnColor(i), i);           
         }
+
+        //Giving top ellipses gold stroke, enabling movement
         private void showalltop()
-        {          
+        {    
+            //Strokes for the pieces in prison, P1 and P2
             if (Bmodel.playerWhite > 0 && Bmodel.playerturn)
             {
                 P2.Fill = Brushes.Wheat;
@@ -344,6 +352,7 @@ namespace BGProj
                     int high = Bmodel.returnHighest(i);
                     bool? turn = Bmodel.returnColor(i);
 
+                    //Checks if it's the players turn and if the triangle got at least 1 filled ellipse
                     if (turn == Bmodel.playerturn && high > 0)
                     {
                         //If any of the dices aren't used, mark the pieces that can move
@@ -360,9 +369,9 @@ namespace BGProj
                                 !Bmodel.availableMove(i, dicesSum[2]) && !Bmodel.availableMove(i, dicesSum[3]))
                             {
                                 //Checks if all pieces are home and does not nullify piece if so
-                                if (!Bmodel.player1out && !Bmodel.playerturn)
+                                if (!Bmodel.player1out && !Bmodel.playerturn) //Black
                                     uc[i].FillTop(Bmodel.returnHighest(i) - 1, i, true);
-                                else if (!Bmodel.player2out && Bmodel.playerturn)
+                                else if (!Bmodel.player2out && Bmodel.playerturn) //White
                                     uc[i].FillTop(Bmodel.returnHighest(i) - 1, i, true);
                             }
                         }
@@ -371,16 +380,14 @@ namespace BGProj
 
                     }
 
-                    //Print number on piece
+                    //Print number on piece if the triangle contains more than 5 pieces
                     if (high > 5)
                         uc[i].WriteNumber(high, i);
                     //Erase number on piece
                     else if (high == 5)
                         uc[i].eraseNumber(high, i);
                 }
-
-                tmp = false;
-            
+                tmp = false; //Mark the end of first roll
             }
         }
        
@@ -424,10 +431,12 @@ namespace BGProj
             //Dice combinations/movements
             int[] dicesSum = new int[]{Bmodel.dice1, Bmodel.dice2, Bmodel.dice1 + Bmodel.dice2,
                         Bmodel.dice1 + Bmodel.dice2 + Bmodel.dice3, Bmodel.dice1 + Bmodel.dice2 + Bmodel.dice3 + Bmodel.dice4};
+
             for (int i = 0; i < dicesSum.Length; i++)
             {
-                if (player)
+                if (player) //White
                 {
+                    //Returns true if the index dice together with the selected position (triangle) works
                     if (Bmodel.availableMove(firstClicked, dicesSum[i]))
                     {
                         int pos = firstClicked - dicesSum[i]; //The position from where user clicked to the next position
@@ -440,10 +449,8 @@ namespace BGProj
                                 return;
                         }
                     }
-                    
-
                 }
-                else 
+                else //Black
                 {
                     if (Bmodel.availableMove(firstClicked, dicesSum[i]))
                     {
@@ -454,7 +461,6 @@ namespace BGProj
                             if (!Bmodel.availableMove(firstClicked, dicesSum[i + 1]))
                                 return;
                         }
-
                     }
                 }
 
