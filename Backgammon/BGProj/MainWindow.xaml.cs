@@ -123,12 +123,11 @@ namespace BGProj
             if (WindowState == WindowState.Maximized)
             {
                 WindowState = WindowState.Normal;
-                //Width = 1280;
-                //Height = 720;
+                
             }
             else
                 WindowState = WindowState.Maximized;
-            //MessageBox.Show("Här ska det vara settings!");
+            
         }
         private void Image6_MouseEnter(object sender, MouseEventArgs e)
         {
@@ -226,6 +225,7 @@ namespace BGProj
                 if (first > second)
                 {
                     message.showMessage("Black: " + first + " White: " + second + "\n   -Black Start-");
+                      
                     return true;
                 }
 

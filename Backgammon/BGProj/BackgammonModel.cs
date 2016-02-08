@@ -369,14 +369,7 @@ namespace BGProj
             }
 
         }
-        //public void ShowMessage(string textIn)
-        //{
-        //    Text.Content = textIn;
-        //    this.Visibility = System.Windows.Visibility.Visible;
-        //    DoubleAnimation animation = new DoubleAnimation(1, 0, TimeSpan.FromSeconds(5));
-        //    this.BeginAnimation(System.Windows.Controls.Canvas.OpacityProperty, animation);
-
-        //}
+        
 
     }
 }
