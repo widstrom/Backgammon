@@ -187,11 +187,11 @@ namespace BGProj
 
             while (true)
             {
-                first = p.Next(1, 7) + p.Next(1, 7);
-                second = p.Next(1, 7) + p.Next(1, 7);
+                //first = p.Next(1, 7) + p.Next(1, 7);
+                //second = p.Next(1, 7) + p.Next(1, 7);
 
-                //first = 11;
-                //second = 4;
+                first = 11;
+                second = 4;
                 //Player_One_Roll.Content = first;
                 //Player_Two_Roll.Content = second;
 
@@ -330,7 +330,7 @@ namespace BGProj
             {
                 int[] dicesSum = new int[]{Bmodel.dice1, Bmodel.dice2, Bmodel.dice1 + Bmodel.dice2,
                         Bmodel.dice1 + Bmodel.dice2 + Bmodel.dice3, Bmodel.dice1 + Bmodel.dice2 + Bmodel.dice3 + Bmodel.dice4};
-                int p = 0;
+
                 for (int i = 0; i < 24; i++)
                 {
                     int high = Bmodel.returnHighest(i);
@@ -339,12 +339,23 @@ namespace BGProj
                     if (turn == Bmodel.playerturn && high > 0)
                     {
                         if (Bmodel.dice1 > 0 || Bmodel.dice2 > 0 || Bmodel.dice3 > 0 || Bmodel.dice4 > 0)
+                        {
+                            Bmodel.controlOut();
                             uc[i].FillTop(Bmodel.returnHighest(i) - 1, i);
+                        }
+                            
 
                         //Checks if the piece can move, if not, set stroke to null
                         if (!Bmodel.availableMove(i, dicesSum[0]) && !Bmodel.availableMove(i, dicesSum[1]) &&
                             !Bmodel.availableMove(i, dicesSum[2]) && !Bmodel.availableMove(i, dicesSum[3]))
-                            uc[i].nullTop(Bmodel.returnHighest(i) - 1, i);
+                        {
+                            //Checks if all pieces are home and does not nullify piece if so
+                            if (!Bmodel.player1out && !Bmodel.playerturn)
+                                uc[i].nullTop(Bmodel.returnHighest(i) - 1, i);
+                            else if (!Bmodel.player2out && Bmodel.playerturn)
+                                uc[i].nullTop(Bmodel.returnHighest(i) - 1, i);
+                        }
+                            
                     }
 
                     //Print number on piece
