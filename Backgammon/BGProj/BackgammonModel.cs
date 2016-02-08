@@ -9,6 +9,7 @@ namespace BGProj
 {
     class BackgammonModel
     {
+        public int[] diceCombination = new int[4];
         public int dice1 = 0;
         public int dice2 = 0;
         public int dice3 = 0;
@@ -48,21 +49,12 @@ namespace BGProj
             triangels[18].number = 5; triangels[18].color = false;
             triangels[23].number = 2; triangels[23].color = true;
 
-            //triangels[0].number = 3; triangels[0].color = true;
+            //triangels[0].number = 5; triangels[0].color = true;
             //triangels[5].number = 5; triangels[5].color = true;
             //triangels[2].number = 5; triangels[2].color = true;
-
-
-            //triangels[16].number = 1; triangels[16].color = false;
-            //triangels[18].number = 5; triangels[18].color = false;
-            //triangels[23].number = 2; triangels[23].color = false;
-
-            //triangels[0].number = 2; triangels[0].color = false;
-            //triangels[6].number = 2; triangels[6].color = true;
-            //triangels[8].number = 3; triangels[8].color = true;
-            //triangels[11].number = 5; triangels[11].color = false;
-
-
+            //triangels[21].number = 5; triangels[21].color = false;
+            //triangels[19].number = 5; triangels[19].color = false;
+            //triangels[23].number = 1; triangels[23].color = false;
         }
 
         public int returnHighest(int arr)
@@ -83,7 +75,7 @@ namespace BGProj
             return triangels[arr].color;
         }
 
-
+       
         public bool availableMove(int triangle, int dice)
         {
             //Left-Down-Right direction
@@ -186,7 +178,7 @@ namespace BGProj
         public void moveOut(int first)
         {
                 controlOut();
-                if (player1out)
+                if (player1out && !playerturn) // Black
                 {
                     int a = first + dice1;
                     int b = first + dice2;
@@ -194,12 +186,21 @@ namespace BGProj
                     int d = c + dice3;
                     int e = d + dice4;
 
+                    
                     if (a > 23 && b > 23)
                     {
                         if (a < b)
+                        {
                             controlMove(first, a);
-                        if(b < a)
-                            controlMove(first , b);
+                        }
+                        if (b < a)
+                        {
+                            controlMove(first, b);
+                        }
+                        if (b == a)
+                        {
+                            controlMove(first, b);
+                        }
                         triangels[first].number -= 1;
                     }
                     else if (a > 23)
@@ -228,7 +229,7 @@ namespace BGProj
                         triangels[first].number -= 1;
                     }                                                                           
                 }
-                if (player2out)
+                if (player2out && playerturn) // White
                 {
                     int a = first - dice1;
                     int b = first - dice2;
@@ -368,8 +369,6 @@ namespace BGProj
                 dice4 = dice3;
             }
         }
-
-        
         //public void ShowMessage(string textIn)
         //{
         //    Text.Content = textIn;

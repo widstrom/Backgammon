@@ -122,7 +122,7 @@ namespace BGProj
                 Grid cell = grid.Children[0] as Grid;
                 TextBlock t = cell.Children[1] as TextBlock;
                 t.Text = index.ToString();
-                t.Foreground = Brushes.Red;
+                t.Foreground = Brushes.SaddleBrown;
 
             }
             else
@@ -130,7 +130,7 @@ namespace BGProj
                 Grid cell = grid.Children[4] as Grid;
                 TextBlock t = cell.Children[1] as TextBlock;
                 t.Text = index.ToString();
-                t.Foreground = Brushes.Red;
+                t.Foreground = Brushes.SaddleBrown;
             }
         }
 
@@ -167,21 +167,18 @@ namespace BGProj
                 Grid cell = grid.Children[4 - ellipse] as Grid;
                 Ellipse p = cell.Children[0] as Ellipse;
 
-                    p.StrokeThickness = 0.7;
-                    p.Stroke = Brushes.Gold;
-
+                p.StrokeThickness = 0.7;
+                p.Stroke = Brushes.Gold;
             }
             else
             {
                 Grid cell = grid.Children[ellipse] as Grid;
                 Ellipse p = cell.Children[0] as Ellipse;
 
-                    p.StrokeThickness = 0.7;
-                    p.Stroke = Brushes.Gold;
-
+                p.StrokeThickness = 0.7;
+                p.Stroke = Brushes.Gold;
             }
         }
-
         public void nullTop(int ellipse, int triangle)
         {
             if (ellipse >= 5)
@@ -203,7 +200,6 @@ namespace BGProj
 
             }
         }
-       
 
 
         public void FillMove(int highest, int number)
@@ -250,5 +246,6 @@ namespace BGProj
 
 
         }
+
     }
 }

@@ -571,11 +571,11 @@
                     <Grid Grid.Column="1">
 
 
-                        <Image MouseLeave="image4_MouseLeave" MouseEnter="Image4_MouseEnter" MouseDown="image4_MouseDown"  Name="image4" Height="25" Width="25" VerticalAlignment="Top" HorizontalAlignment="Left" Source="appbar.transform.rotate.counterclockwise.png" Stretch="Fill" Margin="0" RenderTransformOrigin="0.5,0.5" >
+                        <Image MouseLeave="image4_MouseLeave" MouseEnter="Image4_MouseEnter" MouseDown="image4_MouseDown"  Name="image4" Height="25" Width="25" VerticalAlignment="Top" HorizontalAlignment="Left" Source="appbar.transform.rotate.counterclockwise.png" Stretch="Fill" Margin="0,-3,0,0" RenderTransformOrigin="0.5,0.5" >
 
                         </Image>
 
-                        <Image Name="image5" MouseDown="image5_MouseDown" MouseEnter="image5_MouseEnter" MouseLeave="image5_MouseLeave" Height="25" Width="25"  VerticalAlignment="Top" HorizontalAlignment="Center" Source="appbar.cog.png" RenderTransformOrigin="0.5,0.5">
+                            <Image Name="image5" MouseDown="image5_MouseDown" MouseEnter="image5_MouseEnter" MouseLeave="image5_MouseLeave" Height="25" Width="25"  Margin="0,-3,0,0" VerticalAlignment="Top" HorizontalAlignment="Center" Source="appbar.fullscreen.box.png" RenderTransformOrigin="0.5,0.5">
                             <Image.RenderTransform>
                                 <TransformGroup>
                                     <ScaleTransform/>
@@ -585,7 +585,7 @@
                                 </TransformGroup>
                             </Image.RenderTransform>
                         </Image>
-                        <Image Height="25" Width="25" Name="Image6" MouseEnter="Image6_MouseEnter" MouseDown="Image6_MouseDown" MouseLeave="Image6_MouseLeave"  VerticalAlignment="Top" HorizontalAlignment="Right" Source="appbar.close.png" RenderTransformOrigin="0.5,0.5">
+                            <Image Height="25" Width="25" Name="Image6" MouseEnter="Image6_MouseEnter" MouseDown="Image6_MouseDown"  Margin="0,-3,0,0" MouseLeave="Image6_MouseLeave"  VerticalAlignment="Top" HorizontalAlignment="Right" Source="appbar.close.png" RenderTransformOrigin="0.5,0.5">
                             <Image.RenderTransform>
                                 <TransformGroup>
                                     <ScaleTransform/>
@@ -670,7 +670,7 @@
 
                         </Grid>
 
-                        <Border Name="Border1" MouseDown="Border1_MouseDown" MouseEnter="Border_MouseEnter" MouseLeave="Border_MouseLeave" Height="45" Width="45" BorderThickness="1"
+                        <Border Name="Border1" MouseDown="Border1_MouseDown" MouseEnter="Border1_MouseEnter" MouseLeave="Border1_MouseLeave" Height="45" Width="45" BorderThickness="1"
                             CornerRadius="5,5,5,5" BorderBrush="SaddleBrown" Background="Wheat" RenderTransformOrigin="0.5,0.5">
                             <Border.RenderTransform>
                                 <TransformGroup>

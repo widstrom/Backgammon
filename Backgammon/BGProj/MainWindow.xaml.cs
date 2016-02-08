@@ -31,7 +31,7 @@ namespace BGProj
         private DispatcherTimer timer = new DispatcherTimer();
         int firstClicked;
         int secondClick;
-        bool rolled = false;
+        int time = 0;
         bool firstTimeRolled = true;
 
         public MainWindow()
@@ -54,10 +54,7 @@ namespace BGProj
 
 
         }
-
-
-
-
+        
         public void initialall()
         {
             uc[0] = this.grid0.Children[1] as ucPiece;
@@ -144,42 +141,68 @@ namespace BGProj
             scale = new ScaleTransform(1, 1);
             Image6.RenderTransform = scale;
         }
-        private void Border_MouseEnter(object sender, MouseEventArgs e)
+        private void Border1_MouseEnter(object sender, MouseEventArgs e)
         {
             if (!firstTimeRolled)
             {
-                Dice3.Source = null;
-                Dice4.Source = null;
-                if (!rolled)
-                {
                     Mouse.OverrideCursor = Cursors.Hand;
                     scale = new ScaleTransform(1.2, 1.2);
                     Border1.RenderTransform = scale;
-                    timer.Start();
-                }
+                    
             }
 
         }
-        private void Border_MouseLeave(object sender, MouseEventArgs e)
+        private void Border1_MouseLeave(object sender, MouseEventArgs e)
         {
             if (!firstTimeRolled)
             {
                 Mouse.OverrideCursor = Cursors.Arrow;
                 scale = new ScaleTransform(1, 1);
                 Border1.RenderTransform = scale;
-
-                if (!rolled)
-                {
-                    Dice1.Source = null;
-                    Dice2.Source = null;
-                    Dice3.Source = null;
-                    Dice4.Source = null;
-                    timer.Stop();
-                }
             }
 
         }
+        private void Border1_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            Border1.Visibility = Visibility.Hidden;
+            Border2.Visibility = Visibility.Visible;
+            scale = new ScaleTransform(1, 1);
+            Border1.RenderTransform = scale;
+            
 
+            if (firstTimeRolled)
+            {
+                Bmodel.playerturn = RollTurn();
+                firstTimeRolled = false;
+            }
+
+            else
+            {
+                timer.Start();
+            }
+
+        }
+        void timer_Tick(object sender, EventArgs e)
+        {
+            time++; 
+            if (time == 20) //höj för längre snurr..
+            {
+                Bmodel.rollDices();
+                paintDices();
+                drawBoard();
+                showalltop();
+                time = 0;
+                timer.Stop();
+
+            }
+            Random num = new Random();
+            int number = num.Next(1, 7);
+            int number2 = num.Next(1, 7);
+            BitmapImage I2 = new BitmapImage(new Uri(number2.ToString() + ".png", UriKind.Relative));
+            Dice1.Source = I2;
+            BitmapImage Img = new BitmapImage(new Uri(number.ToString() + ".png", UriKind.Relative));
+            Dice2.Source = Img;
+        }
         private bool RollTurn()
         {
             Random p = new Random();
@@ -195,7 +218,7 @@ namespace BGProj
                 //Player_One_Roll.Content = first;
                 //Player_Two_Roll.Content = second;
 
-
+                
                 if (first > second)
                 {
                     message.showMessage("Black: " + first + " White: " + second + "\n   -Black Start-");
@@ -210,43 +233,8 @@ namespace BGProj
             }
         }
 
-        private void Border1_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-            rolled = true;
-            Border1.Visibility = Visibility.Hidden;
-            Border2.Visibility = Visibility.Visible;
-            scale = new ScaleTransform(1, 1);
-            Border1.RenderTransform = scale;
-
-            timer.Stop();
-
-            if (firstTimeRolled)
-            {
-                Bmodel.playerturn = RollTurn();
-                firstTimeRolled = false;
-            }
-
-            else
-            {
-
-                Bmodel.rollDices();
-                drawBoard();
-                showalltop();
-                BitmapImage Img1 = new BitmapImage(new Uri(Bmodel.dice1.ToString() + ".png", UriKind.Relative));
-                BitmapImage Img2 = new BitmapImage(new Uri(Bmodel.dice2.ToString() + ".png", UriKind.Relative));
-                BitmapImage Img3 = new BitmapImage(new Uri(Bmodel.dice3.ToString() + ".png", UriKind.Relative));
-                BitmapImage Img4 = new BitmapImage(new Uri(Bmodel.dice4.ToString() + ".png", UriKind.Relative));
-                Dice1.Source = Img1;
-                Dice2.Source = Img2;
-                Dice3.Source = Img3;
-                Dice4.Source = Img4;
-
-            }
-
-
-
-        }
-        private void Image6_MouseDown(object sender, MouseButtonEventArgs e)
+       
+        private void Image6_MouseDown(object sender, MouseButtonEventArgs e) // Stäng av knapp
         {
             this.Close();
         }
@@ -262,28 +250,39 @@ namespace BGProj
             scale = new ScaleTransform(1, 1);
             Border2.RenderTransform = scale;
         }
-        private void Border2_MouseDown(object sender, MouseButtonEventArgs e)
+        private void Border2_MouseDown(object sender, MouseButtonEventArgs e) //End turn
         {
-            Border2.Visibility = Visibility.Hidden;
-            drawBoard();
-            if (Bmodel.playerturn)
-                Bmodel.playerturn = false;
+            if (Bmodel.blackPiecesOut == 15)
+            {
+                message.showMessage("         --Black WINS!-- \n Press restart to play again.");
+            }
+            else if (Bmodel.whitePiecesOut == 15)
+            {
+                message.showMessage("         --White WINS!-- \n Press restart to play again.");
+            }
             else
-                Bmodel.playerturn = true;
-            Border1.Visibility = Visibility.Visible;
-            rolled = false;
-
+            {
+                Border2.Visibility = Visibility.Hidden;
+                drawBoard();
+                if (Bmodel.playerturn)
+                    Bmodel.playerturn = false;
+                else
+                    Bmodel.playerturn = true;
+                Border1.Visibility = Visibility.Visible;
+                
+            }
 
 
         }
+       
         private void drawBoard()
         {
-            for (int i = Bmodel.blackPiecesOut; i > 0; i--)
+            for (int i = 14; i > 14 - Bmodel.blackPiecesOut ; i--)
             {
                 Border bord = gridBlackOut.Children[i] as Border;
                 bord.Background = Brushes.Black;
             }
-            for (int i = Bmodel.whitePiecesOut; i > 0; i--)
+            for (int i = 14; i > 14 - Bmodel.whitePiecesOut; i--)
             {
                 Border bord = gridWhiteOut.Children[i] as Border;
                 bord.Background = Brushes.Wheat;
@@ -301,21 +300,28 @@ namespace BGProj
             }
             if (Bmodel.playerWhite > 0 && !Bmodel.playerturn)
             {
-                P2.Fill = Brushes.Wheat;
-                P2.Stroke = Brushes.Gold;
+                RadialGradientBrush myBrushWhite = new RadialGradientBrush();
+                myBrushWhite.GradientOrigin = new Point(0.75, 0.25);
+                myBrushWhite.GradientStops.Add(new GradientStop(Colors.White, 0.3));
+                myBrushWhite.GradientStops.Add(new GradientStop(Colors.Wheat, 0.7));
+
+                P2.Fill = myBrushWhite;
 
             }
             else if (Bmodel.playerBlack > 0 && Bmodel.playerturn)
             {
-                P1.Fill = Brushes.Black;
-                P1.Stroke = Brushes.Gold;
+                RadialGradientBrush myBrushBlack = new RadialGradientBrush();
+                myBrushBlack.GradientOrigin = new Point(0.75, 0.25);
+                myBrushBlack.GradientStops.Add(new GradientStop(Colors.Wheat, -0.2));
+                myBrushBlack.GradientStops.Add(new GradientStop(Colors.Black, 0.4));
+                P1.Fill = myBrushBlack;
+                
             }
             for (int i = 0; i < 24; i++)
-                uc[i].FillTriangel(Bmodel.returnHighest(i), Bmodel.returnColor(i), i);
-
+                uc[i].FillTriangel(Bmodel.returnHighest(i), Bmodel.returnColor(i), i);           
         }
         private void showalltop()
-        {
+        {          
             if (Bmodel.playerWhite > 0 && Bmodel.playerturn)
             {
                 P2.Fill = Brushes.Wheat;
@@ -367,20 +373,11 @@ namespace BGProj
 
 
                 }
+            
             }
         }
-        void timer_Tick(object sender, EventArgs e)
-        {
-
-            Random num = new Random();
-            int number = num.Next(1, 7);
-            int number2 = num.Next(1, 7);
-            BitmapImage Img2 = new BitmapImage(new Uri(number2.ToString() + ".png", UriKind.Relative));
-            Dice1.Source = Img2;
-            BitmapImage Img = new BitmapImage(new Uri(number.ToString() + ".png", UriKind.Relative));
-            Dice2.Source = Img;
-        }
-
+       
+        
         private void CountPrison(int white, int black)
         {
             if (black > 0)
@@ -388,14 +385,14 @@ namespace BGProj
                 Grid cell = this.LockedP1 as Grid;
                 TextBlock t = cell.Children[1] as TextBlock;
                 t.Text = black.ToString();
-                t.Foreground = Brushes.Red;
+                t.Foreground = Brushes.SaddleBrown;
             }
             if (white > 0)
             {
                 Grid cell = this.LockedP2 as Grid;
                 TextBlock t = cell.Children[1] as TextBlock;
                 t.Text = white.ToString();
-                t.Foreground = Brushes.Red;
+                t.Foreground = Brushes.SaddleBrown;
             }
             if (white < 1)
             {
@@ -409,7 +406,7 @@ namespace BGProj
                 Grid cell = this.LockedP1 as Grid;
                 TextBlock t = cell.Children[1] as TextBlock;
                 t.Text = string.Empty;
-                t.Foreground = Brushes.Red;
+                t.Foreground = Brushes.Transparent;
             }
 
         }
@@ -417,39 +414,33 @@ namespace BGProj
 
         private void CallFillMove(bool player)
         {
-            //Movement combinations
+            //Dice sum up
             int[] dicesSum = new int[]{Bmodel.dice1, Bmodel.dice2, Bmodel.dice1 + Bmodel.dice2,
                         Bmodel.dice1 + Bmodel.dice2 + Bmodel.dice3, Bmodel.dice1 + Bmodel.dice2 + Bmodel.dice3 + Bmodel.dice4};
             bool sameDice = false;
-
             for (int i = 0; i < dicesSum.Length; i++)
             {
                 if (player)
                 {
-
                     if (Bmodel.availableMove(firstClicked, dicesSum[i]))
                     {
-                       
                         int pos = firstClicked - dicesSum[i];
                         uc[pos].FillMove(Bmodel.returnFirstFree(pos), pos);
-
                         if (i < dicesSum.Length - 1)
                         {
                             if (!Bmodel.availableMove(firstClicked, dicesSum[i + 1]))
                                 return;
                         }
-
                     }
+                    
 
                 }
-                else //Black piece
+                else
                 {
-
                     if (Bmodel.availableMove(firstClicked, dicesSum[i]))
                     {
                         int pos = firstClicked + dicesSum[i];
                         uc[pos].FillMove(Bmodel.returnFirstFree(pos), pos);
-
                         if (i < dicesSum.Length - 1)
                         {
                             if (!Bmodel.availableMove(firstClicked, dicesSum[i + 1]))
@@ -458,10 +449,8 @@ namespace BGProj
 
                     }
                 }
-
                 if (!Bmodel.availableMove(firstClicked, dicesSum[i]) && !Bmodel.availableMove(firstClicked, dicesSum[i + 1]))
-                    return;
-
+                     return;
             }
         }
         private void paintDices()
@@ -478,15 +467,16 @@ namespace BGProj
 
         private void theCanvas_MouseDown(object sender, MouseButtonEventArgs e)
         {
+
             if (Bmodel.blackPiecesOut == 15)
             {
-                message.showMessage("Black WINS!");
+                message.showMessage("         --Black WINS!-- \n Press restart to play again.");
             }
             else if (Bmodel.whitePiecesOut == 15)
             {
-                message.showMessage("White WINS!");
+                message.showMessage("         --White WINS!-- \n Press restart to play again.");
             }
-            else if (rolled)
+            else
             {
                 HitTestResult target = VisualTreeHelper.HitTest(theCanvas, e.GetPosition(theCanvas));
                 Point pt = e.GetPosition(theCanvas);
@@ -498,9 +488,7 @@ namespace BGProj
 
 
                     if (_shapeSelected.Stroke == Brushes.Gold)
-                    {
-
-                        //Bmodel.controlOut();
+                    {                       
                         if (_shapeSelected.Name == "P1")
                             firstClicked = -1;
                         else if (_shapeSelected.Name == "P2")
@@ -509,13 +497,27 @@ namespace BGProj
                             firstClicked = Int32.Parse(_shapeSelected.Name.Remove(0, 1));
 
                         drawBoard();
-                        showalltop();//ritar ut pjäserna 
+                        showalltop();//ritar ut pjäserna
+                        
+                        //int z, x, c, v, b;
+                        //Bmodel.availableMove(firstClicked, out z, out x, out c, out v, out b);
+                        //    if (z >= 0)
+                        //   uc[z].FillMove(Bmodel.returnFirstFree(z), z);
+                        //if (x >= 0)
+                        //    uc[x].FillMove(Bmodel.returnFirstFree(x), x);
+                        //if (c >= 0)
+                        //    uc[c].FillMove(Bmodel.returnFirstFree(c), c);
+                        //if (v >= 0)
+                        //    uc[v].FillMove(Bmodel.returnFirstFree(v), v);
+                        //if (b >= 0)
+                        //    uc[b].FillMove(Bmodel.returnFirstFree(b), b);
                         CallFillMove(Bmodel.playerturn);
+                        
 
                         _shapeSelected.Stroke = Brushes.Green;
 
                     }
-                    else if (_shapeSelected.Stroke == Brushes.Green)
+                    else if(_shapeSelected.Stroke == Brushes.Green)
                     {
                         drawBoard();
                         showalltop();
@@ -535,19 +537,22 @@ namespace BGProj
                     {
                         message.showMessage("Illegal move!");
                     }
-                    else if (_shapeSelected.Name.Contains("playerHomeBlack") || _shapeSelected.Name.Contains("gridBlackOut") || _shapeSelected.Name.Contains("Player_Two_Roll"))
+                    else if (_shapeSelected.Name.Contains("playerHomeBlack") || _shapeSelected.Name.Contains("gridBlackOut"))
                     {
+                        
                         Bmodel.moveOut(firstClicked);
                         paintDices();
-                        drawBoard();
+                        drawBoard();                      
                         showalltop();
+                        firstClicked = 0; //Prevting bugs when clicking to fast.
                     }
-                    else if (_shapeSelected.Name.Contains("playerHomeWhite") || _shapeSelected.Name.Contains("gridWhiteOut") || _shapeSelected.Name.Contains("Player_One_Roll"))
+                    else if (_shapeSelected.Name.Contains("playerHomeWhite") || _shapeSelected.Name.Contains("gridWhiteOut"))
                     {
                         Bmodel.moveOut(firstClicked);
                         paintDices();
                         drawBoard();
                         showalltop();
+                        firstClicked = 100; //Prevting bugs when clicking to fast.
                     }
                 }
                 catch
