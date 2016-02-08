@@ -211,11 +211,11 @@ namespace BGProj
 
             while (true)
             {
-                //first = p.Next(1, 7) + p.Next(1, 7);
-                //second = p.Next(1, 7) + p.Next(1, 7);
+                first = p.Next(1, 7) + p.Next(1, 7);
+                second = p.Next(1, 7) + p.Next(1, 7);
 
-                first = 1;
-                second = 4;
+                //first = 1;
+                //second = 4;
                 //Player_One_Roll.Content = first;
                 //Player_Two_Roll.Content = second;
 
