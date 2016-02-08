@@ -228,8 +228,6 @@ namespace BGProj
 
             else
             {
-                //Player_One_Roll.Content = "";
-                //Player_Two_Roll.Content = "";
 
                 Bmodel.rollDices();
                 drawBoard();
@@ -242,6 +240,7 @@ namespace BGProj
                 Dice2.Source = Img2;
                 Dice3.Source = Img3;
                 Dice4.Source = Img4;
+                
             }
 
 
@@ -329,6 +328,9 @@ namespace BGProj
             }
             else
             {
+                int[] dicesSum = new int[]{Bmodel.dice1, Bmodel.dice2, Bmodel.dice1 + Bmodel.dice2,
+                        Bmodel.dice1 + Bmodel.dice2 + Bmodel.dice3, Bmodel.dice1 + Bmodel.dice2 + Bmodel.dice3 + Bmodel.dice4};
+                int p = 0;
                 for (int i = 0; i < 24; i++)
                 {
                     int high = Bmodel.returnHighest(i);
@@ -338,6 +340,11 @@ namespace BGProj
                     {
                         if (Bmodel.dice1 > 0 || Bmodel.dice2 > 0 || Bmodel.dice3 > 0 || Bmodel.dice4 > 0)
                             uc[i].FillTop(Bmodel.returnHighest(i) - 1, i);
+
+                        //Checks if the piece can move, if not, set stroke to null
+                        if (!Bmodel.availableMove(i, dicesSum[0]) && !Bmodel.availableMove(i, dicesSum[1]) &&
+                            !Bmodel.availableMove(i, dicesSum[2]) && !Bmodel.availableMove(i, dicesSum[3]))
+                            uc[i].nullTop(Bmodel.returnHighest(i) - 1, i);
                     }
 
                     //Print number on piece
@@ -399,7 +406,7 @@ namespace BGProj
 
         private void CallFillMove(bool player)
         {
-            //Dice sum up
+            //Movement combinations
             int[] dicesSum = new int[]{Bmodel.dice1, Bmodel.dice2, Bmodel.dice1 + Bmodel.dice2,
                         Bmodel.dice1 + Bmodel.dice2 + Bmodel.dice3, Bmodel.dice1 + Bmodel.dice2 + Bmodel.dice3 + Bmodel.dice4};
 

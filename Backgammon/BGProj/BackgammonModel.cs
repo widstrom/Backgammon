@@ -9,7 +9,7 @@ namespace BGProj
 {
     class BackgammonModel
     {
-
+        public int[] diceCombination = new int[4];
         public int dice1 = 0;
         public int dice2 = 0;
         public int dice3 = 0;
@@ -355,7 +355,7 @@ namespace BGProj
             Random num = new Random();
             int number = num.Next(1, 7);
             int number2 = num.Next(1, 7);
-            //int number = 3;
+            //int number = 2;
             //int number2 = 3;
             dice1 = number;
             dice2 = number2;
@@ -365,6 +365,8 @@ namespace BGProj
                 dice4 = dice3;
             }
         }
+
+        
         //public void ShowMessage(string textIn)
         //{
         //    Text.Content = textIn;

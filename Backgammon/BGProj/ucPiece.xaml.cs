@@ -167,16 +167,40 @@ namespace BGProj
                 Grid cell = grid.Children[4 - ellipse] as Grid;
                 Ellipse p = cell.Children[0] as Ellipse;
 
-                p.StrokeThickness = 0.7;
-                p.Stroke = Brushes.Gold;
+                    p.StrokeThickness = 0.7;
+                    p.Stroke = Brushes.Gold;
+
             }
             else
             {
                 Grid cell = grid.Children[ellipse] as Grid;
                 Ellipse p = cell.Children[0] as Ellipse;
 
-                p.StrokeThickness = 0.7;
-                p.Stroke = Brushes.Gold;
+                    p.StrokeThickness = 0.7;
+                    p.Stroke = Brushes.Gold;
+
+            }
+        }
+
+        public void nullTop(int ellipse, int triangle)
+        {
+            if (ellipse >= 5)
+                ellipse = 4;
+            UniformGrid grid = this.pieceGrid as UniformGrid;
+
+            if (triangle > 11)
+            {
+                Grid cell = grid.Children[4 - ellipse] as Grid;
+                Ellipse p = cell.Children[0] as Ellipse;
+                p.Stroke = Brushes.Transparent;
+
+            }
+            else
+            {
+                Grid cell = grid.Children[ellipse] as Grid;
+                Ellipse p = cell.Children[0] as Ellipse;
+                p.Stroke = Brushes.Transparent;
+
             }
         }
        
