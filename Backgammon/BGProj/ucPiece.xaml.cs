@@ -241,6 +241,17 @@ namespace BGProj
 
 
         }
+        private void pieceGrid_MouseEnter(object sender, MouseEventArgs e)
+        {
+            labelNamn1.Visibility = System.Windows.Visibility.Collapsed;
+            labelNamn2.Visibility = System.Windows.Visibility.Collapsed;
+        }
+
+        private void pieceGrid_MouseLeave(object sender, MouseEventArgs e)
+        {
+            labelNamn1.Visibility = System.Windows.Visibility.Visible;
+            labelNamn2.Visibility = System.Windows.Visibility.Visible;
+        }
 
     }
 }

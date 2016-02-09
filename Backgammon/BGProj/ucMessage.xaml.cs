@@ -15,10 +15,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace BGProj
-{
-    /// <summary>
-    /// Interaction logic for ucMessage.xaml
-    /// </summary>
+{  
     public partial class ucMessage : UserControl
     {
         public ucMessage()
@@ -26,10 +23,11 @@ namespace BGProj
             InitializeComponent();
         }
 
-        // Funktion för att skriva ut meddelande på skärmen
-        public void showMessage(string str)
+        // Funktion för att skriva ut meddelande på skärmen  
+        // Tack Grupp Blå för klassen!
+        public void showMessage(string text)
         {
-            Meddelande.Content = str;
+            Meddelande.Content = text;
             this.Visibility = System.Windows.Visibility.Visible;
             DoubleAnimation anim = new DoubleAnimation(3, 0, TimeSpan.FromSeconds(3));
             this.BeginAnimation(Canvas.OpacityProperty, anim);

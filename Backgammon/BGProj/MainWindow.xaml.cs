@@ -84,9 +84,8 @@ namespace BGProj
             uc[23] = this.grid23.Children[1] as ucPiece;
 
             message = theGrid.Children[0] as ucMessage;
-
-            // test
-            //message.showMessage("Slå om vem som börjar");
+            
+            message.showMessage("Roll the dices to decide who starts.");
         }
 
         private void Image4_MouseEnter(object sender, MouseEventArgs e)
@@ -118,7 +117,7 @@ namespace BGProj
             scale = new ScaleTransform(1, 1);
             image5.RenderTransform = scale;
         }
-        private void image5_MouseDown(object sender, MouseButtonEventArgs e)
+        private void image5_MouseDown(object sender, MouseButtonEventArgs e) // Förstora/förminska size på window.
         {
             if (WindowState == WindowState.Maximized)
             {
@@ -185,7 +184,7 @@ namespace BGProj
         void timer_Tick(object sender, EventArgs e)
         {
             time++; 
-            if (time == 20) //höj för längre snurr..
+            if (time == 20) //höj för längre snurr
             {
                 Bmodel.rollDices();
                 paintDices();
@@ -215,13 +214,7 @@ namespace BGProj
                 first = p.Next(1, 7) + p.Next(1, 7);
                 second = p.Next(1, 7) + p.Next(1, 7);
 
-                //first = 1;
-                //second = 4;
-                //Player_One_Roll.Content = first;
-                //Player_Two_Roll.Content = second;
-
                 
-                //Display message of whom starts
                 if (first > second)
                 {
                     message.showMessage("Black: " + first + " White: " + second + "\n   -Black Start-");
@@ -254,7 +247,7 @@ namespace BGProj
             scale = new ScaleTransform(1, 1);
             Border2.RenderTransform = scale;
         }
-        private void Border2_MouseDown(object sender, MouseButtonEventArgs e) //End turn
+        private void Border2_MouseDown(object sender, MouseButtonEventArgs e) //End turn knappen
         {
             if (Bmodel.blackPiecesOut == 15)
             {
@@ -279,7 +272,7 @@ namespace BGProj
 
         }
        
-        private void drawBoard()
+        private void drawBoard() // Funktion som ritar ut boardet
         {
             for (int i = 14; i > 14 - Bmodel.blackPiecesOut ; i--)
             {

@@ -43,12 +43,13 @@ namespace BGProj
             triangels[18].number = 5; triangels[18].color = false;
             triangels[23].number = 2; triangels[23].color = true;
 
+            // Används för att testa olika scenarion.
             //triangels[0].number = 5; triangels[0].color = true;
             //triangels[5].number = 5; triangels[5].color = true;
             //triangels[2].number = 5; triangels[2].color = true;
             //triangels[21].number = 5; triangels[21].color = false;
             //triangels[19].number = 5; triangels[19].color = false;
-            //triangels[23].number = 1; triangels[23].color = false;
+            //triangels[23].number = 5; triangels[23].color = false;
         }
 
         public int returnHighest(int arr)
